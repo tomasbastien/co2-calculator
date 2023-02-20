@@ -3,14 +3,16 @@
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no" />
 		<title>CO2 Calculator</title>
-		<style class="darkreader darkreader--sync" media="screen"></style> 
-		<style class="darkreader darkreader--sync" media="screen"></style> 
-		<style class="darkreader darkreader--sync" media="screen"></style> 
-		<style class="darkreader darkreader--sync" media="screen"></style> 
-		<style class="darkreader darkreader--sync" media="screen"></style> 
+		<!-- LOCAL STYLESHEETS -->
+		<link rel="stylesheet" href="css/pow-fr.css" />
+		<link rel="stylesheet" href="css/custom.css" />
 		<link rel="stylesheet" href="css/assets/bootstrap/css/bootstrap.min.css" />
+		<!-- EXTERNAL STYLESHEETS -->
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 		<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI=" crossorigin="" />
+ 		<link href='http://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
+ 		<!-- EXTERNAL SCRIPTS -->
+ 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
 		<script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js" integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM=" crossorigin=""></script>
 	</head>
 	<body>
@@ -106,13 +108,6 @@
 		<footer class="bg-light text-center text-lg-start">
 		  <div class="container p-4">
 		    <div class="row">
-		      <!-- <div class="col-lg-4 col-md-12 mb-4 mb-md-0">
-		        <h5 class="text-uppercase">Protect Our Winters France</h5>
-
-		        <p>
-		         <a target="_blank" href="https://protectourwinters.fr/">Protect Our Winters France</a> rassemble la communauté des pratiquant·es de sports outdoor pour user de notre passion commune afin d'agir en faveur du climat. Le temps passé à arpenter nos espaces favoris nous met face aux réalités du changement climatique. Nous voulons que la motivation qui nous permet de vivre nos aventures soit mise au service d’une société bas carbone et juste.
-		        </p>
-		      </div> -->
 		      	<h5 class="text-uppercase">Data sources used</h5>
 		      </br></br>
 		      	<div class="col-lg-4 col-md-12 mb-4 mb-md-0">
@@ -138,87 +133,9 @@
 
 		  <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
 		    © 2023 - <a href="./changelog.html" class="link-dark">Changelog</a> - Version 1.2.1
-		    <!-- <a class="text-dark" href="https://protectourwinters.fr/">Protect Our Winters France</a> -->
 		  </div>
 		</footer>
-
-		<!-- <script src="assets/bootstrap/js/bootstrap.min.js"></script> -->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
-
-        <script src="js/utils.js"></script>
+	<!-- LOCAL SCRIPTS   -->
+  <script src="js/utils.js"></script>
 	</body>
 </html>
-
-<style type="text/css">
-	input.valid {
-  border: 2px solid green;
-}
-input.invalid {
-  border: 2px solid red;
-}
-input.empty {
-  border: 2px solid #0d6efd;
-}
-.btn-square-md {
-width: 100px !important;
-max-width: 100% !important;
-max-height: 100% !important;
-height: 100px !important;
-text-align: center;
-padding: 0px;
-font-size:12px;
-}
-</style>
-<style>
-body {
-	background-color: #f2f2f2;
-	font-family: 'Montserrat',Helvetica,Arial,Lucida,sans-serif;
-
-}
-input.empty {
-  border: 2px solid #234B64;
-}
-.btn-primary {
-    --bs-btn-color: #ffee33;
-    --bs-btn-bg: #234B64;
-    --bs-btn-border-color: #234B64;
-    --bs-btn-hover-color: #234B64	;
-    --bs-btn-hover-bg: #ffee33;
-    --bs-btn-hover-border-color: #ffee33;
-    --bs-btn-focus-shadow-rgb: 49,132,253;
-    --bs-btn-active-color: #fff;
-    --bs-btn-active-bg: #0a58ca;
-    --bs-btn-active-border-color: #0a53be;
-    --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
-    --bs-btn-disabled-color: #fff;
-    --bs-btn-disabled-bg: #234B64;
-    --bs-btn-disabled-border-color: #234B64;
-    text-transform: uppercase;
-
-}
-.btn-secondary {
-    --bs-btn-color: #fff;
-    --bs-btn-bg: #6c757d;
-    --bs-btn-border-color: #6c757d;
-    --bs-btn-hover-color: #fff;
-    --bs-btn-hover-bg: #5c636a;
-    --bs-btn-hover-border-color: #565e64;
-    --bs-btn-focus-shadow-rgb: 130,138,145;
-    --bs-btn-active-color: #fff;
-    --bs-btn-active-bg: #565e64;
-    --bs-btn-active-border-color: #51585e;
-    --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
-    --bs-btn-disabled-color: #fff;
-    --bs-btn-disabled-bg: #6c757d;
-    --bs-btn-disabled-border-color: #6c757d;
-    text-transform: uppercase;
-    
-
-}
-
-button, input, optgroup, select, textarea {
-    font-family: 'Montserrat',Helvetica,Arial,Lucida,sans-serif;
-}
-</style>
-
- <link href='http://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>

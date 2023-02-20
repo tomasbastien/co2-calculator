@@ -1,0 +1,18 @@
+input.valid {
+  border: 2px solid green;
+}
+input.invalid {
+  border: 2px solid red;
+}
+input.empty {
+  border: 2px solid #0d6efd;
+}
+.btn-square-md {
+  width: 100px !important;
+  max-width: 100% !important;
+  max-height: 100% !important;
+  height: 100px !important;
+  text-align: center;
+  padding: 0px;
+  font-size:12px;
+}
