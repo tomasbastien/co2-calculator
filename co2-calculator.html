@@ -4,9 +4,9 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no" />
 		<title>CO2 Calculator</title>
 		<!-- LOCAL STYLESHEETS -->
-		<link rel="stylesheet" href="css/pow-fr.css" />
-		<link rel="stylesheet" href="css/custom.css" />
 		<link rel="stylesheet" href="css/assets/bootstrap/css/bootstrap.min.css" />
+		<!-- <link rel="stylesheet" href="css/pow-fr.css" /> -->
+		<link rel="stylesheet" href="css/custom.css" />
 		<!-- EXTERNAL STYLESHEETS -->
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 		<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI=" crossorigin="" />
@@ -24,28 +24,34 @@
 							<div class="card-body p-sm-5">
 								<h2 class="text-center mb-4">CO2 Calculator</h2>
 								<div id="route-details">
+									<div class="mb-3">
+									<label for="cars">Choose a transportation:</label>
+									  <select class="form-select" name="transportation" id="transportation" required onchange="show_options_settings(this)">
+									  	<option value=""></option>
+									  	<option value="Autobus">Autobus</option>
+									    <option value="Bike">Bike</option>
+									    <option value="City Bus">City Bus</option>
+									    <option value="Car">Car</option>
+									    <option value="Electric Car">Electric Car</option>
+									    <option value="Plane">Plane</option>
+									    <!-- <option value="SNCF">SNCF</option> -->
+									    <option value="Regular train">Regular train</option>
+									    <option value="High-speed train">High-speed train</option>
+									    
+									  </select>
+									</div>
+									<div class="mb-3" id="div-set-passengers-number"></div>
 									<div class="mb-3" id="div-departure">
 										<input id="departure" type="search" class="form-control empty" type="text" name="departure" placeholder="Departure" required />
 									</div>
-									<div class="mb-3" id="div-add-step">
-										<button class="btn btn-primary" onclick="add_step()"><i class="fa fa-plus "></i></button>
-										<button class="btn btn-primary" onclick="revert_geolocation_input_fields()"><i class="fa fa-exchange "> </i></button>
+									<div class="mb-3" id="div-manage-step">
+										<button id="div-invert-step" class="btn btn-primary" onclick="revert_geolocation_input_fields()"><i class="fa fa-exchange "> </i></button>
+										<button id="div-add-step" class="btn btn-primary" style="display:none;" onclick="add_step()"><i class="fa fa-plus "></i></button>
 										<button id="div-delete-step" style="display:none;" title="Remove step" class="btn btn-primary" onclick="delete_step()"><i class="fa fa-minus"></i></button>
 									</div>
 									<div class="mb-3" id="div-arrival">
 										<input id="arrival" type="search" class="form-control empty" type="text" name="arrival" placeholder="Arrival" required/>
 									</div>
-									<div class="mb-3">
-									<label for="cars">Choose a transportation:</label>
-									  <select class="form-select" name="transportation" id="transportation" required onchange="show_passengers_setting(this)">
-									    <option value="Bike">Bike</option>
-									    <option value="City Bus">City Bus</option>
-									    <option value="Car">Car</option>
-									    <option value="Electric Car">Electric Car</option>
-									    <option value="Autobus">Autobus</option>
-									  </select>
-									</div>
-									<div class="mb-3" id="div-set-passengers-number"></div>
 								</div>
 									<div class="mb-3" >
 										<button class="btn btn-primary d-block w-100" onclick="calculate_co2_route()">Add this trip</button>
@@ -73,18 +79,26 @@
 									      <div class="modal-body">
 									        Based on provided geolocations, here's the operation mode to provide an <u>estimated</u> CO2e emission for the specified trip :
 									        <ul class="">
+									        	</br>
 									        	<li>Each location string is sent to <strong>Nominatim Openstreetmap</strong> to query the OSM database for [lat,lon] GPS coordinates and stored in a list.</li>
 									        	<ul>
 									        		<li><em>This tool version takes the very first result of the query, so provided geolocation has to be the most accurate possible (using local state, city or country). It will be enhanced later to provide results list to the user.</em></li>
 									        	</ul>
-									        	<li>This [lat,lon] GPS coordinates list is sent to <strong>Openrouteservice directions API</strong> (with chosen transportation mode), in order to plan a trip throught all these locations and obtain kilometers journey length and route as a GPS points array.</li>
+									        	</br>
+									        	<li>This [lat,lon] GPS coordinates list is sent over a diffent routing API based on chosen transportation mode :
+									        	</li>
 									        	<ul>
-									        		<li><em>Openrouteservice directions API only supports transportation profiles driving-car and regular-bike, so public transportations may required to specify steps to match with the local public transportation plan. This could be also be a future enhancement.</em></li>
+									        	<li><strong>Openrouteservice directions API</strong> for any "road" mode
+									        	, in order to plan a trip throught all these locations and obtain kilometers journey length and route as a GPS points array.</br><em>Openrouteservice directions API only supports transportation profiles driving-car and regular-bike, so public transportations may required to specify steps to match with the local public transportation plan. This could be also be a future enhancement.</em></li>
+									        	<li><strong>A simple crowfly</strong> math calculation for plane and train, this needs to declare as many steps (railway station) as possible</li>
+									        	<!-- <li><strong>SNCF journey API</strong> that will mix regular and high-speed train for the France area</li> -->
 									        	</ul>
+									        	</br>
 									        	<li>Total kilometers is sent to <strong>Mon Impact Transport API</strong> (provided by ADEME, FR gov. ecologic transition agency), with chosen transportation mode. It returns kgco2e emissions, then divided by carpoolers if specified.</li>
 									        	<ul>
 									        		<li><em>Default passengers number is 1 for any other transportation than car an electric car, as estimation returned from ADEME for buses assumes an average transportation occupancy.</em></li>
 									        	</ul>
+									        	</br>
 									        	<li>GPS points array is shown as a line over a <strong>LeafLet</strong> Map, centered to fit global itinerary within the tile. This is usefull to see if the tool actually match with expected or realized journey.</li>
 									        </ul>
 									        <div class="alert alert-dark" role="alert">
@@ -117,10 +131,11 @@
 			        </p>
 			    </div>
 			    <div class="col-lg-4 col-md-12 mb-4 mb-md-0">
-			        <h6 class="text-uppercase">Route determined with OpenRouteService</h6>
+			        <h6 class="text-uppercase">Route determined with OpenRouteService for road vehicules</h6>
 			        <p>
 			          More details on  <a target="_blank" href="https://openrouteservice.org/">https://openrouteservice.org/</a>, documentation and API sources on <a target="_blank" href="https://openrouteservice.org/dev/#/api-docs">dedicated web page</a>.
 			        </p>
+			        <h6 class="text-uppercase">Plane and simple train directions/distances determined with a straight crowfly</h6>
 		    	</div>
 		    	<div class="col-lg-4 col-md-12 mb-4 mb-md-0">
 			        <h6 class="text-uppercase">GPS information retrieved from Openstreetmap via the Nominatim tool</h6>
@@ -132,7 +147,7 @@
 		  </div>
 
 		  <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
-		    © 2023 - <a href="./changelog.html" class="link-dark">Changelog</a> - Version 1.2.1
+		    © 2023 - <a href="./changelog.html" class="link-dark">Changelog</a> - Version 2.0.0
 		  </div>
 		</footer>
 	<!-- LOCAL SCRIPTS   -->
