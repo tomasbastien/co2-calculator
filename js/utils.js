@@ -360,7 +360,7 @@ async function get_openrouteservice_route(geojson_text, transportation_profile){
 async function get_brouter_route(geojson_route, transportation_profile){
 	var error = true;
 	var gps_path = geojson_route.join(",").replace(/\],\[/g,"|").replace(/\[/g,"").replace(/\]/g,"").replace(/\"/g,"");
-	const result = fetch('http://brouter.de/brouter?lonlats='+gps_path+'&profile='+transportation_profile+'&alternativeidx=0&format=geojson', {
+	const result = fetch('https://brouter.de/brouter?lonlats='+gps_path+'&profile='+transportation_profile+'&alternativeidx=0&format=geojson', {
 					    method: 'GET'
 					}).then(response => { 
 						if (response.status == 200) {
