@@ -111,7 +111,7 @@ function show_options_settings(elementValue){
 			document.getElementById("route-details").insertBefore(passengers_div, currentDiv);
 			
 	}
-	if ((elementValue.value.includes("SNCF"))){
+	if ((elementValue.value.includes("SNCF")) || (elementValue.value.includes("train"))){
 		if (addstep_button != null) {
 				addstep_button.style.display="none";
 				for (i=0; i<=step_number+1;i++){
@@ -355,6 +355,39 @@ async function get_openrouteservice_route(geojson_text, transportation_profile){
 }
 
 
+//BROUTER API ROUTE FUNCTION
+
+async function get_brouter_route(geojson_route, transportation_profile){
+	var error = true;
+	var gps_path = geojson_route.join(",").replace(/\],\[/g,"|").replace(/\[/g,"").replace(/\]/g,"").replace(/\"/g,"");
+	const result = fetch('http://brouter.de/brouter?lonlats='+gps_path+'&profile='+transportation_profile+'&alternativeidx=0&format=geojson', {
+					    method: 'GET'
+					}).then(response => { 
+						if (response.status == 200) {
+					    	error=false;
+					    	return response.json();
+					  	}else{
+					  		return response.text();
+					  	}
+					}).then(content => {
+						if (error == false){
+							return content;
+						}else{
+							document.getElementById("loading").innerHTML = "";
+							if(content.includes("from-position")){
+								document.getElementById("calculation-result").innerHTML = "<div class='alert alert-danger' role='alert'>Departure point is not a railway station</div>"
+							}else if (content.includes("to-position")){
+								document.getElementById("calculation-result").innerHTML = "<div class='alert alert-danger' role='alert'>Arrival point is not a railway station</div>"
+							}
+							else{
+								document.getElementById("calculation-result").innerHTML = "<div class='alert alert-danger' role='alert'>An error occured during route processing, please retry</div>"
+							}
+							return undefined;
+						}
+					})
+	return result;
+}
+
 //SNCF API SEARCH FUNCTIONS
 
 async function search_sncf_train_station(locality, transportation_suffix){
@@ -521,15 +554,23 @@ async function calculate_co2_route() {
 						co2_emissions=train_journey["journeys"][0]["co2_emission"]["value"]/1000;
 					}
 				}
-				if((transportation_profile == "train")||(transportation_profile == "plane")){
+				if(transportation_profile == "plane"){
 					route = get_crowfly_route(geojson_route);
 					route_distance=get_crowfly_distance(geojson_route);
 					co2_emissions=await get_ademe_co2(route_distance, transportation_id);
 				}
 
+				if(transportation_profile == "train"){
+					route = await get_brouter_route(geojson_route,"rail");
+					if (route != undefined){
+						route_distance = route.features[0]["properties"]["track-length"];
+				  		co2_emissions = await get_ademe_co2(route_distance, transportation_id);
+				  	}
+				}
+
 				//console.log(route);
-				console.log(route_distance);
-				console.log(co2_emissions);
+				//console.log(route_distance);
+				//console.log(co2_emissions);
 
 
 				if (route != undefined){
@@ -555,7 +596,7 @@ function render_total(itineraries){
 	reset_map(map);
 	document.getElementById("calculation-result").innerHTML="";
 	for (itinerary in itineraries){
-		console.log(itineraries[itinerary]["route"]);
+		//console.log(itineraries[itinerary]["route"]);
 		L.geoJSON(itineraries[itinerary]["route"]).addTo(map);
 		map.fitBounds(L.geoJSON(itineraries[itinerary]["route"]).getBounds());
 		total["co2_emissions"]=total["co2_emissions"]+itineraries[itinerary]["co2_emissions"];

@@ -5,7 +5,7 @@
 		<title>CO2 Calculator</title>
 		<!-- LOCAL STYLESHEETS -->
 		<link rel="stylesheet" href="css/assets/bootstrap/css/bootstrap.min.css" />
-		<!-- <link rel="stylesheet" href="css/pow-fr.css" /> -->
+		<link rel="stylesheet" href="css/pow-fr.css" />
 		<link rel="stylesheet" href="css/custom.css" />
 		<!-- EXTERNAL STYLESHEETS -->
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -90,7 +90,8 @@
 									        	<ul>
 									        	<li><strong>Openrouteservice directions API</strong> for any "road" mode
 									        	, in order to plan a trip throught all these locations and obtain kilometers journey length and route as a GPS points array.</br><em>Openrouteservice directions API only supports transportation profiles driving-car and regular-bike, so public transportations may required to specify steps to match with the local public transportation plan. This could be also be a future enhancement.</em></li>
-									        	<li><strong>A simple crowfly</strong> math calculation for plane and train, this needs to declare as many steps (railway station) as possible</li>
+									        	<li><strong>A simple crowfly</strong> math calculation for plane, this needs to declare as many steps as possible</li>
+									        	<li><strong>BRouter.de</strong> for trains journey, that sticks as much as possible to railway path and need to have departure and arrival on an existant train station</li>
 									        	<!-- <li><strong>SNCF journey API</strong> that will mix regular and high-speed train for the France area</li> -->
 									        	</ul>
 									        	</br>
@@ -124,30 +125,33 @@
 		    <div class="row">
 		      	<h5 class="text-uppercase">Data sources used</h5>
 		      </br></br>
-		      	<div class="col-lg-4 col-md-12 mb-4 mb-md-0">
-			        <h6 class="text-uppercase">CO2e data provided by ADEME (FR gov. ecologic transition agency)</h6>
-			        <p>
-			          More details on <a  target="_blank"href="https://impactco2.fr/transport">https://impactco2.fr/transport</a>, documentation and API sources on <a  target="_blank"href="https://github.com/datagir/monimpacttransport">GitHub</a>.
-			        </p>
-			    </div>
-			    <div class="col-lg-4 col-md-12 mb-4 mb-md-0">
-			        <h6 class="text-uppercase">Route determined with OpenRouteService for road vehicules</h6>
-			        <p>
-			          More details on  <a target="_blank" href="https://openrouteservice.org/">https://openrouteservice.org/</a>, documentation and API sources on <a target="_blank" href="https://openrouteservice.org/dev/#/api-docs">dedicated web page</a>.
-			        </p>
-			        <h6 class="text-uppercase">Plane and simple train directions/distances determined with a straight crowfly</h6>
-		    	</div>
-		    	<div class="col-lg-4 col-md-12 mb-4 mb-md-0">
+		      <div class="col-lg-4 col-md-12 mb-4 mb-md-0">
 			        <h6 class="text-uppercase">GPS information retrieved from Openstreetmap via the Nominatim tool</h6>
 			        <p>
 			          More details on  <a target="_blank" href="https://nominatim.openstreetmap.org/">https://nominatim.openstreetmap.org/</a>, documentation and API sources on <a target="_blank" href="https://nominatim.org/release-docs/latest/api/Overview/">dedicated web page</a>.
 			        </p>
 		    	</div>
+			    <div class="col-lg-4 col-md-12 mb-4 mb-md-0">
+			        <h6 class="text-uppercase">Route determined with different service depending on chose tranportation</h6>
+			        <p>
+			        <ul>
+			          <li>Road vehicules such as cars, bikes and buses : <a target="_blank" href="https://openrouteservice.org/">OpenRouteService</a></li>
+			          <li>Railway itineraries : <a target="_blank" href="http://brouter.de/">BRouter.de</a></li>
+			          <li>Plane : simple straight crowfly calculation</li>
+			        </p>
+			    	</ul>
+		    	</div>
+		    	<div class="col-lg-4 col-md-12 mb-4 mb-md-0">
+			        <h6 class="text-uppercase">CO2e data provided by ADEME (FR gov. ecologic transition agency)</h6>
+			        <p>
+			          More details on <a  target="_blank"href="https://impactco2.fr/transport">https://impactco2.fr/transport</a>, documentation and API sources on <a  target="_blank"href="https://github.com/datagir/monimpacttransport">GitHub</a>.
+			        </p>
+			    </div>
 		    </div>
 		  </div>
 
 		  <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
-		    © 2023 - <a href="./changelog.html" class="link-dark">Changelog</a> - Version 2.0.0
+		    © 2023 - <a href="./changelog.html" class="link-dark">Changelog</a> - Version 2.1.0
 		  </div>
 		</footer>
 	<!-- LOCAL SCRIPTS   -->
