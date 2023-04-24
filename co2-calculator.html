@@ -42,7 +42,7 @@
 									</div>
 									<div class="mb-3" id="div-set-passengers-number"></div>
 									<div class="mb-3" id="div-departure">
-										<input id="departure" type="search" class="form-control empty" type="text" name="departure" placeholder="Departure" required />
+										<input id="departure" type="search" class="form-control empty" type="text" name="departure" placeholder="Departure (Locality or GPS coordinates)" required />
 									</div>
 									<div class="mb-3" id="div-manage-step">
 										<button id="div-invert-step" class="btn btn-primary" onclick="revert_geolocation_input_fields()"><i class="fa fa-exchange "> </i></button>
@@ -50,7 +50,7 @@
 										<button id="div-delete-step" style="display:none;" title="Remove step" class="btn btn-primary" onclick="delete_step()"><i class="fa fa-minus"></i></button>
 									</div>
 									<div class="mb-3" id="div-arrival">
-										<input id="arrival" type="search" class="form-control empty" type="text" name="arrival" placeholder="Arrival" required/>
+										<input id="arrival" type="search" class="form-control empty" type="text" name="arrival" placeholder="Arrival (Locality or GPS coordinates)" required/>
 									</div>
 								</div>
 									<div class="mb-3" >
@@ -82,10 +82,11 @@
 									        	</br>
 									        	<li>Each location string is sent to <strong>Nominatim Openstreetmap</strong> to query the OSM database for [lat,lon] GPS coordinates and stored in a list.</li>
 									        	<ul>
+									        		<li><em>If GPS coordinates are directly provided (whether DD : ex: 45.8994, 6.1269 or DMS format : ex: 45°53'57.8"N 6°07'36.8"E), the tools skips the location query on Nominatim.</em></li>
 									        		<li><em>This tool version takes the very first result of the query, so provided geolocation has to be the most accurate possible (using local state, city or country). It will be enhanced later to provide results list to the user.</em></li>
 									        	</ul>
 									        	</br>
-									        	<li>This [lat,lon] GPS coordinates list is sent over a diffent routing API based on chosen transportation mode :
+									        	<li>This [lat,lon] GPS coordinates list is sent over a different routing API based on chosen transportation mode :
 									        	</li>
 									        	<ul>
 									        	<li><strong>Openrouteservice directions API</strong> for any "road" mode
@@ -103,7 +104,7 @@
 									        	<li>GPS points array is shown as a line over a <strong>LeafLet</strong> Map, centered to fit global itinerary within the tile. This is usefull to see if the tool actually match with expected or realized journey.</li>
 									        </ul>
 									        <div class="alert alert-dark" role="alert">
-											  No data is stored on the server, all computation is done client-side by the  web-browser. All is HTML5/Javascript written and prettified with Bootstrap 5 CSS library.
+											  No data is stored on the server, all computation is done client-side by the  web-browser. All is HTML5/Javascript written and prettified with Bootstrap 5 CSS library. Some functions (GPS coord. validation) have been AI-written using <strong>ChatGPT</strong> prompts.
 											</div>
 											All recensed bugs and futur features can be find on <a href="./changelog.html" class="link-dark">changelog page</a>.
 									      </div>
@@ -136,7 +137,7 @@
 			        <p>
 			        <ul>
 			          <li>Road vehicules such as cars, bikes and buses : <a target="_blank" href="https://openrouteservice.org/">OpenRouteService</a></li>
-			          <li>Railway itineraries : <a target="_blank" href="http://brouter.de/">BRouter.de</a></li>
+			          <li>Railway itineraries : <a target="_blank" href="https://brouter.de/">BRouter.de</a></li>
 			          <li>Plane : simple straight crowfly calculation</li>
 			        </p>
 			    	</ul>
@@ -151,7 +152,7 @@
 		  </div>
 
 		  <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
-		    © 2023 - <a href="./changelog.html" class="link-dark">Changelog</a> - Version 2.1.0
+		    © 2023 - <a href="./changelog.html" class="link-dark">Changelog</a> - Version 2.2.0
 		  </div>
 		</footer>
 	<!-- LOCAL SCRIPTS   -->

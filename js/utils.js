@@ -190,7 +190,8 @@ async function create_geojson(locality_array) {
 	var route_gps = [];
 	var undefined_step = false;
 	for (item of locality_array) {
-	    await fetch('https://nominatim.openstreetmap.org/search?q='+item+'&format=json&polygon=1&addressdetails=1', {
+		if (!isValidGPSAny(item)){
+			await fetch('https://nominatim.openstreetmap.org/search?q='+item+'&format=json&polygon=1&addressdetails=1', {
 		    method: 'GET'
 			})
 			.then(gps_json => gps_json.json())
@@ -206,7 +207,14 @@ async function create_geojson(locality_array) {
 				geojson_route.push("["+JSON.stringify(gps_json[0]["lon"])+','+JSON.stringify(gps_json[0]["lat"])+"]");	
 				}
 			});
-	    }
+		}else{
+			if(isValidGPSDMS(item)){
+				geojson_route.push("["+swapCoordinates(DMStoDD(item))+"]");
+			}else{
+				geojson_route.push("["+swapCoordinates(item)+"]");
+			}
+		}
+	}
 	//console.log(geojson_route.join(","));
 	if (undefined_step) {
 		geojson_route = []; 
@@ -331,6 +339,7 @@ async function get_ademe_co2(route_distance, transportation_id){
 //OPENROUTESERVICE API ROUTE FUNCTION
 
 async function get_openrouteservice_route(geojson_text, transportation_profile){
+	var error = true;
 	const result = await fetch('https://api.openrouteservice.org/v2/directions/'+transportation_profile+'/geojson', {
 		    method: 'POST',
 		    headers: {
@@ -341,16 +350,19 @@ async function get_openrouteservice_route(geojson_text, transportation_profile){
 		    body: geojson_text
 		}).then(response => { 
 			if (response.status == 200) {
-		    return response.json();
-		  }
-		  throw new Error('Something went wrong');
-		})
-
-		if(result == undefined){
-			document.getElementById("loading").innerHTML = "";
-			document.getElementById("calculation-result").innerHTML = "<div class='alert alert-danger' role='alert'>An error occured during route processing, please retry</div>"
-		}
-	return(result);
+				error = false;	
+		  	}
+		  	return response.json();
+		}).then(content => {
+						if (error == false){
+							return content;
+						}else{
+							document.getElementById("loading").innerHTML = "";
+							document.getElementById("calculation-result").innerHTML = "<div class='alert alert-danger' role='alert'>"+content.error.message+"</div>"
+							return undefined;
+						}
+					})
+	return result;
 
 }
 
@@ -380,7 +392,7 @@ async function get_brouter_route(geojson_route, transportation_profile){
 								document.getElementById("calculation-result").innerHTML = "<div class='alert alert-danger' role='alert'>Arrival point is not a railway station</div>"
 							}
 							else{
-								document.getElementById("calculation-result").innerHTML = "<div class='alert alert-danger' role='alert'>An error occured during route processing, please retry</div>"
+								document.getElementById("calculation-result").innerHTML = "<div class='alert alert-danger' role='alert'>An error occured during route processing ("+content+"), please retry</div>"
 							}
 							return undefined;
 						}
@@ -519,11 +531,14 @@ async function calculate_co2_route() {
 				arrival_pretty_gps_coordonates["lon"] = getDD2DMS(geojson_route.slice(-1)[0].split(",")[0].replace("[","").replace(/\"/g,""),"lon");
 				arrival_pretty_gps_coordonates["lat"] = getDD2DMS(geojson_route.slice(-1)[0].split(",")[1].replace("]","").replace(/\"/g,""),"lat");
 				//console.log("Geojson "+geojson_text);
+
 				// IF TRANSPORTATION IS A ROAD VEHICULE
 				if ((transportation_profile == "driving-car")||(transportation_profile == "cycling-regular")){
 					route = await get_openrouteservice_route(geojson_text, transportation_profile);
-					route_distance = route.features[0].properties.summary.distance;
-				  	co2_emissions = await get_ademe_co2(route_distance, transportation_id);
+					if (route != undefined){
+						route_distance = route.features[0].properties.summary.distance;
+					  	co2_emissions = await get_ademe_co2(route_distance, transportation_id);
+					  }
 				}
 				// IF TRANSPORTATION IS A SNCF EQUIPEMENT
 				if ((transportation_profile == "train-sncf")){
@@ -683,6 +698,89 @@ function getDD2DMS(dms, type){
     //else return value     
     return (days * sign) + 'º ' + minutes + "' " + secounds + "'' " + direction;
 }
+
+
+//CHATGPT GENERATED FUNCTIONS
+
+function isValidGPS(str) {
+  // Regex pattern to match decimal degrees
+  const regex = /^-?([1-8]?\d(\.\d+)?|90(\.0+)?),\s*-?(180(\.0+)?|((1[0-7]\d)|([1-9]?\d))(\.\d+)?)$/;
+  const match = regex.exec(str);
+  if (!match) {
+    return false;
+  }
+  // Parse latitude and longitude from match
+  const latitude = parseFloat(match[1]);
+  const longitude = parseFloat(match[4]);
+  // Check that latitude and longitude are within valid range
+  if (latitude < -90 || latitude > 90 || longitude < -180 || longitude > 180) {
+    return false;
+  }
+  return true;
+}
+
+function isValidGPSDMS(str) {
+  // Regex pattern to match DMS format
+  const regex = /^([NS])?(\d{1,3})°(\d{1,2})'(\d{1,2}(\.\d+)?)\"\s*([EW])?(\d{1,3})°(\d{1,2})'(\d{1,2}(\.\d+)?)?\"$/;
+  const match = regex.exec(str);
+  if (!match) {
+    return false;
+  }
+  // Parse latitude and longitude from match
+  const latitude = parseFloat(match[2]) + parseFloat(match[3])/60 + parseFloat(match[4])/3600;
+  const longitude = parseFloat(match[7]) + parseFloat(match[8])/60 + parseFloat(match[9])/3600;
+  // Check that latitude and longitude are within valid range
+  if (latitude < -90 || latitude > 90 || longitude < -180 || longitude > 180) {
+    return false;
+  }
+  return true;
+}
+
+function isValidGPSAny(str) {
+  // Check if string is valid GPS coordinate in decimal degrees format
+  if (isValidGPS(str)) {
+    return true;
+  }
+  // Check if string is valid GPS coordinate in DMS format
+  if (isValidGPSDMS(str)) {
+    return true;
+  }
+  // If string is not a valid GPS coordinate in either format, return false
+  return false;
+}
+
+function DMStoDD(dms) {
+  // Split DMS string into components
+  const parts = dms.split(/[^\d\w\.]+/);
+  
+  // Extract degrees, minutes, and seconds from components
+  const degrees = parseFloat(parts[0]);
+  const minutes = parseFloat(parts[1]);
+  const seconds = parseFloat(parts[2]);
+
+  // Calculate decimal degrees value
+  let dd = degrees + (minutes / 60) + (seconds / 3600);
+
+  // Check if coordinate is in southern or western hemisphere and flip sign
+  if (parts[3] === "S" || parts[3] === "W") {
+    dd = -dd;
+  }
+
+  return dd;
+}
+
+
+function swapCoordinates(str) {
+  const dd = str.split(",").map(parseFloat);
+  
+  if (dd.length !== 2) {
+    throw new Error("Invalid coordinate format");
+  }
+  
+  const swapped = [dd[1], dd[0]];
+  return swapped.join(",");
+}
+
 
 // MAIN
 
