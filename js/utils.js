@@ -391,6 +391,9 @@ async function get_brouter_route(geojson_route, transportation_profile){
 							}else if (content.includes("to-position")){
 								document.getElementById("calculation-result").innerHTML = "<div class='alert alert-danger' role='alert'>Arrival point is not a railway station</div>"
 							}
+							else if (content.includes("no track found")){
+								document.getElementById("calculation-result").innerHTML = "<div class='alert alert-danger' role='alert'>A provided location is not on rail tracks</div>"
+							}
 							else{
 								document.getElementById("calculation-result").innerHTML = "<div class='alert alert-danger' role='alert'>An error occured during route processing ("+content+"), please retry</div>"
 							}
