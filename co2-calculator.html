@@ -22,21 +22,23 @@
 					<div class="col-lg-8 col-xl-7 col-xxl-7">
 						<div class="card mb-5">
 							<div class="card-body p-sm-5">
-								<h2 class="text-center mb-4">CO2 Calculator</h2>
+								<button type="button" class="btn btn-light" style="padding : 12px" onclick="setLanguage('en')"><img src="https://flagcdn.com/w20/gb.png" height=13px width=20px alt="English"/></button>
+		        				<button type="button" class="btn btn-light" style="padding : 12px" onclick="setLanguage('fr')"><img src="https://flagcdn.com/w20/fr.png" alt="Français"/></button>
+								<h2 class="text-center mb-4"><span id="title"></span></h2>
 								<div id="route-details">
 									<div class="mb-3">
-									<label for="cars">Choose a transportation:</label>
+									<label for="cars"><span id="transportation-title"></span></label>
 									  <select class="form-select" name="transportation" id="transportation" required onchange="show_options_settings(this)">
 									  	<option value=""></option>
-									  	<option value="Autobus">Autobus</option>
-									    <option value="Bike">Bike</option>
-									    <option value="City Bus">City Bus</option>
-									    <option value="Car">Car</option>
-									    <option value="Electric Car">Electric Car</option>
-									    <option value="Plane">Plane</option>
+									  	<option value="Autobus"><span id="Autobus-option">Autobus</span></option>
+									    <option value="Bike"><span id="Bike-option"></span>Bike</option>
+									    <option value="City Bus"><span id="City_Bus-option"></span>City Bus</option>
+									    <option value="Car"><span id="Car-option"></span>Car</option>
+									    <option value="Electric Car"><span id="Electric_Car-option"></span>Electric Car</option>
+									    <option value="Plane"><span id="Plane-option"></span>Plane</option>
 									    <!-- <option value="SNCF">SNCF</option> -->
-									    <option value="Regular train">Regular train</option>
-									    <option value="High-speed train">High-speed train</option>
+									    <option value="Regular train"><span id="Regular_train-option"></span>Regular train</option>
+									    <option value="High-speed train"><span id="High-speed_train-option"></span>High-speed train</option>
 									    
 									  </select>
 									</div>
@@ -54,10 +56,10 @@
 									</div>
 								</div>
 									<div class="mb-3" >
-										<button class="btn btn-primary d-block w-100" onclick="calculate_co2_route()">Add this trip</button>
+										<button class="btn btn-primary d-block w-100" onclick="calculate_co2_route()"><span id="add-trip">Add this trip</span></button>
 									</div>
 									<div class="mb-3" >
-										<button class="btn btn-secondary d-block w-100" onclick="clear_fields()">Clear</button>
+										<button class="btn btn-secondary d-block w-100" onclick="clear_fields()"><span id="clear">Clear</span></button>
 									</div>
 								<div id="loading" class="mb-3"></div>
 								<div id="calculation-result" class="mb-3" style="display:none;"></div>
@@ -65,8 +67,9 @@
 								<div class="mb-3">
 									<!-- Button trigger modal -->
 									<button type="button" class="btn btn-light d-block w-100" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-									  How does this tool work ?
+									  <span id="how">How does this tool work ?</span>
 									</button>
+
 
 									<!-- Modal -->
 									<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -74,42 +77,13 @@
 									    <div class="modal-content">
 									      <div class="modal-header">
 									        <h5 class="modal-title" id="staticBackdropLabel">How does this tool work ?</h5>
+									        <button type="button" class="btn btn-light" style="padding : 12px" onclick="setLanguage('en')"><img src="https://flagcdn.com/w20/gb.png" height=13px width=20px alt="English"/></button>
+		        							<button type="button" class="btn btn-light" style="padding : 12px" onclick="setLanguage('fr')"><img src="https://flagcdn.com/w20/fr.png" alt="Français"/></button>
 									        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 									      </div>
-									      <div class="modal-body">
-									        Based on provided geolocations, here's the operation mode to provide an <u>estimated</u> CO2e emission for the specified trip :
-									        <ul class="">
-									        	</br>
-									        	<li>Each location string is sent to <strong>Nominatim Openstreetmap</strong> to query the OSM database for [lat,lon] GPS coordinates and stored in a list.</li>
-									        	<ul>
-									        		<li><em>If GPS coordinates are directly provided (whether DD : ex: 45.8994, 6.1269 or DMS format : ex: 45°53'57.8"N 6°07'36.8"E), the tools skips the location query on Nominatim.</em></li>
-									        		<li><em>This tool version takes the very first result of the query, so provided geolocation has to be the most accurate possible (using local state, city or country). It will be enhanced later to provide results list to the user.</em></li>
-									        	</ul>
-									        	</br>
-									        	<li>This [lat,lon] GPS coordinates list is sent over a different routing API based on chosen transportation mode :
-									        	</li>
-									        	<ul>
-									        	<li><strong>Openrouteservice directions API</strong> for any "road" mode
-									        	, in order to plan a trip throught all these locations and obtain kilometers journey length and route as a GPS points array.</br><em>Openrouteservice directions API only supports transportation profiles driving-car and regular-bike, so public transportations may required to specify steps to match with the local public transportation plan. This could be also be a future enhancement.</em></li>
-									        	<li><strong>A simple crowfly</strong> math calculation for plane, this needs to declare as many steps as possible</li>
-									        	<li><strong>BRouter.de</strong> for trains journey, that sticks as much as possible to railway path and need to have departure and arrival on an existant train station</li>
-									        	<!-- <li><strong>SNCF journey API</strong> that will mix regular and high-speed train for the France area</li> -->
-									        	</ul>
-									        	</br>
-									        	<li>Total kilometers is sent to <strong>Mon Impact Transport API</strong> (provided by ADEME, FR gov. ecologic transition agency), with chosen transportation mode. It returns kgco2e emissions, then divided by carpoolers if specified.</li>
-									        	<ul>
-									        		<li><em>Default passengers number is 1 for any other transportation than car an electric car, as estimation returned from ADEME for buses assumes an average transportation occupancy.</em></li>
-									        	</ul>
-									        	</br>
-									        	<li>GPS points array is shown as a line over a <strong>LeafLet</strong> Map, centered to fit global itinerary within the tile. This is usefull to see if the tool actually match with expected or realized journey.</li>
-									        </ul>
-									        <div class="alert alert-dark" role="alert">
-											  No data is stored on the server, all computation is done client-side by the  web-browser. All is HTML5/Javascript written and prettified with Bootstrap 5 CSS library. Some functions (GPS coord. validation) have been AI-written using <strong>ChatGPT</strong> prompts.
-											</div>
-											All recensed bugs and futur features can be find on <a href="./changelog.html" class="link-dark">changelog page</a>.
-									      </div>
+									      <div class="modal-body" id="how-does-this-tool-work"></div>
 									      <div class="modal-footer">
-									        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+									        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><span id="close">Close</span></button>
 									      </div>
 									    </div>
 									  </div>
@@ -122,7 +96,7 @@
 			</div>
 		</section>
 		<footer class="bg-light text-center text-lg-start">
-		  <div class="container p-4">
+		  <!-- <div class="container p-4">
 		    <div class="row">
 		      	<h5 class="text-uppercase">Data sources used</h5>
 		      </br></br>
@@ -149,13 +123,15 @@
 			        </p>
 			    </div>
 		    </div>
-		  </div>
+		  </div> -->
 
 		  <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
-		    © 2023 - <a href="./changelog.html" class="link-dark">Changelog</a> - Version 2.2.0
+		        © 2023 - <a href="./changelog.html" class="link-dark">Changelog</a> - Version <span id="last_release_id"></span>
 		  </div>
+
 		</footer>
 	<!-- LOCAL SCRIPTS   -->
   <script src="js/utils.js"></script>
+  <script src=js/lang.js></script>
 	</body>
 </html>
