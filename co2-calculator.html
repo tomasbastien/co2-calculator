@@ -2,10 +2,10 @@
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no" />
-		<title>CO2 Calculator</title>
+		<title>CO2e Calculator</title>
 		<!-- LOCAL STYLESHEETS -->
 		<link rel="stylesheet" href="css/assets/bootstrap/css/bootstrap.min.css" />
-		<link rel="stylesheet" href="css/pow-fr.css" />
+		<!-- <link rel="stylesheet" href="css/pow-fr.css" /> -->
 		<link rel="stylesheet" href="css/custom.css" />
 		<!-- EXTERNAL STYLESHEETS -->
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -14,6 +14,8 @@
  		<!-- EXTERNAL SCRIPTS -->
  		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
 		<script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js" integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM=" crossorigin=""></script>
+		<script src="https://unpkg.com/leaflet"></script>
+		<script src="https://unpkg.com/leaflet-simple-map-screenshoter"></script>
 	</head>
 	<body>
 		<section class="position-relative py-4 py-xl-5"> 
@@ -24,7 +26,7 @@
 							<div class="card-body p-sm-5">
 								<button type="button" class="btn btn-light" style="padding : 12px" onclick="setLanguage('en')"><img src="https://flagcdn.com/w20/gb.png" height=13px width=20px alt="English"/></button>
 		        				<button type="button" class="btn btn-light" style="padding : 12px" onclick="setLanguage('fr')"><img src="https://flagcdn.com/w20/fr.png" alt="Français"/></button>
-								<h2 class="text-center mb-4"><span id="title"></span></h2>
+								<h2 class="text-center mb-4"><span id="title"></span><span></h2>
 								<div id="route-details">
 									<div class="mb-3">
 									<label for="cars"><span id="transportation-title"></span></label>
@@ -133,5 +135,6 @@
 	<!-- LOCAL SCRIPTS   -->
   <script src="js/utils.js"></script>
   <script src=js/lang.js></script>
+  <!-- <script src=js/pow-fr.js></script> -->
 	</body>
 </html>

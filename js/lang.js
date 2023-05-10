@@ -1,25 +1,27 @@
 var updates = {
-      'last_release_id' : '2.2.1'
+      'last_release_id' : '2.2.2'
 }
 
 var changelog_langEn = {    
     // 'changelog' : '<h5 class='mt-4'><span class='p-2 bg-light shadow rounded text-success'>Version 1.0.0</span>   28th Jan, 2023</h5><ul class='mt-3'>    <li class='ml-3'><i class='mdi mdi-circle-medium mr-2'></i><strong>Initial Released</strong></li></ul><h5 class='mt-4'> <span class='p-2 bg-light shadow rounded text-success'>Version 1.1.0</span>   03rd Fev, 2023</h5><ul class='mt-3'>    <li class='ml-3'><i class='mdi mdi-circle-medium mr-2'></i><strong>Multimodal management</strong> (plan itinerary with differents transportations) : it is now possible to chain multiple trips with different transportation</li>    <li class='ml-3'><i class='mdi mdi-circle-medium mr-2'></i>Better responsive design and text alignment</li></ul><h5 class='mt-4'> <span class='p-2 bg-light shadow rounded text-success'>Version 1.2.0</span>   04th Fev, 2023</h5><ul class='mt-3'>    <li class='ml-3'><i class='mdi mdi-circle-medium mr-2'></i><strong>Multimodal management :</strong> adding 'delete' option</li>    <li class='ml-3'><i class='mdi mdi-circle-medium mr-2'></i><strong>Easy step management :</strong> remove, invert list</li>    <li class='ml-3'><i class='mdi mdi-circle-medium mr-2'></i>Using pretty buttons for step management</li></ul><h5 class='mt-4'> <span class='p-2 bg-light shadow rounded text-success'>Version 1.2.1</span>   04th Fev, 2023</h5><ul class='mt-3'>    <li class='ml-3'><i class='mdi mdi-circle-medium mr-2'></i><strong>Bug fixes :</strong> resolving issues <strong>#1</strong> and <strong>#3</strong></li>    <li class='ml-3'><i class='mdi mdi-circle-medium mr-2'></i>Using pretty button for step deletion in result sub-part</li></ul><h5 class='mt-4'> <span class='p-2 bg-light shadow rounded text-success'>Version 2.0.0</span>   8th Mar, 2023</h5><ul class='mt-3'>    <li class='ml-3'><i class='mdi mdi-circle-medium mr-2'></i><strong>Adding plane support</strong> (distance estimated on a crowfly beetween steps)</li>    <li class='ml-3'><i class='mdi mdi-circle-medium mr-2'></i><strong>Adding regular and high-speed train support</strong> (distance estimated on a crowfly beetween steps)</li>    <!-- <li class='ml-3'><i class='mdi mdi-circle-medium mr-2'></i><strong>Adding SNCF (french rail company) routing engine</strong>, with autocalculation of journey and CO2 emissions</li> --></ul><h5 class='mt-4'> <span class='p-2 bg-light shadow rounded text-success'>Version 2.1.0</span>   21th Mar, 2023</h5><ul class='mt-3'>    <li class='ml-3'><i class='mdi mdi-circle-medium mr-2'></i><strong>Regular and high-speed train trips now use BRouter.de</strong> (really sticks to the railway, enhancing precision in distance calculation)</li>    <!-- <li class='ml-3'><i class='mdi mdi-circle-medium mr-2'></i><strong>Adding SNCF (french rail company) routing engine</strong>, with autocalculation of journey and CO2 emissions</li> --></ul><h5 class='mt-4'> <span class='p-2 bg-light shadow rounded text-success'>Version 2.2.0</span>   24th Apr, 2023</h5><ul class='mt-3'>    <li class='ml-3'><i class='mdi mdi-circle-medium mr-2'></i><strong>Allow direct use of GPS coordinates</strong> (both DD & DMS format)</li>    <li class='ml-3'><i class='mdi mdi-circle-medium mr-2'></i>Text correction</li></ul><h7 class='mt-4'> <span class='p-2 bg-light shadow rounded text-warning'>Known issues in <strong>2.2.0</strong></span> Last updated on 24th Apr, 2023</h7><ul class='mt-3'>    <li class='ml-3'><i class='mdi mdi-circle-medium mr-2'></i><strong>#2</strong> - Map is not centered on global view when chaining trips</li></ul><h7 class='mt-4'> <span class='p-2 bg-light shadow rounded text-secondary'>Considered features</span> Last updated on 24th Apr, 2023</h7><ul class='mt-3'>    <li class='ml-3'><i class='mdi mdi-circle-medium mr-2'></i>Dropdown list for Nominatim query results in order to let the user choose the desired location instead of using the only first result</li>    <li class='ml-3'><i class='mdi mdi-circle-medium mr-2'></i>Find better direction service for public transportation</li></ul><h7 class='mt-4'> <span class='p-2 bg-light shadow rounded text-secondary'>Older issues</span> Last updated on 24th Apr, 2023</h7><ul class='mt-3'>    <li class='ml-3'><i class='mdi mdi-circle-medium mr-2'></i><del><strong>#1</strong> - CO2 calculation approximation with using round kilometers, better use meters</del></li>    <li class='ml-3'><i class='mdi mdi-circle-medium mr-2'></i><del><strong>#3</strong> - After trip deletion, GPS trace remains on the map</del></li></ul>',
-    'v1.0.0-release-date' : '   28th Jan, 2023',
+    'v1.0.0-release-date' : '   Jan 28th, 2023',
     'v1.0.0-release-notes' : '<li class="ml-3"><i class="mdi mdi-circle-medium mr-2"></i><strong>Original release</strong></li>',
-    'v1.1.0-release-date' : '   03rd Fev, 2023',
+    'v1.1.0-release-date' : '   Fev 3rd, 2023',
     'v1.1.0-release-notes' : '<li class="ml-3"><i class="mdi mdi-circle-medium mr-2"></i><strong>Multimodal management</strong> (plan itinerary with differents transportations) : it is now possible to chain multiple trips with different transportation</li><li class="ml-3"><i class="mdi mdi-circle-medium mr-2"></i>Better responsive design and text alignment</li>',
-    'v1.2.0-release-date' : '   04th Fev, 2023',
+    'v1.2.0-release-date' : '   Fev 4th, 2023',
     'v1.2.0-release-notes' : '<li class="ml-3"><i class="mdi mdi-circle-medium mr-2"></i><strong>Multimodal management :</strong> adding "delete" option</li><li class="ml-3"><i class="mdi mdi-circle-medium mr-2"></i><strong>Easy step management :</strong> remove, invert list</li><li class="ml-3"><i class="mdi mdi-circle-medium mr-2"></i>Using pretty buttons for step management</li>',
-    'v1.2.1-release-date' : '   04th Fev, 2023',
+    'v1.2.1-release-date' : '   Fev 4th, 2023',
     'v1.2.1-release-notes' : '<li class="ml-3"><i class="mdi mdi-circle-medium mr-2"></i><strong>Bug fixes :</strong> resolving issues <strong>#1</strong> and <strong>#3</strong></li><li class="ml-3"><i class="mdi mdi-circle-medium mr-2"></i>Using pretty button for step deletion in result sub-part</li>',
-    'v2.0.0-release-date' : '   8th Mar, 2023',
+    'v2.0.0-release-date' : '   Mar 8th , 2023',
     'v2.0.0-release-notes' : '<li class="ml-3"><i class="mdi mdi-circle-medium mr-2"></i><strong>Adding plane support</strong> (distance estimated on a crowfly beetween steps)</li><li class="ml-3"><i class="mdi mdi-circle-medium mr-2"></i><strong>Adding regular and high-speed train support</strong> (distance estimated on a crowfly beetween steps)</li><!-- <li class="ml-3"><i class="mdi mdi-circle-medium mr-2"></i><strong>Adding SNCF (french rail company) routing engine</strong>, with autocalculation of journey and CO2 emissions</li> -->',
-    'v2.1.0-release-date' : '   21th Mar, 2023',
+    'v2.1.0-release-date' : '   Mar 21th, 2023',
     'v2.1.0-release-notes' : '<li class="ml-3"><i class="mdi mdi-circle-medium mr-2"></i><strong>Regular and high-speed train trips now use BRouter.de</strong> (really sticks to the railway, enhancing precision in distance calculation)</li>',
-    'v2.2.0-release-date' : '   24th Apr, 2023',
+    'v2.2.0-release-date' : '   Apr 24th, 2023',
     'v2.2.0-release-notes' : '<li class="ml-3"><i class="mdi mdi-circle-medium mr-2"></i><strong>Allow direct use of GPS coordinates</strong> (both DD & DMS format)</li><li class="ml-3"><i class="mdi mdi-circle-medium mr-2"></i>Text correction</li>',
-    'v2.2.1-release-date' : '   29th Apr, 2023',
-    'v2.2.1-release-notes' : '<li class="ml-3"><i class="mdi mdi-circle-medium mr-2"></i><strong>Adding multilanguage support</strong></li>'
+    'v2.2.1-release-date' : '   Apr 29th, 2023',
+    'v2.2.1-release-notes' : '<li class="ml-3"><i class="mdi mdi-circle-medium mr-2"></i><strong>Adding multilanguage support</strong></li>',
+    'v2.2.2-release-date' : '   May 10th, 2023',
+    'v2.2.2-release-notes' : '<li class="ml-3"><i class="mdi mdi-circle-medium mr-2"></i>Adding <strong>watermark</strong> and <strong>screenshot & download button</strong> for LeafLet map</li>'
 }
 
 var changelog_langFr = {    
@@ -39,11 +41,13 @@ var changelog_langFr = {
     'v2.2.0-release-date' : '   24 avril 2023',
     'v2.2.0-release-notes' : '<li class="ml-3"><i class="mdi mdi-circle-medium mr-2"></i><strong>Interprétation de coordonnées GPS dans les champs Départ, Arrivée et étapes </strong> (au format DD ou DMS)</li>    <li class="ml-3"><i class="mdi mdi-circle-medium mr-2"></i>Correction de textes</li>',
     'v2.2.1-release-date' : '   29 avril 2023',
-    'v2.2.1-release-notes' : '<li class="ml-3"><i class="mdi mdi-circle-medium mr-2"></i><strong>Ajout du multi-langues</strong></li>'
+    'v2.2.1-release-notes' : '<li class="ml-3"><i class="mdi mdi-circle-medium mr-2"></i><strong>Ajout du multi-langues</strong></li>',
+    'v2.2.2-release-date' : '   10 mai 2023',
+    'v2.2.2-release-notes' : '<li class="ml-3"><i class="mdi mdi-circle-medium mr-2"></i>Ajout du <strong>filigrane</strong> et du <strong>bouton d\'export</strong> de la carte LeafLet en image</strong></li>'
 }
 
 var co2calculator_langEn = { 
-  'title' : 'CO2 Calculator',
+  'title' : 'CO2e Calculator',
   'transportation-title' : 'Choose a transportation : ',
   'transportation' : '',
   'add-trip' : 'Add this trip',
@@ -57,7 +61,7 @@ var co2calculator_langEn = {
 }
 
 var co2calculator_langFr = { 
-  'title' : 'Calculateur CO2',
+  'title' : 'Calculateur CO2e',
   'transportation-title' : 'Choisir un moyen de transport : ',
   'transportation' : '',
   'add-trip' : 'Ajouter ce trajet',
@@ -89,7 +93,7 @@ var co2calculator_tranportationsEn = {
     '6' : 'Electric Car',
     '7' : 'Plane',
     '8' : 'Regular train',
-    '9' : 'High-speed_train',
+    '9' : 'High-speed train',
 }
 
 var changelog_lang = changelog_langEn;

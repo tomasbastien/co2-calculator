@@ -1,10 +1,49 @@
 // CONST & GLOBAL VARIABLES //
+
+
+
+
+let pluginOptions = {
+   cropImageByInnerWH: true, // crop blank opacity from image borders
+   hidden: false, // hide screen icon
+   preventDownload: false, // prevent download on button click
+   domtoimageOptions: {}, // see options for dom-to-image
+   position: 'topright', // position of take screen icon
+   screenName: "co2e-calculator-map-"+getCurrentDateTime(), // string or function
+   hideElementsWithSelectors: ['.leaflet-control-container'], // by default hide map controls All els must be child of _map._container
+   mimeType: 'image/png', // used if format == image,
+   // caption: "TEST", // string or function, added caption to bottom of screen
+   // captionFontSize: 15,
+   // captionFont: 'Arial',
+   // captionColor: 'black',
+   // captionBgColor: 'white',
+   // captionOffset: 5,
+   // callback for manually edit map if have warn: "May be map size very big on that zoom level, we have error"
+   // and screenshot not created
+   onPixelDataFail: async function({ node, plugin, error, mapPane, domtoimageOptions }) {
+       // Solutions:
+       // decrease size of map
+       // or decrease zoom level
+       // or remove elements with big distanses
+       // and after that return image in Promise - plugin._getPixelDataOfNormalMap
+       return plugin._getPixelDataOfNormalMap(domtoimageOptions)
+   }
+}
+
+
 const map = L.map('map').setView([45.899182,6.128679],7);
-var step_number = 0;
+simpleMapScreenshoter = L.simpleMapScreenshoter(pluginOptions).addTo(map);
+
+
+
 const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
 	maxZoom: 19,
 	attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
 }).addTo(map);
+
+
+var step_number = 0;
+
 
 var itineraries = [];
 var transportations = [
@@ -615,7 +654,10 @@ function render_total(itineraries){
 	document.getElementById("calculation-result").innerHTML="";
 	for (itinerary in itineraries){
 		//console.log(itineraries[itinerary]["route"]);
-		L.geoJSON(itineraries[itinerary]["route"]).addTo(map);
+		L.geoJSON(itineraries[itinerary]["route"],{
+        // color: '#f2e253',
+        // weight: 5,
+    	}).addTo(map);
 		map.fitBounds(L.geoJSON(itineraries[itinerary]["route"]).getBounds());
 		total["co2_emissions"]=total["co2_emissions"]+itineraries[itinerary]["co2_emissions"];
 		total["co2_emissions_individual"]=total["co2_emissions_individual"]+(itineraries[itinerary]["co2_emissions"]/itineraries[itinerary]["passengers"]);
@@ -704,6 +746,19 @@ function getDD2DMS(dms, type){
 
 
 //CHATGPT GENERATED FUNCTIONS
+
+function getCurrentDateTime() {
+  const now = new Date();
+  const year = now.getFullYear();
+  const month = String(now.getMonth() + 1).padStart(2, '0');
+  const day = String(now.getDate()).padStart(2, '0');
+  const hour = String(now.getHours()).padStart(2, '0');
+  const minute = String(now.getMinutes()).padStart(2, '0');
+  const second = String(now.getSeconds()).padStart(2, '0');
+
+  const formattedDateTime = `${year}-${month}-${day}_${hour}-${minute}-${second}`;
+  return formattedDateTime;
+}
 
 function isValidGPS(str) {
   // Regex pattern to match decimal degrees
