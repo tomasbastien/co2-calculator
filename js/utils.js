@@ -263,25 +263,6 @@ async function create_geojson(locality_array) {
 
 function clear_fields() {
 	location.reload();
-	// console.log("Clearing fields");
-	// document.getElementById('departure').value = '';
-	// document.getElementById('arrival').value = '';
-	// for (let step = 1; step <= step_number; step++) {
-	// 	element=document.getElementById("step-"+step);
-	// 	element.remove();
-	// }
-	// step_number=0;
-	// reset_map(map);
-	// route_steps = [];
-	// map.setView([45.899182,6.128679],9);
-	// document.getElementById("calculation-result").innerHTML = "";
-	// passengers=1;
-	// document.getElementById('transportation').value = 'Bike';
-	// element=document.getElementById("passengers_div");
-	// if (element != null){
-	// 	element.remove();
-	// }
-
 }
 
 function revert_geolocation_input_fields() {
@@ -442,51 +423,6 @@ async function get_brouter_route(geojson_route, transportation_profile){
 	return result;
 }
 
-//SNCF API SEARCH FUNCTIONS
-
-async function search_sncf_train_station(locality, transportation_suffix){
-	const response = await fetch('https://api.sncf.com/v1/coverage/sncf/places?q='+locality+'&type%5B%5D=stop_point&', {
-			    method: 'GET',
-			    headers: {
-			        'Authorization' : '6e4ad4ec-86ef-41c7-8636-8df3993f4537'
-			        }
-			}).then(response => { 
-				return(response.json());
-			}).then(response => {
-				for(item in response["places"]){
-					if((response["places"][item]["quality"] >= 50)&&(response["places"][item]["id"].includes(transportation_suffix))){
-						//console.log(response["places"][item]);
-						return(response["places"][item]);
-					}
-				}
-			});
-	if(response == undefined){
-		document.getElementById("loading").innerHTML = "";
-		document.getElementById("calculation-result").innerHTML = "<div class='alert alert-warning' role='alert'><em>"+locality+"</em> was not found as a railway station in the SNCF database, please be more specific for it or use a nearby location</div>"
-
-	}
-	return(response);
-}
-
-async function get_sncf_journey(departure_point, arrival_point){
-	const response = await fetch('https://api.sncf.com/v1/coverage/sncf/journeys?from='+departure_point+'&to='+arrival_point, {
-			    method: 'GET',
-			    headers: {
-			        'Authorization' : '6e4ad4ec-86ef-41c7-8636-8df3993f4537'
-			        }
-			}).then(response => { 
-				return(response.json());
-			});
-	//console.log(response);
-	if(response["journeys"][0]["tags"].includes("ecologic")){
-		return response;
-	}else{
-		document.getElementById("loading").innerHTML = "";
-		document.getElementById("calculation-result").innerHTML = "<div class='alert alert-warning' role='alert'>No train itinerary was found in the SNCF database</div>"
-		return undefined;
-	}
-}
-
 function concatGeoJSON(g1, g2){
     return { 
         "type" : "LineString",
@@ -525,9 +461,6 @@ async function calculate_co2_route() {
 			        var transportation_id = transportations[i]["id"];
 			        var transportation_profile = transportations[i]["profile"];
 			        var transportation_emoji = transportations[i]["emoji"];
-			        if((transportation_id == "15") || (transportation_id == "2")|| (transportation_id == "99")){
-			        	var transportation_suffix = transportations[i]["sncf_stop_suffix"];
-			        }
 			    }
 			}
 			element=document.getElementById("passengers_div");
@@ -535,37 +468,7 @@ async function calculate_co2_route() {
 				passengers = document.getElementById("passengers").value;
 			}
 
-		// if((transportation_id == "15") || (transportation_id == "2")){
-		// 	const departure_station=await search_sncf_train_station(departure, transportation_suffix);
-		// 	const arrival_station=await search_sncf_train_station(arrival, transportation_suffix);
-
-		// 	if ((departure_station != undefined)&&(arrival_station != undefined)){
-		// 		document.getElementById("departure").value=departure_station["stop_point"]["name"];
-		// 		document.getElementById("arrival").value=arrival_station["stop_point"]["name"];
-		// 		var rail_route = { 
-		// 			"type" : "LineString",
-	    // 			"coordinates": [],
-	    // 			"properties":[{
-	    // 				"length" : 0
-	    // 			}
-	    // 			]
-	    // 		};
-							
-		// 		// L.marker([departure_station["stop_point"]["coord"]["lat"],departure_station["stop_point"]["coord"]["lon"]]).addTo(map);
-		// 		// L.marker([arrival_station["stop_point"]["coord"]["lat"],arrival_station["stop_point"]["coord"]["lon"]]).addTo(map);
-		// 		const train_journey = await get_sncf_journey(departure_station["id"], arrival_station["id"]);
-		// 		for (item in train_journey["journeys"][0]["sections"]){
-		// 			if(train_journey["journeys"][0]["sections"][item]["type"] != "waiting"){
-		// 				rail_route=concatGeoJSON(rail_route,train_journey["journeys"][0]["sections"][item]["geojson"]);
-		// 			}
-					
-		// 		}
-		// 		itineraries.push({"departure": departure_station["stop_point"]["name"],"arrival":arrival_station["stop_point"]["name"],"geojson_route":rail_route,"transportation":transportation,"passengers":passengers, "route":rail_route, "distance":rail_route["properties"][0]["length"],"co2_emissions":train_journey["journeys"][0]["co2_emission"]["value"]/1000});
-		// 		// L.geoJSON(rail_route).addTo(map);
-		// 		document.getElementById("loading").innerHTML = "";
-		// 		render_total(itineraries);
-		// 	}
-		// }else{
+		
 
 			geojson_route= await create_geojson(route_steps)
 			if (geojson_route.length > 0){
@@ -582,35 +485,7 @@ async function calculate_co2_route() {
 					  	co2_emissions = await get_ademe_co2(route_distance, transportation_id);
 					  }
 				}
-				// IF TRANSPORTATION IS A SNCF EQUIPEMENT
-				if ((transportation_profile == "train-sncf")){
-					const departure_station=await search_sncf_train_station(departure, transportation_suffix);
-					const arrival_station=await search_sncf_train_station(arrival, transportation_suffix);
-
-					if ((departure_station != undefined)&&(arrival_station != undefined)){
-						document.getElementById("departure").value=departure_station["stop_point"]["name"];
-						document.getElementById("arrival").value=arrival_station["stop_point"]["name"];
-						route = { 
-							"type" : "LineString",
-			    			"coordinates": [],
-			    			"properties":[{
-			    				"length" : 0
-			    			}
-			    			]
-			    		};
-									
-						// L.marker([departure_station["stop_point"]["coord"]["lat"],departure_station["stop_point"]["coord"]["lon"]]).addTo(map);
-						// L.marker([arrival_station["stop_point"]["coord"]["lat"],arrival_station["stop_point"]["coord"]["lon"]]).addTo(map);
-						const train_journey = await get_sncf_journey(departure_station["id"], arrival_station["id"]);
-						for (item in train_journey["journeys"][0]["sections"]){
-							if(train_journey["journeys"][0]["sections"][item]["type"] != "waiting"){
-								route=concatGeoJSON(route,train_journey["journeys"][0]["sections"][item]["geojson"]);
-							}
-						}
-						route_distance=route["properties"][0]["length"];
-						co2_emissions=train_journey["journeys"][0]["co2_emission"]["value"]/1000;
-					}
-				}
+				
 				if(transportation_profile == "plane"){
 					route = get_crowfly_route(geojson_route);
 					route_distance=get_crowfly_distance(geojson_route);
