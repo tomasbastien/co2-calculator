@@ -2,6 +2,7 @@ var updates = {
       'last_release_id' : '2.2.3'
 }
 
+
 var changelog_langEn = {    
     // 'changelog' : '<h5 class='mt-4'><span class='p-2 bg-light shadow rounded text-success'>Version 1.0.0</span>   28th Jan, 2023</h5><ul class='mt-3'>    <li class='ml-3'><i class='mdi mdi-circle-medium mr-2'></i><strong>Initial Released</strong></li></ul><h5 class='mt-4'> <span class='p-2 bg-light shadow rounded text-success'>Version 1.1.0</span>   03rd Fev, 2023</h5><ul class='mt-3'>    <li class='ml-3'><i class='mdi mdi-circle-medium mr-2'></i><strong>Multimodal management</strong> (plan itinerary with differents transportations) : it is now possible to chain multiple trips with different transportation</li>    <li class='ml-3'><i class='mdi mdi-circle-medium mr-2'></i>Better responsive design and text alignment</li></ul><h5 class='mt-4'> <span class='p-2 bg-light shadow rounded text-success'>Version 1.2.0</span>   04th Fev, 2023</h5><ul class='mt-3'>    <li class='ml-3'><i class='mdi mdi-circle-medium mr-2'></i><strong>Multimodal management :</strong> adding 'delete' option</li>    <li class='ml-3'><i class='mdi mdi-circle-medium mr-2'></i><strong>Easy step management :</strong> remove, invert list</li>    <li class='ml-3'><i class='mdi mdi-circle-medium mr-2'></i>Using pretty buttons for step management</li></ul><h5 class='mt-4'> <span class='p-2 bg-light shadow rounded text-success'>Version 1.2.1</span>   04th Fev, 2023</h5><ul class='mt-3'>    <li class='ml-3'><i class='mdi mdi-circle-medium mr-2'></i><strong>Bug fixes :</strong> resolving issues <strong>#1</strong> and <strong>#3</strong></li>    <li class='ml-3'><i class='mdi mdi-circle-medium mr-2'></i>Using pretty button for step deletion in result sub-part</li></ul><h5 class='mt-4'> <span class='p-2 bg-light shadow rounded text-success'>Version 2.0.0</span>   8th Mar, 2023</h5><ul class='mt-3'>    <li class='ml-3'><i class='mdi mdi-circle-medium mr-2'></i><strong>Adding plane support</strong> (distance estimated on a crowfly beetween steps)</li>    <li class='ml-3'><i class='mdi mdi-circle-medium mr-2'></i><strong>Adding regular and high-speed train support</strong> (distance estimated on a crowfly beetween steps)</li>    <!-- <li class='ml-3'><i class='mdi mdi-circle-medium mr-2'></i><strong>Adding SNCF (french rail company) routing engine</strong>, with autocalculation of journey and CO2 emissions</li> --></ul><h5 class='mt-4'> <span class='p-2 bg-light shadow rounded text-success'>Version 2.1.0</span>   21th Mar, 2023</h5><ul class='mt-3'>    <li class='ml-3'><i class='mdi mdi-circle-medium mr-2'></i><strong>Regular and high-speed train trips now use BRouter.de</strong> (really sticks to the railway, enhancing precision in distance calculation)</li>    <!-- <li class='ml-3'><i class='mdi mdi-circle-medium mr-2'></i><strong>Adding SNCF (french rail company) routing engine</strong>, with autocalculation of journey and CO2 emissions</li> --></ul><h5 class='mt-4'> <span class='p-2 bg-light shadow rounded text-success'>Version 2.2.0</span>   24th Apr, 2023</h5><ul class='mt-3'>    <li class='ml-3'><i class='mdi mdi-circle-medium mr-2'></i><strong>Allow direct use of GPS coordinates</strong> (both DD & DMS format)</li>    <li class='ml-3'><i class='mdi mdi-circle-medium mr-2'></i>Text correction</li></ul><h7 class='mt-4'> <span class='p-2 bg-light shadow rounded text-warning'>Known issues in <strong>2.2.0</strong></span> Last updated on 24th Apr, 2023</h7><ul class='mt-3'>    <li class='ml-3'><i class='mdi mdi-circle-medium mr-2'></i><strong>#2</strong> - Map is not centered on global view when chaining trips</li></ul><h7 class='mt-4'> <span class='p-2 bg-light shadow rounded text-secondary'>Considered features</span> Last updated on 24th Apr, 2023</h7><ul class='mt-3'>    <li class='ml-3'><i class='mdi mdi-circle-medium mr-2'></i>Dropdown list for Nominatim query results in order to let the user choose the desired location instead of using the only first result</li>    <li class='ml-3'><i class='mdi mdi-circle-medium mr-2'></i>Find better direction service for public transportation</li></ul><h7 class='mt-4'> <span class='p-2 bg-light shadow rounded text-secondary'>Older issues</span> Last updated on 24th Apr, 2023</h7><ul class='mt-3'>    <li class='ml-3'><i class='mdi mdi-circle-medium mr-2'></i><del><strong>#1</strong> - CO2 calculation approximation with using round kilometers, better use meters</del></li>    <li class='ml-3'><i class='mdi mdi-circle-medium mr-2'></i><del><strong>#3</strong> - After trip deletion, GPS trace remains on the map</del></li></ul>',
     'known_issues' : 'Known issues',
@@ -70,7 +71,7 @@ var changelog_langFr = {
     'feature-id-2' : 'Trouver un meilleur moteur de trajets pour les transports publics'
 }
 
-var co2calculator_langEn = { 
+var co2ecalculator_langEn = { 
   'title' : 'CO2e Calculator',
   'transportation-title' : 'Choose a transportation : ',
   'transportation' : '',
@@ -84,7 +85,7 @@ var co2calculator_langEn = {
  'close' : 'Close'
 }
 
-var co2calculator_langFr = { 
+var co2ecalculator_langFr = { 
   'title' : 'Calculateur CO2e',
   'transportation-title' : 'Choisir un moyen de transport : ',
   'transportation' : '',
@@ -98,7 +99,7 @@ var co2calculator_langFr = {
  'close' : 'Fermer'
 }
 
-var co2calculator_tranportationsFr = {
+var co2ecalculator_tranportationsFr = {
     '2' : 'Autocar',
     '3' : 'Vélo',
     '4' : 'Bus de ville',
@@ -109,7 +110,7 @@ var co2calculator_tranportationsFr = {
     '9' : 'Train à grande vitesse'
 }
 
-var co2calculator_tranportationsEn = {
+var co2ecalculator_tranportationsEn = {
     '2' : 'Autobus',
     '3' : 'Bike',
     '4' : 'City Bus',
@@ -121,8 +122,8 @@ var co2calculator_tranportationsEn = {
 }
 
 var changelog_lang = changelog_langEn;
-var co2calculator_lang = co2calculator_langEn;
-var co2calculator_tranportations = co2calculator_tranportationsEn;
+var co2ecalculator_lang = co2ecalculator_langEn;
+var co2ecalculator_tranportations = co2ecalculator_tranportationsEn;
 
 function updateVersion(){
   element=document.getElementById("last_release_id");
@@ -142,22 +143,22 @@ function updateLanguage(page) {
       }
     }
   }
-  if (page.includes("co2-calculator")){
-    for (var propName in co2calculator_lang) {
+  if (page.includes("co2e-calculator")){
+    for (var propName in co2ecalculator_lang) {
       element=document.getElementById(propName)
       if (propName == 'transportation'){
-        for (let i = 1 ; i <= Object.keys(co2calculator_tranportationsEn).length; i++){
+        for (let i = 1 ; i <= Object.keys(co2ecalculator_tranportationsEn).length; i++){
         const option = document.querySelector('#transportation option:nth-of-type('+(i+1)+')');
-        option.textContent = co2calculator_tranportations[i+1];
+        option.textContent = co2ecalculator_tranportations[i+1];
         }
       }else{
 
       if (element.nodeName == 'SPAN'){
-        element.innerText = co2calculator_lang[propName];
+        element.innerText = co2ecalculator_lang[propName];
       }else if (element.nodeName == 'INPUT'){
-        element.placeholder = co2calculator_lang[propName];
+        element.placeholder = co2ecalculator_lang[propName];
       }else{
-        element.innerHTML = co2calculator_lang[propName];
+        element.innerHTML = co2ecalculator_lang[propName];
       }
     }
     }
@@ -170,12 +171,12 @@ function setLanguage(language) {
   var page = window.location.pathname.split("/").pop();
   if (language === 'en') {
     changelog_lang = changelog_langEn;
-    co2calculator_lang = co2calculator_langEn;
-    co2calculator_tranportations = co2calculator_tranportationsEn;
+    co2ecalculator_lang = co2ecalculator_langEn;
+    co2ecalculator_tranportations = co2ecalculator_tranportationsEn;
   } else if (language === 'fr') {
     changelog_lang = changelog_langFr;
-    co2calculator_lang = co2calculator_langFr;
-    co2calculator_tranportations = co2calculator_tranportationsFr;
+    co2ecalculator_lang = co2ecalculator_langFr;
+    co2ecalculator_tranportations = co2ecalculator_tranportationsFr;
   }
   updateLanguage(page);
 }
