@@ -17,4 +17,4 @@ L.Control.Watermark = L.Control.extend({
 		return new L.Control.Watermark(opts);
 	};
 	
-	const watermarkControl = L.control.watermark({position: 'bottomleft'}).addTo(map);
+	L.control.watermark({position: 'bottomleft'}).addTo(map);

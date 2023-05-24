@@ -1,5 +1,5 @@
 var updates = {
-      'last_release_id' : '2.2.3'
+      'last_release_id' : '2.2.4'
 }
 
 
@@ -28,13 +28,17 @@ var changelog_langEn = {
     'v2.2.2-release-notes' : '<li class="ml-3"><i class="mdi mdi-circle-medium mr-2"></i>Adding <strong>watermark</strong> and <strong>screenshot & download button</strong> for LeafLet map</li>',
     'v2.2.3-release-date' : '   May 15th, 2023',
     'v2.2.3-release-notes' : '<li class="ml-3"><i class="mdi mdi-circle-medium mr-2"></i>Code cleaning and refactoring</li>',
+    'v2.2.4-release-date' : '   May 24th, 2023',
+    'v2.2.4-release-notes' : '<li class="ml-3"><i class="mdi mdi-circle-medium mr-2"></i>Bug fixes :</strong> resolving issue <strong>#4</strong></li>',
     'issue-id-1' : '<li class="ml-3"><i class="mdi mdi-circle-medium mr-2"></i><del><strong>#1</strong> - CO2e calculation approximation with using round kilometers, better use meters</del></li>',
     'issue-id-2' : '<li class="ml-3"><i class="mdi mdi-circle-medium mr-2"></i><strong>#2</strong> - Map is not centered on global view when chaining trips</li>',
     'issue-id-3' : '<li class="ml-3"><i class="mdi mdi-circle-medium mr-2"></i><del><strong>#3</strong> - After trip deletion, GPS trace remains on the map</del></li>',
-    'last_issues_review_date' : '   May 10th, 2023',
-    'last_features_review_date' : '   May 10th, 2023',
+    'issue-id-4' : '<li class="ml-3"><i class="mdi mdi-circle-medium mr-2"></i><del><strong>#4</strong> - Backward button still use old URL on changelog page, that causes error on watermark over Leaflet map</del></li>',
+    'last_issues_review_date' : '   May 24th, 2023',
+    'last_features_review_date' : '   May 24th, 2023',
     'feature-id-1' : 'Dropdown list for Nominatim query results in order to let the user choose the desired location instead of using the only first result',
-    'feature-id-2' : 'Find better direction service for public transportation'
+    'feature-id-2' : 'Find better direction service for public transportation',
+    'feature-id-3' : 'Evaluate network payload performances to decide if hosting external ressources could be relevant'
 }
 
 var changelog_langFr = {    
@@ -62,13 +66,17 @@ var changelog_langFr = {
     'v2.2.2-release-notes' : '<li class="ml-3"><i class="mdi mdi-circle-medium mr-2"></i>Ajout du <strong>filigrane</strong> et du <strong>bouton d\'export</strong> en image de la carte LeafLet</strong></li></del></li>',
     'v2.2.3-release-date' : '   15 mai 2023',
     'v2.2.3-release-notes' : '<li class="ml-3"><i class="mdi mdi-circle-medium mr-2"></i>Ménage et réorganisation du code</li>',
+    'v2.2.4-release-date' : '   24 mai 2023',
+    'v2.2.4-release-notes' : '<li class="ml-3"><i class="mdi mdi-circle-medium mr-2"></i>Correction de bugs :</strong> correction du bug <strong>#4</strong></li>',
     'issue-id-1' : '<li class="ml-3"><i class="mdi mdi-circle-medium mr-2"></i><del><strong>#1</strong> - Le calcul CO2e est approximatif avec l\'utilisation d\'un arrondi au kilomètre près, il faudrait mieux utiliser un compte en mètres',
     'issue-id-2' : '<li class="ml-3"><i class="mdi mdi-circle-medium mr-2"></i><strong>#2</strong> - La carte n\'est pas centrée sur l\'itinéraire global lorsque plusieurs trajets s\'enchainent.</li>',
     'issue-id-3' : '<li class="ml-3"><i class="mdi mdi-circle-medium mr-2"></i><del><strong>#3</strong> - Après la suppression d\'un trajet, la trace GPS du trajet reste sur la carte</del></li>',
-    'last_issues_review_date' : '   10 mai 2023',
-    'last_features_review_date' : '   10 mai 2023',
+    'issue-id-4' : '<li class="ml-3"><i class="mdi mdi-circle-medium mr-2"></i><del><strong>#4</strong> - Le bouton "Retour" utilise toujours l\'ancienne URL sur la page de changelog, ce qui entraine une erreur sur le filigrane apposé sur la carte Leaflet</del></li>',
+    'last_issues_review_date' : '   24 mai 2023',
+    'last_features_review_date' : '   24 mai 2023',
     'feature-id-1' : 'Ajouter une pré-liste de résultats pour la requête Nominatom pour permettre à l\'utilisateur de choisir la localisation souhaitée au lieu du premier résultat.',
-    'feature-id-2' : 'Trouver un meilleur moteur de trajets pour les transports publics'
+    'feature-id-2' : 'Trouver un meilleur moteur de trajets pour les transports publics',
+    'feature-id-3' : 'Evaluer les performances de chargement de l\'outil pour décider si héberger les ressources externes peut être pertinent'
 }
 
 var co2ecalculator_langEn = { 
