@@ -169,7 +169,11 @@ function show_options_settings(elementValue){
 function delete_step(){
 	if (step_number > 0)
 	{
-		const element = document.getElementById('step-'+step_number);
+		var element = document.getElementById('step-'+step_number);
+		element.remove();
+		element = document.getElementById('div-step-'+step_number);
+		element.remove();
+		element = document.getElementById('step-'+step_number+"-dropdownList");
 		element.remove();
 		step_number--;
 	}
@@ -184,21 +188,30 @@ function delete_step(){
 function add_step() {
 	step_number=step_number+1;
 	const new_step = document.createElement("div");
-	new_step.className = "mb-3";
+	new_step.className = "mb-3 input-group";
+	new_step.id="div-step-"+step_number;
 	var input = document.createElement("input");
 	input.type = "text";
 	input.placeholder = "Step "+step_number;
 	input.id="step-"+step_number;
-	input.type="search";
-	new_step.appendChild(input);
+	input.setAttribute('list', "step-"+step_number+"-dropdownList");
 	input.className = "form-control empty required";
+	var datalist = document.createElement("datalist");
+	datalist.id="step-"+step_number+"-dropdownList"
+	new_step.appendChild(input);
 	const currentDiv = document.getElementById("div-manage-step");
 	document.getElementById("route-details").insertBefore(new_step, currentDiv);
+	document.getElementById("route-details").insertBefore(datalist, currentDiv);
 
 	var x = document.getElementById("div-delete-step");
 	if (x.style.display === "none") {
 	  x.style.display = "";
 	} 
+
+	input.addEventListener('keyup',debounce(() => {
+	    console.log('idle...')
+	    queryGeocodeAPIforDropdown(input.id,input.value);
+	  }, 500));
 
 	input.addEventListener('input', function handleInput() {
   		this.classList.remove('invalid');
@@ -567,6 +580,61 @@ function remove_route(itineraries,id){
 	render_total(itineraries);
 }
 
+
+// DROPDOWN FUNCTIONS
+
+function debounce(fn, duration) {
+  var timer;
+  return function() {
+    clearTimeout(timer);
+    timer = setTimeout(fn, duration)
+  }
+}
+
+function populateDropdown(propertyNames, step) {
+  var dropdown = document.getElementById(step+"-dropdownList");
+  // Clear existing options
+  dropdown.innerHTML = "";
+  // Create and append new options
+  propertyNames.forEach(function (propertyName) {
+    var listItem = document.createElement("option");
+    listItem.textContent = propertyName;
+    listItem.classList="dropdown-item";
+    listItem.addEventListener("click", function () {
+      inputField.value = propertyName;
+      dropdown.parentNode.classList.remove("open");
+    });
+    dropdown.appendChild(listItem);
+  });
+}
+
+function queryGeocodeAPIforDropdown(step,inputText) {
+  const dropdownList = document.getElementById(step+'-dropdownList');
+  dropdownList.innerHTML = ''; // Clear previous results
+  // Make an API request
+  fetch(`https://api.openrouteservice.org/geocode/autocomplete?api_key=5b3ce3597851110001cf62483a8b9711fdbd49c0b11b4087ad9a32ff&text=${encodeURIComponent(inputText)}`)
+  // fetch(`https://photon.komoot.io/api/?q==${encodeURIComponent(inputText)}`)
+    .then(response => response.json())
+    .then(data => {
+      console.log(data);
+      // Extract property names from the API response
+      var propertyNames = [];
+      data.features.forEach(function (feature) {
+        //console.log(feature);
+        propertyName=feature.properties.label;
+        if (!propertyNames.includes(propertyName)) {
+          propertyNames.push(propertyName);
+        }
+      });
+    // Populate the dropdown with property names
+    populateDropdown(propertyNames,step);
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
+}
+
+
 // OTHERS FUNCTIONS
 
 function getDistanceFromLatLonInm(lat1, lon1, lat2, lon2) {
@@ -723,7 +791,20 @@ if (x.style.display === "none") {
 } 			
 
 
+
 //LISTENERS
+
+var departure = document.getElementById('departure');
+departure.addEventListener('keyup',debounce(() => {
+    console.log('idle...')
+    queryGeocodeAPIforDropdown(departure.id,departure.value);
+  }, 500));
+
+var arrival = document.getElementById('arrival');
+arrival.addEventListener('keyup',debounce(() => {
+    console.log('idle...')
+    queryGeocodeAPIforDropdown(arrival.id,arrival.value);
+  }, 500));
 
 document.getElementById('departure').oninput = function(){
 		 this.classList.remove('empty');

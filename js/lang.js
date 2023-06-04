@@ -1,5 +1,5 @@
 var updates = {
-      'last_release_id' : '2.2.4'
+      'last_release_id' : '2.3.0'
 }
 
 
@@ -8,6 +8,7 @@ var changelog_langEn = {
     'known_issues' : 'Known issues',
     'considerated_features' : 'Considerated features',
     'older_issues' : 'Older issues',
+    'older_features' : 'Older considerated features',
     'v1.0.0-release-date' : '   Jan 28th, 2023',
     'v1.0.0-release-notes' : '<li class="ml-3"><i class="mdi mdi-circle-medium mr-2"></i><strong>Original release</strong></li>',
     'v1.1.0-release-date' : '   Fev 3rd, 2023',
@@ -30,13 +31,17 @@ var changelog_langEn = {
     'v2.2.3-release-notes' : '<li class="ml-3"><i class="mdi mdi-circle-medium mr-2"></i>Code cleaning and refactoring</li>',
     'v2.2.4-release-date' : '   May 24th, 2023',
     'v2.2.4-release-notes' : '<li class="ml-3"><i class="mdi mdi-circle-medium mr-2"></i>Bug fixes :</strong> resolving issue <strong>#4</strong></li>',
+    'v2.3.0-release-date' : '   Jun 4th, 2023',
+    'v2.3.0-release-notes' : '<li class="ml-3"><i class="mdi mdi-circle-medium mr-2"></i><strong>Adding Openrouteservice autocomplete</strong> to allow user to choose pre-processed location based on provided text string</li>',
     'issue-id-1' : '<li class="ml-3"><i class="mdi mdi-circle-medium mr-2"></i><del><strong>#1</strong> - CO2e calculation approximation with using round kilometers, better use meters</del></li>',
     'issue-id-2' : '<li class="ml-3"><i class="mdi mdi-circle-medium mr-2"></i><strong>#2</strong> - Map is not centered on global view when chaining trips</li>',
     'issue-id-3' : '<li class="ml-3"><i class="mdi mdi-circle-medium mr-2"></i><del><strong>#3</strong> - After trip deletion, GPS trace remains on the map</del></li>',
     'issue-id-4' : '<li class="ml-3"><i class="mdi mdi-circle-medium mr-2"></i><del><strong>#4</strong> - Backward button still use old URL on changelog page, that causes error on watermark over Leaflet map</del></li>',
-    'last_issues_review_date' : '   May 24th, 2023',
-    'last_features_review_date' : '   May 24th, 2023',
-    'feature-id-1' : 'Dropdown list for Nominatim query results in order to let the user choose the desired location instead of using the only first result',
+    'last_issues_review_date' : '   Jun 4th, 2023',
+    'last_features_review_date' : '   Jun 4th, 2023',
+    'last_older_issues_review_date' : '   Jun 4th, 2023',
+    'last_older_features_review_date' : '   Jun 4th, 2023',
+    'feature-id-1' : '<li class="ml-3"><i class="mdi mdi-circle-medium mr-2"></i><del>Dropdown list for Nominatim query results in order to let the user choose the desired location instead of using the only first result</del></li>',
     'feature-id-2' : 'Find better direction service for public transportation',
     'feature-id-3' : 'Evaluate network payload performances to decide if hosting external ressources could be relevant'
 }
@@ -46,6 +51,7 @@ var changelog_langFr = {
     'known_issues' : 'Bugs connus',
     'considerated_features' : 'Fonctionnalités envisagées',
     'older_issues' : 'Anciens bugs',
+    'older_features' : 'Anciennes fonctionnalités envisagées',
     'v1.0.0-release-date' : '   28 janvier 2023',
     'v1.0.0-release-notes' : '<li class="ml-3"><i class="mdi mdi-circle-medium mr-2"></i><strong>Première version et publication</strong></li>',
     'v1.1.0-release-date' : '   03 février 2023',
@@ -68,13 +74,17 @@ var changelog_langFr = {
     'v2.2.3-release-notes' : '<li class="ml-3"><i class="mdi mdi-circle-medium mr-2"></i>Ménage et réorganisation du code</li>',
     'v2.2.4-release-date' : '   24 mai 2023',
     'v2.2.4-release-notes' : '<li class="ml-3"><i class="mdi mdi-circle-medium mr-2"></i>Correction de bugs :</strong> correction du bug <strong>#4</strong></li>',
+    'v2.3.0-release-date' : '   4 juin 2023',
+    'v2.3.0-release-notes' : '<li class="ml-3"><i class="mdi mdi-circle-medium mr-2"></i><strong>Ajout de l\'autocomplétion avec Openrouteservice </strong>pour permettre à l\'utilisateur de choisir une localisation pré-déterminée à partir du texte saisi</li>',
     'issue-id-1' : '<li class="ml-3"><i class="mdi mdi-circle-medium mr-2"></i><del><strong>#1</strong> - Le calcul CO2e est approximatif avec l\'utilisation d\'un arrondi au kilomètre près, il faudrait mieux utiliser un compte en mètres',
     'issue-id-2' : '<li class="ml-3"><i class="mdi mdi-circle-medium mr-2"></i><strong>#2</strong> - La carte n\'est pas centrée sur l\'itinéraire global lorsque plusieurs trajets s\'enchainent.</li>',
     'issue-id-3' : '<li class="ml-3"><i class="mdi mdi-circle-medium mr-2"></i><del><strong>#3</strong> - Après la suppression d\'un trajet, la trace GPS du trajet reste sur la carte</del></li>',
     'issue-id-4' : '<li class="ml-3"><i class="mdi mdi-circle-medium mr-2"></i><del><strong>#4</strong> - Le bouton "Retour" utilise toujours l\'ancienne URL sur la page de changelog, ce qui entraine une erreur sur le filigrane apposé sur la carte Leaflet</del></li>',
-    'last_issues_review_date' : '   24 mai 2023',
-    'last_features_review_date' : '   24 mai 2023',
-    'feature-id-1' : 'Ajouter une pré-liste de résultats pour la requête Nominatom pour permettre à l\'utilisateur de choisir la localisation souhaitée au lieu du premier résultat.',
+    'last_issues_review_date' : '   4 juin 2023',
+    'last_features_review_date' : '   4 juin 2023',
+    'last_older_issues_review_date' : '   4 juin 2023',
+    'last_older_features_review_date' : '   4 juin 2023',
+    'feature-id-1' : '<li class="ml-3"><i class="mdi mdi-circle-medium mr-2"></i><del>Ajouter une pré-liste de résultats pour la requête Nominatim pour permettre à l\'utilisateur de choisir la localisation souhaitée au lieu du premier résultat.</li>',
     'feature-id-2' : 'Trouver un meilleur moteur de trajets pour les transports publics',
     'feature-id-3' : 'Evaluer les performances de chargement de l\'outil pour décider si héberger les ressources externes peut être pertinent'
 }

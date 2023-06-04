@@ -43,17 +43,20 @@
 									  </select>
 									</div>
 									<div class="mb-3" id="div-set-passengers-number"></div>
-									<div class="mb-3" id="div-departure">
-										<input id="departure" type="search" class="form-control empty" type="text" name="departure" placeholder="Departure (Locality or GPS coordinates)" required />
+									<div class="mb-3 input-group" id="div-departure">
+										<input id="departure" type="text" class="form-control empty" name="departure" placeholder="Departure (Locality or GPS coordinates)" required list="departure-dropdownList"/>
 									</div>
+									<datalist id="departure-dropdownList"></datalist>
 									<div class="mb-3" id="div-manage-step">
 										<button id="div-invert-step" class="btn btn-primary" onclick="revert_geolocation_input_fields()"><i class="fa fa-exchange "> </i></button>
 										<button id="div-add-step" class="btn btn-primary" style="display:none;" onclick="add_step()"><i class="fa fa-plus "></i></button>
 										<button id="div-delete-step" style="display:none;" title="Remove step" class="btn btn-primary" onclick="delete_step()"><i class="fa fa-minus"></i></button>
 									</div>
-									<div class="mb-3" id="div-arrival">
-										<input id="arrival" type="search" class="form-control empty" type="text" name="arrival" placeholder="Arrival (Locality or GPS coordinates)" required/>
+									<div class="mb-3 input-group" id="div-arrival">
+										<input id="arrival" type="text" class="form-control empty" name="arrival" placeholder="Arrival (Locality or GPS coordinates)" required list="arrival-dropdownList"/>
 									</div>
+									<datalist id="arrival-dropdownList"></datalist>
+
 								</div>
 									<div class="mb-3" >
 										<button class="btn btn-primary d-block w-100" onclick="calculate_co2_route()"><span id="add-trip">Add this trip</span></button>
