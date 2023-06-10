@@ -796,14 +796,17 @@ if (x.style.display === "none") {
 
 var departure = document.getElementById('departure');
 departure.addEventListener('keyup',debounce(() => {
-    console.log('idle...')
-    queryGeocodeAPIforDropdown(departure.id,departure.value);
+    if(departure.value != ""){
+    	queryGeocodeAPIforDropdown(departure.id,departure.value);
+    }
+
   }, 500));
 
 var arrival = document.getElementById('arrival');
 arrival.addEventListener('keyup',debounce(() => {
-    console.log('idle...')
-    queryGeocodeAPIforDropdown(arrival.id,arrival.value);
+    if(arrival.value != ""){
+    	queryGeocodeAPIforDropdown(arrival.id,arrival.value);
+    }
   }, 500));
 
 document.getElementById('departure').oninput = function(){
