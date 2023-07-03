@@ -209,7 +209,7 @@ function add_step() {
 	} 
 
 	input.addEventListener('keyup',debounce(() => {
-	    console.log('idle...')
+	    //console.log('idle...')
 	    queryGeocodeAPIforDropdown(input.id,input.value);
 	  }, 500));
 
@@ -237,7 +237,7 @@ function add_step() {
 	});
 }
 
-async function create_geojson(locality_array) {
+async function create_geojson_nominatim(locality_array) {
 	var geojson_route = [];
 	var route_gps = [];
 	var undefined_step = false;
@@ -257,6 +257,56 @@ async function create_geojson(locality_array) {
 				route_gps.push(gps_json);
 				//console.log(gps_json[0].display_name);
 				geojson_route.push("["+JSON.stringify(gps_json[0]["lon"])+','+JSON.stringify(gps_json[0]["lat"])+"]");	
+				}
+			});
+		}else{
+			if(isValidGPSDMS(item)){
+				geojson_route.push("["+swapCoordinates(DMStoDD(item))+"]");
+			}else{
+				geojson_route.push("["+swapCoordinates(item)+"]");
+			}
+		}
+	}
+	//console.log(geojson_route.join(","));
+	if (undefined_step) {
+		geojson_route = []; 
+	}
+	return geojson_route;
+}
+
+async function create_geojson_openrouteservice(locality_array) {
+	var geojson_route = [];
+	var route_gps = [];
+	var undefined_step = false;
+	for (item of locality_array) {
+		if (!isValidGPSAny(item)){
+			await fetch('https://api.openrouteservice.org/geocode/search?api_key=5b3ce3597851110001cf62483a8b9711fdbd49c0b11b4087ad9a32ff&text='+item, {
+		    method: 'GET'
+			})
+			.then(gps_json => gps_json.json())
+			.then(gps_json => {
+				if (Object.keys(gps_json).length === 0){
+					console.log("Not found in openrouteservice, going for Nominatim");
+					fetch('https://nominatim.openstreetmap.org/search?q='+item+'&format=json&polygon=1&addressdetails=1', {
+				    method: 'GET'
+					})
+					.then(gps_json => gps_json.json())
+					.then(gps_json => {
+						if (Object.keys(gps_json).length === 0){
+							console.log(item+" was not found in the OSM database");
+							document.getElementById("calculation-result").innerHTML = "<div class='alert alert-warning' role='alert'><em>"+item+"</em> was not found in the OSM database, please be more specific for it or use a nearby location</div>"
+							undefined_step = true;
+							document.getElementById("loading").innerHTML = "";
+						}else{
+						route_gps.push(gps_json);
+						//console.log(gps_json[0].display_name);
+						geojson_route.push("["+JSON.stringify(gps_json[0]["lon"])+','+JSON.stringify(gps_json[0]["lat"])+"]");	
+						}
+					});
+				}else{
+				route_gps.push(gps_json);
+				//console.log(gps_json);
+				geojson_route.push(JSON.stringify(gps_json["features"][0]["geometry"]["coordinates"]));	
 				}
 			});
 		}else{
@@ -311,14 +361,14 @@ function validate(list){
 function get_crowfly_distance(geojson_route){
 	var distance=0;
 	for (i=0; i<geojson_route.length-1; i++){
-			console.log(geojson_route[i]);
+			//console.log(geojson_route[i]);
 			distance += getDistanceFromLatLonInm(geojson_route[i].split(",")[0].replace("[","").replace(/\"/g,""),geojson_route[i].split(",")[1].replace("]","").replace(/\"/g,""),geojson_route[i+1].split(",")[0].replace("[","").replace(/\"/g,""),geojson_route[i+1].split(",")[1].replace("]","").replace(/\"/g,""));
 	}
 	return(distance);
 }
 
 function get_crowfly_route(geojson_route){
-	console.log(geojson_route);
+	//console.log(geojson_route);
 	var result = {
 		"type" : "FeatureCollection",
 		"bbox" : [-0.376976, 39.465088, 6.131541, 45.900415],
@@ -337,14 +387,14 @@ function get_crowfly_route(geojson_route){
 			}]
 	};
 	for (i=0; i<geojson_route.length-1; i++){
-		console.log(geojson_route[i].replace("[","").replace("]","").replace(/\"/g,"").split(",")[1])
+		//console.log(geojson_route[i].replace("[","").replace("]","").replace(/\"/g,"").split(",")[1])
 		result.features[0].geometry.coordinates.push([geojson_route[i].replace("[","").replace("]","").replace(/\"/g,"").split(",")[0],geojson_route[i].replace("[","").replace("]","").replace(/\"/g,"").split(",")[1]]);
 		result.features[0].geometry.coordinates.push([geojson_route[i+1].replace("[","").replace("]","").replace(/\"/g,"").split(",")[0],geojson_route[i+1].replace("[","").replace("]","").replace(/\"/g,"").split(",")[1]]);
 		// var coord = geojson_route[i].split(",")[0].replace("[","").replace(/\"/g,"");
 		// console.log(coord);
 	}
 	result.features[0].properties.segments.distance=get_crowfly_distance(geojson_route);
-	console.log(result);
+	//console.log(result);
 	return(result);
 
 }
@@ -483,7 +533,7 @@ async function calculate_co2_route() {
 
 		
 
-			geojson_route= await create_geojson(route_steps)
+			geojson_route= await create_geojson_openrouteservice(route_steps)
 			if (geojson_route.length > 0){
 				geojson_text='{"coordinates":['+geojson_route.join(',')+']}';
 				arrival_pretty_gps_coordonates["lon"] = getDD2DMS(geojson_route.slice(-1)[0].split(",")[0].replace("[","").replace(/\"/g,""),"lon");
@@ -547,9 +597,9 @@ function render_total(itineraries){
         // weight: 5,
     	}).addTo(map);
 		map.fitBounds(L.geoJSON(itineraries[itinerary]["route"]).getBounds());
-		total["co2_emissions"]=total["co2_emissions"]+itineraries[itinerary]["co2_emissions"];
-		total["co2_emissions_individual"]=total["co2_emissions_individual"]+(itineraries[itinerary]["co2_emissions"]/itineraries[itinerary]["passengers"]);
-		total["distance"]=total["distance"]+itineraries[itinerary]["distance"];
+		total["co2_emissions"]=parseFloat(total["co2_emissions"])+parseFloat(itineraries[itinerary]["co2_emissions"]);
+		total["co2_emissions_individual"]=parseFloat(total["co2_emissions_individual"])+(parseFloat(itineraries[itinerary]["co2_emissions"])/parseFloat(itineraries[itinerary]["passengers"]));
+		total["distance"]=parseFloat(total["distance"])+parseFloat(itineraries[itinerary]["distance"]);
 		for (var i=0 ; i < transportations.length ; i++)
 		{
 		    if (transportations[i]["name"] == itineraries[itinerary]["transportation"]) {
@@ -616,7 +666,7 @@ function queryGeocodeAPIforDropdown(step,inputText) {
   // fetch(`https://photon.komoot.io/api/?q==${encodeURIComponent(inputText)}`)
     .then(response => response.json())
     .then(data => {
-      console.log(data);
+      //console.log(data);
       // Extract property names from the API response
       var propertyNames = [];
       data.features.forEach(function (feature) {
