@@ -286,23 +286,10 @@ async function create_geojson_openrouteservice(locality_array) {
 			.then(gps_json => gps_json.json())
 			.then(gps_json => {
 				if (Object.keys(gps_json).length === 0){
-					console.log("Not found in openrouteservice, going for Nominatim");
-					fetch('https://nominatim.openstreetmap.org/search?q='+item+'&format=json&polygon=1&addressdetails=1', {
-				    method: 'GET'
-					})
-					.then(gps_json => gps_json.json())
-					.then(gps_json => {
-						if (Object.keys(gps_json).length === 0){
-							console.log(item+" was not found in the OSM database");
-							document.getElementById("calculation-result").innerHTML = "<div class='alert alert-warning' role='alert'><em>"+item+"</em> was not found in the OSM database, please be more specific for it or use a nearby location</div>"
-							undefined_step = true;
-							document.getElementById("loading").innerHTML = "";
-						}else{
-						route_gps.push(gps_json);
-						//console.log(gps_json[0].display_name);
-						geojson_route.push("["+JSON.stringify(gps_json[0]["lon"])+','+JSON.stringify(gps_json[0]["lat"])+"]");	
-						}
-					});
+					console.log(item+" was not found in the Openrouteservice database");
+					document.getElementById("calculation-result").innerHTML = "<div class='alert alert-warning' role='alert'><em>"+item+"</em> was not found in the Openrouteservice database, please be more specific for it or use a nearby location</div>"
+					undefined_step = true;
+					document.getElementById("loading").innerHTML = "";
 				}else{
 				route_gps.push(gps_json);
 				//console.log(gps_json);
@@ -533,7 +520,10 @@ async function calculate_co2_route() {
 
 		
 
-			geojson_route= await create_geojson_openrouteservice(route_steps)
+			geojson_route= await create_geojson_nominatim(route_steps);
+			if (geojson_route.length == 0){
+				geojson_route= await create_geojson_openrouteservice(route_steps);
+			}
 			if (geojson_route.length > 0){
 				geojson_text='{"coordinates":['+geojson_route.join(',')+']}';
 				arrival_pretty_gps_coordonates["lon"] = getDD2DMS(geojson_route.slice(-1)[0].split(",")[0].replace("[","").replace(/\"/g,""),"lon");
