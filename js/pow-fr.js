@@ -18,3 +18,5 @@ L.Control.Watermark = L.Control.extend({
 	};
 	
 	L.control.watermark({position: 'bottomleft'}).addTo(map);
+
+	colors = ["#ffee33","#234B64"];

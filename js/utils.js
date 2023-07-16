@@ -33,8 +33,10 @@ let pluginOptions = {
 
 const map = L.map('map').setView([45.899182,6.128679],7);
 simpleMapScreenshoter = L.simpleMapScreenshoter(pluginOptions).addTo(map);
+map.addControl(new L.Control.Fullscreen());
 
-
+var alternate_colors=0;
+var colors = ["#0d6efd","#0d6efd"];
 
 const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
 	maxZoom: 19,
@@ -578,15 +580,29 @@ function render_total(itineraries){
 		"co2_emissions_individual" : 0,
 		"distance" : 0
 	};
+	var color_track = "";
+	alternate_colors=0;
 	reset_map(map);
+	var routes_group = L.featureGroup().addTo(map);
 	document.getElementById("calculation-result").innerHTML="";
 	for (itinerary in itineraries){
 		//console.log(itineraries[itinerary]["route"]);
+		if (alternate_colors % 2 === 0) {
+			color_track=colors[0];
+		}
+		else{
+			color_track=colors[1];
+		}
 		L.geoJSON(itineraries[itinerary]["route"],{
-        // color: '#f2e253',
+         color: color_track,
         // weight: 5,
-    	}).addTo(map);
-		map.fitBounds(L.geoJSON(itineraries[itinerary]["route"]).getBounds());
+    	}).addTo(routes_group);;
+
+		map.fitBounds(routes_group.getBounds());
+		//Markers
+		console.log(itineraries[itinerary]["route"].features[0].geometry.coordinates[0].toReversed());
+		L.marker(itineraries[itinerary]["route"].features[0].geometry.coordinates[0].toReversed()).addTo(map);
+		L.marker(itineraries[itinerary]["route"].features[0].geometry.coordinates[itineraries[itinerary]["route"].features[0].geometry.coordinates.length - 1].toReversed()).addTo(map);
 		total["co2_emissions"]=parseFloat(total["co2_emissions"])+parseFloat(itineraries[itinerary]["co2_emissions"]);
 		total["co2_emissions_individual"]=parseFloat(total["co2_emissions_individual"])+(parseFloat(itineraries[itinerary]["co2_emissions"])/parseFloat(itineraries[itinerary]["passengers"]));
 		total["distance"]=parseFloat(total["distance"])+parseFloat(itineraries[itinerary]["distance"]);
@@ -603,6 +619,7 @@ function render_total(itineraries){
 		var content="<button type='button' class='btn btn-danger btn-sm' onclick='remove_route(itineraries,"+itinerary+")'><i class='fa fa-times'></i></button> <strong>#"+itinerary+"</strong> "+transportation_emoji+" <strong>"+itineraries[itinerary]["departure"]+"</strong> - <strong>"+itineraries[itinerary]["arrival"]+"</strong> ("+distance_kms+" kms), <strong>"+itineraries[itinerary]["passengers"]+"</strong> 👤 = <strong>"+(itineraries[itinerary]["co2_emissions"]/itineraries[itinerary]["passengers"]).toFixed(2)+" kgCO2e/pers";
 		newNode.innerHTML = content;
 		document.getElementById("calculation-result").appendChild(newNode);
+		alternate_colors++;
 	}
 	total_kms=(parseFloat(total["distance"])/1000).toFixed(2);
 	var horizontal_line = document.createElement('hr');
