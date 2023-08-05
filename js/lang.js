@@ -1,5 +1,5 @@
 var updates = {
-      'last_release_id' : '2.4.0'
+      'last_release_id' : '2.6.0'
 }
 
 
@@ -39,20 +39,25 @@ var changelog_langEn = {
     'v2.3.2-release-notes' : '<li class="ml-3"><i class="mdi mdi-circle-medium mr-2"></i><strong>Bug fixes :</strong> resolving issue <strong>#5</strong></li><li>Adding Openrouteservice fallback for unsuccessful Nominatim queries</li>',
     'v2.4.0-release-date' : '   Jul 16th, 2023',
     'v2.4.0-release-notes' : '<li class="ml-3"><i class="mdi mdi-circle-medium mr-2"></i><strong>Bug fixes :</strong> resolving issue <strong>#2</strong></li><li><strong>Implementing feature "<i>Coloring different trips on the map</i>"</strong> and adding markers that allows to identify departure and arrival</li><li><strong>Adding full screen button</strong> on Leaflet map',
+    'v2.5.0-release-date' : '   Aug 1st, 2023',
+    'v2.5.0-release-notes' : '<li class="ml-3"><i class="mdi mdi-circle-medium mr-2"></i><strong>Adding POIs look up</strong> into 2km radius to choose the closest station to the provided location when using train. Made with <strong>Overpass API</strong>.</li><li><strong>Bug fixes :</strong> resolving issue <strong>#6</strong>',
+    'v2.6.0-release-date' : '   Aug 5th, 2023',
+    'v2.6.0-release-notes' : '<li class="ml-3"><i class="mdi mdi-circle-medium mr-2"></i>Enhancing <strong>POIs look up</strong> to find nearest train station (up to 10km radius) and nearest airport (up to 100km radius) to the provided location when using train or plane, still using <strong>Overpass API</strong>.</li>',
     'issue-id-1' : '<li class="ml-3"><i class="mdi mdi-circle-medium mr-2"></i><del><strong>#1</strong> - CO2e calculation approximation with using round kilometers, better use meters</del></li>',
     'issue-id-2' : '<li class="ml-3"><i class="mdi mdi-circle-medium mr-2"></i><del><strong>#2</strong> - Map is not centered on global view when chaining trips</del></li>',
     'issue-id-3' : '<li class="ml-3"><i class="mdi mdi-circle-medium mr-2"></i><del><strong>#3</strong> - After trip deletion, GPS trace remains on the map</del></li>',
     'issue-id-4' : '<li class="ml-3"><i class="mdi mdi-circle-medium mr-2"></i><del><strong>#4</strong> - Backward button still use old URL on changelog page, that causes error on watermark over Leaflet map</del></li>',
     'issue-id-5' : '<li class="ml-3"><i class="mdi mdi-circle-medium mr-2"></i><del><strong>#5</strong> - "+" operator concats strings instead of summing numbers</del></li>',
-    'last_issues_review_date' : '   Jul 16th, 2023',
-    'last_features_review_date' : '   Jul 16th, 2023',
-    'last_older_issues_review_date' : '   Jul 16th, 2023',
-    'last_older_features_review_date' : '   Jul 16th, 2023',
+    'issue-id-6' : '<li class="ml-3"><i class="mdi mdi-circle-medium mr-2"></i><del><strong>#6</strong> - Markers are not shown when using train</del></li>',
+    'last_issues_review_date' : '   Aug 5th, 2023',
+    'last_features_review_date' : '   Aug 5th, 20233',
+    'last_older_issues_review_date' : '   Aug 5th, 2023',
+    'last_older_features_review_date' : '   Aug 5th, 2023',
     'feature-id-1' : '<li class="ml-3"><i class="mdi mdi-circle-medium mr-2"></i><del>Dropdown list for Nominatim query results in order to let the user choose the desired location instead of using the only first result</del></li>',
     'feature-id-2' : 'Find better direction service for public transportation',
     'feature-id-3' : 'Evaluate network payload performances to decide if hosting external ressources could be relevant',
     'feature-id-4' : '<li class="ml-3"><i class="mdi mdi-circle-medium mr-2"></i><del>Coloring different trips on the map</del></li>',
-    'feature-id-5' : 'Look for filtered list of POIs when using public transportations or train to ensure that steps are stop stations'
+    'feature-id-5' : 'Look for filtered list of POIs when using public transportations to ensure that steps are stop stations'
 }
 
 var changelog_langFr = {    
@@ -83,7 +88,7 @@ var changelog_langFr = {
     'v2.2.3-release-notes' : '<li class="ml-3"><i class="mdi mdi-circle-medium mr-2"></i>Ménage et réorganisation du code</li>',
     'v2.2.4-release-date' : '   24 mai 2023',
     'v2.2.4-release-notes' : '<li class="ml-3"><i class="mdi mdi-circle-medium mr-2"></i><strong>Correction de bugs :</strong> correction du bug <strong>#4</strong></li>',
-    'v2.3.0-release-date' : '   4 juin 2023',
+    'v2.3.0-release-date' : '   04 juin 2023',
     'v2.3.0-release-notes' : '<li class="ml-3"><i class="mdi mdi-circle-medium mr-2"></i><strong>Ajout de l\'autocomplétion avec Openrouteservice </strong>pour permettre à l\'utilisateur de choisir une localisation pré-déterminée à partir du texte saisi</li>',
     'v2.3.1-release-date' : '   10 juin 2023',
     'v2.3.1-release-notes' : '<li class="ml-3"><i class="mdi mdi-circle-medium mr-2"></i>Gestion du cas où le champ Lieu est nul pour ne pas interroger Openrouteservice dans ce cas</li>',
@@ -91,15 +96,20 @@ var changelog_langFr = {
     'v2.3.2-release-notes' : '<li class="ml-3"><i class="mdi mdi-circle-medium mr-2"></i><strong>Correction de bugs :</strong> correction du bug <strong>#5</strong></li><li>Ajout d\'une requête vers Openrouteservice si celle vers Nominatim échoue</li>',
     'v2.4.0-release-date' : '   16 juillet 2023',
     'v2.4.0-release-notes' : '<li class="ml-3"><i class="mdi mdi-circle-medium mr-2"></i><strong>Correction de bugs :</strong> correction du bug <strong>#2</strong></li><li><strong>Ajout de la fonctionnalité "<i>Colorer les différents trajets sur la carte</i>"</strong> avec ajout de marqueur permettant d\'identifer les points de départ et d\'arrivée</li><li><strong>Ajout du bouton "Plein écran"</strong> sur la carte Leaflet</li>',
+    'v2.5.0-release-date' : '   01 août 2023',
+    'v2.5.0-release-notes' : '<li class="ml-3"><i class="mdi mdi-circle-medium mr-2"></i><strong>Ajout d\'une recherche de points d\'intérêt</strong> dans un rayon de 2km pour choisir la gare de train la plus proche du lieu saisi. Fait avec l\'API <strong>Overpass</strong>.</li><li><strong>Correction de bugs :</strong> correction du bug <strong>#6</strong>',
+    'v2.6.0-release-date' : '   05 août 2023',
+    'v2.6.0-release-notes' : '<li class="ml-3"><i class="mdi mdi-circle-medium mr-2"></i>Amélioration de la <strong>recherche de points d\'intérêt</strong> pour trouver la gare (dans un rayon jusqu\'à 10km) et l\'aéroport le plus proche (dans un rayon jusqu\'à 100km) du lieu saisi lors de l\'utilisation du train ou de l\'avion, toujours avec l\'API <strong>Overpass</strong>.</li>',
     'issue-id-1' : '<li class="ml-3"><i class="mdi mdi-circle-medium mr-2"></i><del><strong>#1</strong> - Le calcul CO2e est approximatif avec l\'utilisation d\'un arrondi au kilomètre près, il faudrait mieux utiliser un compte en mètres',
     'issue-id-2' : '<li class="ml-3"><i class="mdi mdi-circle-medium mr-2"></i><del><strong>#2</strong> - La carte n\'est pas centrée sur l\'itinéraire global lorsque plusieurs trajets s\'enchainent.</del></li>',
     'issue-id-3' : '<li class="ml-3"><i class="mdi mdi-circle-medium mr-2"></i><del><strong>#3</strong> - Après la suppression d\'un trajet, la trace GPS du trajet reste sur la carte</del></li>',
     'issue-id-4' : '<li class="ml-3"><i class="mdi mdi-circle-medium mr-2"></i><del><strong>#4</strong> - Le bouton "Retour" utilise toujours l\'ancienne URL sur la page de changelog, ce qui entraine une erreur sur le filigrane apposé sur la carte Leaflet</del></li>',
     'issue-id-5' : '<li class="ml-3"><i class="mdi mdi-circle-medium mr-2"></i><del><strong>#5</strong> - L\'opérateur "+" concataine les chaines des caractères au lieu d\'additionner les nombres</del></li>',
-    'last_issues_review_date' : '   16 juillet 2023',
-    'last_features_review_date' : '   16 juillet 2023',
-    'last_older_issues_review_date' : '   16 juillet 2023',
-    'last_older_features_review_date' : '   16 juillet 2023',
+    'issue-id-6' : '<li class="ml-3"><i class="mdi mdi-circle-medium mr-2"></i><del><strong>#6</strong> - Les marqueurs ne sont pas visibles lorsqu\'on utilise le train</del></li>',
+    'last_issues_review_date' : '   05 août 2023',
+    'last_features_review_date' : '   05 août 2023',
+    'last_older_issues_review_date' : '   05 août 2023',
+    'last_older_features_review_date' : '   05 août 2023',
     'feature-id-1' : '<li class="ml-3"><i class="mdi mdi-circle-medium mr-2"></i><del>Ajouter une pré-liste de résultats pour la requête Nominatim pour permettre à l\'utilisateur de choisir la localisation souhaitée au lieu du premier résultat.</li>',
     'feature-id-2' : 'Trouver un meilleur moteur de trajets pour les transports publics',
     'feature-id-3' : 'Evaluer les performances de chargement de l\'outil pour décider si héberger les ressources externes peut être pertinent',

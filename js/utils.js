@@ -243,6 +243,8 @@ async function create_geojson_nominatim(locality_array) {
 	var geojson_route = [];
 	var route_gps = [];
 	var undefined_step = false;
+	document.getElementById("calculation-result").innerHTML = "";
+	document.getElementById("loading").innerHTML = "<div class='text-center'><div class='spinner-border' role='status'><span class='visually-hidden'>Loading...</span></div></div>";
 	for (item of locality_array) {
 		if (!isValidGPSAny(item)){
 			await fetch('https://nominatim.openstreetmap.org/search?q='+item+'&format=json&polygon=1&addressdetails=1', {
@@ -280,6 +282,9 @@ async function create_geojson_openrouteservice(locality_array) {
 	var geojson_route = [];
 	var route_gps = [];
 	var undefined_step = false;
+	document.getElementById("calculation-result").innerHTML = "";
+	document.getElementById("loading").innerHTML = "<div class='text-center'><div class='spinner-border' role='status'><span class='visually-hidden'>Loading...</span></div></div>";
+
 	for (item of locality_array) {
 		if (!isValidGPSAny(item)){
 			await fetch('https://api.openrouteservice.org/geocode/search?api_key=5b3ce3597851110001cf62483a8b9711fdbd49c0b11b4087ad9a32ff&text='+item, {
@@ -444,7 +449,9 @@ async function get_openrouteservice_route(geojson_text, transportation_profile){
 async function get_brouter_route(geojson_route, transportation_profile){
 	var error = true;
 	var gps_path = geojson_route.join(",").replace(/\],\[/g,"|").replace(/\[/g,"").replace(/\]/g,"").replace(/\"/g,"");
-	const result = fetch('https://brouter.de/brouter?lonlats='+gps_path+'&profile='+transportation_profile+'&alternativeidx=0&format=geojson', {
+	
+
+	const result = await fetch('https://brouter.de/brouter?lonlats='+gps_path+'&profile='+transportation_profile+'&alternativeidx=0&format=geojson', {
 					    method: 'GET'
 					}).then(response => { 
 						if (response.status == 200) {
@@ -483,11 +490,175 @@ function concatGeoJSON(g1, g2){
     }
 }
 
+// async function get_nearby_stations_overpass(lat,lon) {
+// 	const boundingBox = calculateBoundingBox(lat, lon, 2);
+// 	// console.log(boundingBox);
+// 	console.log(boundingBox.bbox[0][1]+","+boundingBox.bbox[0][0]+","+boundingBox.bbox[1][1]+","+boundingBox.bbox[1][0]);
+
+// 	const result = await fetch("https://overpass-api.de/api/interpreter?data=[out%3Ajson][timeout%3A25];%0A%0A%28%0A%20%20node%5B%22public_transport%22%3D%22stop_position%22%5D%5B%22train%22%3D%22yes%22%5D%28" + boundingBox.bbox[0][1] + "%2C" + boundingBox.bbox[0][0] + "%2C" + boundingBox.bbox[1][1] + "%2C" + boundingBox.bbox[1][0] + "%29%3B%0A%20%20way%5B%22public_transport%22%3D%22stop_position%22%5D%5B%22train%22%3D%22yes%22%5D%28" + boundingBox.bbox[0][1] + "%2C" + boundingBox.bbox[0][0] + "%2C" + boundingBox.bbox[1][1] + "%2C" + boundingBox.bbox[1][0] + "%29%3B%0A%20%20relation%5B%22public_transport%22%3D%22stop_position%22%5D%5B%22train%22%3D%22yes%22%5D%28" + boundingBox.bbox[0][0] + "%2C" + boundingBox.bbox[0][1] + "%2C" + boundingBox.bbox[1][0] + "%2C" + boundingBox.bbox[1][1] + "%29%3B%0A%29%3B%0A%0Aout%20body%3B%0A%3E%3B%0Aout%20skel%20qt%3B", {
+// 					    method: 'GET'
+// 					}).then(response => { 
+// 						if (response.status == 200) {
+// 					    	error=false;
+// 					    	return response.json();
+// 					  	}else{
+// 					  		return response.text();
+// 					  	}
+// 					  });
+// 	// console.log(result);
+// 	return(result.elements);
+
+// }
+
+// async function get_nearby_airports_overpass(lat,lon) {
+// 	const boundingBox = calculateBoundingBox(lat, lon, 50);
+// 	// console.log(boundingBox);
+// 	console.log(boundingBox.bbox[0][1]+","+boundingBox.bbox[0][0]+","+boundingBox.bbox[1][1]+","+boundingBox.bbox[1][0]);
+
+// 	var result = await fetch("https://overpass-api.de/api/interpreter?data=[out%3Ajson][timeout%3A25];%0A%0A%28%0A%20%20way%5B%22aeroway%22%3D%22aerodrome%22%5D%28" + boundingBox.bbox[0][1] + "%2C" + boundingBox.bbox[0][0] + "%2C" + boundingBox.bbox[1][1] + "%2C" + boundingBox.bbox[1][0] + "%29%3B%0A%29%3B%0A%0Aout%20body%3B%0A%3E%3B%0Aout%20skel%20qt%3B", {
+// 					method: 'GET'
+// 					}).then(response => { 
+// 						if (response.status == 200) {
+// 					    	error=false;
+// 					    	return response.json();
+// 					  	}else{
+// 					  		return response.text();
+// 					  	}
+// 					  });
+// 	console.log(result.elements);
+// 	// results for airports are not nodes but ways (group of node), returns the closest to the bbox center
+// 	var points_to_compare = [];
+// 	for (element in result.elements){
+// 		if (result.elements[element].type == "way"){
+// 			result2 = await fetch("https://overpass-api.de/api/interpreter?data=%5Bout%3Ajson%5D%5Btimeout%3A25%5D%3B%0A%28%0A%20%20node%28"+result.elements[element].nodes[0]+"%29%3B%0A%29%3B%0Aout%20body%3B%0A%3E%3B%0Aout%20skel%20qt%3B", {
+// 						method: 'GET'
+// 						}).then(response => { 
+// 							if (response.status == 200) {
+// 						    	error=false;
+// 						    	return response.json();
+// 						  	}else{
+// 						  		return response.text();
+// 						  	}
+// 						  });
+// 			console.log(result2);
+// 			points_to_compare.push({"lat":result2.elements[0].lat,"lon":result2.elements[0].lon});
+// 		}
+// 	}
+// 	console.log(points_to_compare);
+// 	console.log(findClosestCoordinateIndex(points_to_compare,lat,lon));
+// 	return(points_to_compare[findClosestCoordinateIndex(points_to_compare,lat,lon)]);
+
+// }
+
+async function get_nearby_stations_openrouteservices(lat,lon) {
+	const boundingBox = calculateBoundingBox(lat, lon, 2);
+	// console.log(boundingBox)
+	const jsonObject = {
+	  "request": "pois",
+	  "geometry": boundingBox,
+	  "filters": {
+	    "category_ids": [610]
+	  },
+	  "limit" : 5
+	};
+	const station_nearby = await fetch('https://api.openrouteservice.org/pois', {
+	    method: 'POST',
+	    headers: {
+	        'Accept': 'application/json, application/geo+json, application/gpx+xml, img/png',
+	        'Authorization' : '5b3ce3597851110001cf62483a8b9711fdbd49c0b11b4087ad9a32ff',
+	        "Content-Type": "application/json"
+	        },
+	    body: JSON.stringify(jsonObject)
+	}).then(response => { 
+		if (response.status == 200) {
+			error = false;	
+	  	}
+	  	return response.json();
+	}).then(content => {
+					if (error == false){
+						return content;
+					}else{
+						// document.getElementById("loading").innerHTML = "";
+						// document.getElementById("calculation-result").innerHTML = "<div class='alert alert-danger' role='alert'>"+content.error.message+"</div>"
+						return undefined;
+					}
+				})
+
+	return(station_nearby.features);
+}
+
+// async function replace_locality_by_closest_rail_station(geojson_route){
+// 	var geojson_stations_route=[];
+// 	for (locality in geojson_route){
+// 		lat = geojson_route[locality].split(",")[1].replace("]","").replace(/\"/g,"");
+// 		lon = geojson_route[locality].split(",")[0].replace("[","").replace(/\"/g,"");
+// 		nearby_stations = await get_nearby_stations_overpass(lat,lon);
+// 		// console.log(nearby_stations)
+// 		geojson_stations_route.push("["+JSON.stringify(nearby_stations[nearby_stations.length-1].lon)+','+JSON.stringify(nearby_stations[nearby_stations.length-1].lat)+"]");
+// 	}
+// 	return(geojson_stations_route)
+// }
+
+async function replace_locality_by_closest_rail_station(geojson_route){
+	var geojson_rail_stations_route=[];
+	var max_incremental_radius = 10;
+	for (locality in geojson_route){
+		var incremental_radius = 0;
+		var nearby_rail_stations = undefined;
+		lat = geojson_route[locality].split(",")[1].replace("]","").replace(/\"/g,"");
+		lon = geojson_route[locality].split(",")[0].replace("[","").replace(/\"/g,"");
+		// nearby_rail_stations = await get_nearby_rail_stations_overpass(lat,lon);
+		while((nearby_rail_stations == undefined) && (incremental_radius <= max_incremental_radius)){
+			incremental_radius++;
+			console.log(incremental_radius);
+			nearby_rail_stations = await searchNearbyRail_station(lat, lon, incremental_radius*1000)
+		}
+		if((nearby_rail_stations==undefined) && (incremental_radius == max_incremental_radius+1)){
+			//means that no airport was found after overpass lookup
+			document.getElementById("loading").innerHTML = "";
+			document.getElementById("calculation-result").innerHTML = "<div class='alert alert-danger' role='alert'>"+"No train station was found around "+lat+","+lon+"</div>"
+			return undefined;
+		}
+		console.log(nearby_rail_stations)
+		geojson_rail_stations_route.push("["+nearby_rail_stations[0].lon+','+nearby_rail_stations[0].lat+"]");
+	}
+	console.log(geojson_rail_stations_route);
+	return(geojson_rail_stations_route)
+}
+
+async function replace_locality_by_closest_airport(geojson_route){
+	var geojson_airports_route=[];
+	var max_incremental_radius = 10;
+	for (locality in geojson_route){
+		var incremental_radius = 0;
+		var nearby_airports = undefined;
+		lat = geojson_route[locality].split(",")[1].replace("]","").replace(/\"/g,"");
+		lon = geojson_route[locality].split(",")[0].replace("[","").replace(/\"/g,"");
+		// nearby_airports = await get_nearby_airports_overpass(lat,lon);
+		while((nearby_airports == undefined) && (incremental_radius <= max_incremental_radius)){
+			incremental_radius++;
+			console.log(incremental_radius);
+			nearby_airports = await searchNearbyAirport(lat, lon, incremental_radius*10000)
+		}
+		if((nearby_airports==undefined) && (incremental_radius == max_incremental_radius+1)){
+			//means that no airport was found after overpass lookup
+			document.getElementById("loading").innerHTML = "";
+			document.getElementById("calculation-result").innerHTML = "<div class='alert alert-danger' role='alert'>"+"No airport was found around "+lat+","+lon+"</div>"
+			return undefined;
+		}
+		console.log(nearby_airports)
+		geojson_airports_route.push("["+nearby_airports[0].lon+','+nearby_airports[0].lat+"]");
+	}
+	console.log(geojson_airports_route);
+	return(geojson_airports_route)
+}
+
 async function calculate_co2_route() {
 	var departure = document.getElementById("departure").value;
 	var arrival = document.getElementById("arrival").value;
 	var route_steps = [];
 	var route =[];
+	var co2_emissions = undefined;
 	route_steps[0]=departure;
 	route_steps[step_number+1]=arrival;
 
@@ -542,16 +713,23 @@ async function calculate_co2_route() {
 				}
 				
 				if(transportation_profile == "plane"){
-					route = get_crowfly_route(geojson_route);
-					route_distance=get_crowfly_distance(geojson_route);
-					co2_emissions=await get_ademe_co2(route_distance, transportation_id);
+					geojson_route = await replace_locality_by_closest_airport(geojson_route)
+					if(geojson_route != undefined){
+						route = get_crowfly_route(geojson_route);
+						route_distance=get_crowfly_distance(geojson_route);
+						co2_emissions=await get_ademe_co2(route_distance, transportation_id);
+					}
 				}
 
 				if(transportation_profile == "train"){
-					route = await get_brouter_route(geojson_route,"rail");
-					if (route != undefined){
-						route_distance = route.features[0]["properties"]["track-length"];
-				  		co2_emissions = await get_ademe_co2(route_distance, transportation_id);
+					geojson_route = await replace_locality_by_closest_rail_station(geojson_route)
+					if(geojson_route != undefined){
+						route = await get_brouter_route(geojson_route,"rail");
+						//console.log(route);
+						if (route != undefined){
+							route_distance = route.features[0]["properties"]["track-length"];
+					  		co2_emissions = await get_ademe_co2(route_distance, transportation_id);
+					  	}
 				  	}
 				}
 
@@ -600,9 +778,16 @@ function render_total(itineraries){
 
 		map.fitBounds(routes_group.getBounds());
 		//Markers
-		console.log(itineraries[itinerary]["route"].features[0].geometry.coordinates[0].toReversed());
-		L.marker(itineraries[itinerary]["route"].features[0].geometry.coordinates[0].toReversed()).addTo(map);
-		L.marker(itineraries[itinerary]["route"].features[0].geometry.coordinates[itineraries[itinerary]["route"].features[0].geometry.coordinates.length - 1].toReversed()).addTo(map);
+		departure_point=itineraries[itinerary]["route"].features[0].geometry.coordinates[0];
+		if(departure_point.length == 3){//means that altitude is also included, remove it for marker
+			departure_point.pop();
+		}
+		arrival_point=itineraries[itinerary]["route"].features[0].geometry.coordinates[itineraries[itinerary]["route"].features[0].geometry.coordinates.length - 1];
+		if(arrival_point.length == 3){//means that altitude is also included, remove it for marker
+			arrival_point.pop();
+		}
+		L.marker(departure_point.toReversed()).addTo(map);
+		L.marker(arrival_point.toReversed()).addTo(map);
 		total["co2_emissions"]=parseFloat(total["co2_emissions"])+parseFloat(itineraries[itinerary]["co2_emissions"]);
 		total["co2_emissions_individual"]=parseFloat(total["co2_emissions_individual"])+(parseFloat(itineraries[itinerary]["co2_emissions"])/parseFloat(itineraries[itinerary]["passengers"]));
 		total["distance"]=parseFloat(total["distance"])+parseFloat(itineraries[itinerary]["distance"]);
@@ -746,6 +931,173 @@ function getDD2DMS(dms, type){
 
 
 //CHATGPT GENERATED FUNCTIONS
+
+async function searchNearbyRail_station(latitude, longitude, radius) {
+	console.log(latitude+","+longitude);
+  // Step 1: Set up the Overpass API endpoint
+  const overpassEndpoint = "https://overpass-api.de/api/interpreter";
+
+  // Step 2: Create a function to query the Overpass API
+  const query = `[out:json];(
+    node["public_transport"="stop_position"]["train"="yes"](around:${radius}, ${latitude},${longitude});
+    way["public_transport"="stop_position"]["train"="yes"](around:${radius}, ${latitude},${longitude});
+    relation["public_transport"="stop_position"]["train"="yes"](around:${radius}, ${latitude},${longitude});
+  );(._;>;);out meta qt 1;`;
+
+  const url = `${overpassEndpoint}?data=${encodeURIComponent(query)}`;
+
+  try {
+  	var rail_stations=[];
+    const response = await fetch(url);
+    const data = await response.json();
+
+    console.log(data)
+
+    // Step 4: Parse the API response and extract rail_station information
+    if(data.elements.length != 0){
+    	rail_stations = data.elements;
+    }else{
+    	return undefined;
+    }
+    
+
+    return rail_stations.map((rail_station) => ({
+      lat: rail_station.lat,
+      lon: rail_station.lon,
+    }));
+  } catch (error) {
+    console.error("Error fetching nearby rail_stations:", error);
+    return undefined;
+  }
+}
+
+async function searchNearbyAirport(latitude, longitude, radius) {
+	console.log(latitude+","+longitude);
+  // Step 1: Set up the Overpass API endpoint
+  const overpassEndpoint = "https://overpass-api.de/api/interpreter";
+
+  // Step 2: Create a function to query the Overpass API
+  const query = `[out:json];(
+    node["aeroway"="aerodrome"](around:${radius}, ${latitude},${longitude});
+    way["aeroway"="aerodrome"](around:${radius}, ${latitude},${longitude});
+    relation["aeroway"="aerodrome"](around:${radius}, ${latitude},${longitude});
+  );(._;>;);out meta qt 1;`;
+
+  const url = `${overpassEndpoint}?data=${encodeURIComponent(query)}`;
+
+  try {
+  	var airports=[];
+    const response = await fetch(url);
+    const data = await response.json();
+
+    console.log(data)
+
+    // Step 4: Parse the API response and extract airport information
+    if(data.elements.length != 0){
+    	airports = data.elements;
+    }else{
+    	return undefined;
+    }
+    
+
+    return airports.map((airport) => ({
+      lat: airport.lat,
+      lon: airport.lon,
+    }));
+  } catch (error) {
+    console.error("Error fetching nearby airports:", error);
+    return undefined;
+  }
+}
+
+
+function calculateHaversineDistance(lat1, lon1, lat2, lon2) {
+  const earthRadiusKm = 6371; // Earth's radius in kilometers
+
+  const toRadians = (degrees) => (degrees * Math.PI) / 180;
+  const dLat = toRadians(lat2 - lat1);
+  const dLon = toRadians(lon2 - lon1);
+
+  const a =
+    Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+    Math.cos(toRadians(lat1)) *
+    Math.cos(toRadians(lat2)) *
+    Math.sin(dLon / 2) * Math.sin(dLon / 2);
+
+  const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+  const distance = earthRadiusKm * c;
+
+  return distance;
+}
+
+function findClosestCoordinateIndex(coordinatesArray, latRef, lonRef) {
+  if (!Array.isArray(coordinatesArray) || coordinatesArray.length === 0) {
+    throw new Error('Invalid coordinates array or empty.');
+  }
+
+  let closestIndex = 0;
+  let closestDistance = calculateHaversineDistance(
+    latRef,
+    lonRef,
+    coordinatesArray[0].lat,
+    coordinatesArray[0].lon
+  );
+
+  for (let i = 1; i < coordinatesArray.length; i++) {
+    const currentDistance = calculateHaversineDistance(
+      latRef,
+      lonRef,
+      coordinatesArray[i].lat,
+      coordinatesArray[i].lon
+    );
+
+    if (currentDistance < closestDistance) {
+      closestDistance = currentDistance;
+      closestIndex = i;
+    }
+  }
+
+  return closestIndex;
+}
+
+
+function calculateBoundingBox(latitude, longitude, distance) {
+  const earthRadius = 6371; // Earth's radius in kilometers
+
+  // Convert latitude and longitude from degrees to radians
+  const latRad = latitude * (Math.PI / 180);
+  const lonRad = longitude * (Math.PI / 180);
+
+  // Convert distance from kilometers to radians
+  const distanceRad = distance / earthRadius;
+
+  // Calculate minimum and maximum latitudes for the bounding box
+  const minLat = latRad - distanceRad;
+  const maxLat = latRad + distanceRad;
+
+  // Calculate minimum and maximum longitudes for the bounding box
+  const minLon = lonRad - Math.asin(Math.sin(distanceRad) / Math.cos(latRad));
+  const maxLon = lonRad + Math.asin(Math.sin(distanceRad) / Math.cos(latRad));
+
+  // Convert back from radians to degrees
+  const minLatDeg = minLat * (180 / Math.PI);
+  const maxLatDeg = maxLat * (180 / Math.PI);
+  const minLonDeg = minLon * (180 / Math.PI);
+  const maxLonDeg = maxLon * (180 / Math.PI);
+
+  // Return the bounding box coordinates
+  return {
+  	bbox: [[minLonDeg,minLatDeg],[maxLonDeg,maxLatDeg]]
+  };
+}
+
+// // Example usage:
+// const latitude = 40.7128; // Replace with your desired latitude
+// const longitude = -74.0060; // Replace with your desired longitude
+// const distanceInKm = 5; // 5 kilometers
+
+// const boundingBox = calculateBoundingBox(latitude, longitude, distanceInKm);
+// console.log(boundingBox);
 
 function getCurrentDateTime() {
   const now = new Date();
