@@ -112,7 +112,7 @@ parse_dom () {
 }
 
 
-cat issues.xml features.xml versions.xml  > combined_file
+cat ../xml/issues.xml ../xml/features.xml ../xml/versions.xml  > combined_file
 
 js_var_attribute=""
 echo "var changelog_langEn = {" > en.js
@@ -130,7 +130,7 @@ echo "var co2ecalculator_langFr = {" >> fr.js
 
 while read_dom; do
     parse_dom
-done <<< $(cat manual.xml)
+done <<< $(cat ../xml/manual.xml)
 
 echo "}" >> en.js
 echo "}" >> fr.js
