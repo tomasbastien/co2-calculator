@@ -1,0 +1,219 @@
+<version number='1.0.0'>
+    <release_date lang="FR">28 janvier 2023</release_date> 
+    <release_date lang="EN">Jan 28th, 2023</release_date> 
+    <release_notes lang="FR">
+        [li][b]Première version et publication[/b][/li]
+    </release_notes> 
+    <release_notes lang="EN">
+        [li][b]Original release[/b][/li]
+    </release_notes>
+</version>
+
+
+<version number='1.1.0'>
+    <release_date lang="FR">03 février 2023</release_date>
+    <release_date lang="EN">Fev 3rd, 2023</release_date>
+    <release_notes lang="FR">
+        [li][b]Gestion multimodale[/b] (créer des itinéraires avec plusieurs moyens de transports) : il est maintenant possible d\'enchainer plusieurs voyages avec des modes de transports différents
+        [li]Amélioration du design et de l\'alignement des textes[/li]
+    </release_notes>
+    <release_notes lang="EN">
+        [li][b]Multimodal management[/b] (plan itinerary with differents transportations) : it is now possible to chain multiple trips with different transportation[/li]
+        [li]Better responsive design and text alignment[/li]
+    </release_notes>
+</version>  
+        
+
+
+<version number='1.2.0'>
+    <release_date lang="FR">04 février 2023</release_date>
+    <release_notes lang="FR">
+        [li][b]Gestion multimodale :[/b] ajout de l\'option "Supprimer"[/li]
+        [li][b]Gestion des étapes facilitée :[/b] suppression, inversion de la liste[/li]
+        [li]Ajout de boutons pour la gestion des étapes[/li]
+    </release_notes>
+    <release_date lang="EN">Fev 4th, 2023</release_date>
+    <release_notes lang="EN">
+        [li][b]Multimodal management :[/b] adding "delete" option[/li]
+        [li][b]Easy step management :[/b] remove, invert list[/li]
+        [li]Using pretty buttons for step management[/li]
+    </release_notes>
+</version>       
+    
+
+
+<version number='1.2.1' >
+    <release_date lang="FR">04 février 2023</release_date>
+    <release_notes lang="FR">
+        [li][b]Correction de bugs :[/b] correction des bugs [b]#1[/b] et [b]#3[/b][/li]
+        [li]Ajout d\'un bouton pour la suppression d\'étape dans le panneau des résultats[/li]
+    </release_notes>
+    <release_date lang="EN">Fev 4th, 2023</release_date>
+    <release_notes lang="EN">
+        [li][b]Bug fixes :[/b] resolving issues [b]#1[/b] and [b]#3[/b][/li]
+        [li]Using pretty button for step deletion in result sub-part[/li]
+    </release_notes>
+</version>        
+    
+
+
+<version number='2.0.0'>
+<release_date lang="FR">08 mars 2023</release_date>
+<release_notes lang="FR">
+    [li][b]Ajout de l\'avion[/b] (distance estimée avec des trajets à vol d\'oiseau)[/li]
+    [li][b]Ajout du train régional et du train à grand vitesse[/b] (distance estimée avec des trajets à vol d\'oiseau)[/li]
+</release_notes>
+<release_date lang="EN">Mar 8th , 2023</release_date>
+<release_notes lang="EN">
+    [li][b]Adding plane support[/b] (distance estimated on a crowfly beetween steps)[/li]
+    [li][b]Adding regular and high-speed train support[/b] (distance estimated on a crowfly beetween steps)[/li]
+</release_notes>
+</version>    
+
+<version number='2.1.0'>  
+    <release_date lang="FR">21 mars 2023</release_date>
+    <release_notes lang="FR">
+        [li][b]Les trajets en trains régionaux et à grande vitesse utilisent maintenant le moteur de Brouter.de[/b] (suit plus fidèlement les voies de chemins de fer, améliorant la précision sur la distance calculée)[/li]
+    </release_notes>
+    <release_date lang="EN">Mar 21th, 2023</release_date>
+    <release_notes lang="EN">
+        [li][b]Regular and high-speed train trips now use BRouter.de[/b] (really sticks to the railway, enhancing precision in distance calculation)[/li]
+    </release_notes>
+ </version>   
+
+
+<version number='2.2.0'>
+    <release_date lang="FR">24 avril 2023</release_date>
+    <release_notes lang="FR">
+        [li][b]Interprétation de coordonnées GPS dans les champs Départ, Arrivée et étapes [/b] (au format DD ou DMS)[/li]
+        [li]Correction de textes[/li]
+    </release_notes>
+    <release_date lang="EN">Apr 24th, 2023</release_date>
+    <release_notes lang="EN">
+        [li][b]Allow direct use of GPS coordinates[/b] (both DD and DMS format)[/li]
+        [li]Text correction[/li]
+    </release_notes>
+</version>
+
+<version number='2.2.1'>
+        <release_date lang="FR">29 avril 2023</release_date>
+        <release_notes lang="FR">
+            [li][b]Ajout du multi-langues[/b]</release_notes>
+        <release_date lang="EN">Apr 29th, 2023</release_date>
+        <release_notes lang="EN">
+            [li][b]Adding multilanguage support[/b]</release_notes>
+</version>
+
+<version number='2.2.2'>
+        <release_date lang="FR">10 mai 2023</release_date>
+        <release_notes lang="FR">
+            [li]Ajout du [b]filigrane[/b] et du [b]bouton d\'export[/b] en image de la carte LeafLet[/b][/li]
+        </release_notes>
+        <release_date lang="EN">May 10th, 2023</release_date>
+        <release_notes lang="EN">
+            [li]Adding [b]watermark[/b] and [b]screenshot and download button[/b] for LeafLet map[/li]
+        </release_notes>
+</version>
+
+<version number='2.2.3'>
+        <release_date lang="FR">15 mai 2023</release_date>
+        <release_notes lang="FR">
+            [li]Ménage et réorganisation du code[/li]
+        </release_notes>
+        <release_date lang="EN">May 15th, 2023</release_date>
+        <release_notes lang="EN">
+            [li]Code cleaning and refactoring[/li]
+        </release_notes>
+</version>
+
+<version number='2.2.4'>
+        <release_date lang="FR">24 mai 2023</release_date>
+        <release_notes lang="FR">
+            [li][b]Correction de bugs :[/b] correction du bug [b]#4[/b][/li]
+        </release_notes>
+        <release_date lang="EN">May 24th, 2023</release_date>
+        <release_notes lang="EN">
+            [li][b]Bug fixes :[/b] resolving issue [b]#4[/b][/li]
+        </release_notes>
+</version>
+
+
+<version number='2.3.0'>
+    
+        <release_date lang="FR">04 juin 2023</release_date>
+        <release_notes lang="FR">
+            [li][b]Ajout de l\'autocomplétion avec Openrouteservice [/b]pour permettre à l\'utilisateur de choisir une localisation pré-déterminée à partir du texte saisi[/li]
+        </release_notes>
+        <release_date lang="EN">Jun 4th, 2023</release_date>
+        <release_notes lang="EN">
+            [li][b]Adding Openrouteservice autocomplete[/b] to allow user to choose pre-processed location based on provided text string[/li]
+        </release_notes>
+</version>
+
+<version number='2.3.1'>
+        <release_date lang="FR">10 juin 2023</release_date>
+        <release_notes lang="FR">
+            [li]Gestion du cas où le champ Lieu est nul pour ne pas interroger Openrouteservice dans ce cas[/li]
+        </release_notes>
+        <release_date lang="EN">Jun 10th, 2023</release_date>
+        <release_notes lang="EN">
+            [li]Handling empty user input to prevent querying Openrouteservices in this case[/li]
+        </release_notes>
+</version>
+
+<version number='2.3.2'>
+        <release_date lang="FR">03 juillet 2023</release_date>
+        <release_notes lang="FR">
+            [li][b]Correction de bugs :[/b] correction du bug [b]#5[/b][/li]
+            [li]Ajout d\'une requête vers Openrouteservice si celle vers Nominatim échoue[/li]
+        </release_notes>
+        <release_date lang="EN">Jul 3rd, 2023</release_date>
+        <release_notes lang="EN">
+            [li][b]Bug fixes :[/b] resolving issue [b]#5[/b][/li]
+            [li]Adding Openrouteservice fallback for unsuccessful Nominatim queries[/li]
+        </release_notes>
+</version>  
+
+
+<version number='2.4.0'>
+        <release_date lang="FR">16 juillet 2023</release_date>
+        <release_notes lang="FR">
+            [li][b]Correction de bugs :[/b] correction du bug [b]#2[/b][/li]
+            [li][b]Ajout de la fonctionnalité "[i]Colorer les différents trajets sur la carte[/i]"[/b] avec ajout de marqueur permettant d\'identifer les points de départ et d\'arrivée[/li]
+            [li][b]Ajout du bouton "Plein écran"[/b] sur la carte Leaflet[/li]
+        </release_notes>
+        <release_date lang="EN">Jul 16th, 2023</release_date>
+        <release_notes lang="EN">
+            [li][b]Bug fixes :[/b] resolving issue [b]#2[/b][/li]
+            [li][b]Implementing feature "[i]Coloring different trips on the map[/i]"[/b] and adding markers that allows to identify departure and arrival[/li]
+            [li][b]Adding full screen button[/b] on Leaflet map[/li]
+        </release_notes>
+        
+</version>
+
+
+<version number='2.5.0'>
+        <release_date lang="FR">01 août 2023</release_date>
+        <release_notes lang="FR">
+            [li][b]Ajout d\'une recherche de points d\'intérêt[/b] dans un rayon de 2km pour choisir la gare de train la plus proche du lieu saisi. Fait avec l\'API [b]Overpass[/b].[/li]
+            [li][b]Correction de bugs :[/b] correction du bug [b]#6[/b][/li]
+        </release_notes>
+        <release_date lang="EN">Aug 1st, 2023</release_date>
+        <release_notes lang="EN">
+            [li][b]Adding POIs look up[/b] into 2km radius to choose the closest station to the provided location when using train. Made with [b]Overpass API[/b].[/li]
+            [li][b]Bug fixes :[/b] resolving issue [b]#6[/b][/li]
+        </release_notes>
+</version>
+
+<version number='2.6.0'>
+    <release_date lang="FR">05 août 2023</release_date>
+    <release_notes lang="FR">
+        [li]Amélioration de la [b]recherche de points d\'intérêt[/b] pour trouver la gare (dans un rayon jusqu\'à 10km) et l\'aéroport le plus proche (dans un rayon jusqu\'à 100km) du lieu saisi lors de l\'utilisation du train ou de l\'avion, toujours avec l\'API [b]Overpass[/b].[/li]
+    </release_notes>
+    <release_date lang="EN">Aug 5th, 2023</release_date>
+    <release_notes lang="EN">
+        [li]Enhancing [b]POIs look up[/b] to find nearest train station (up to 10km radius) and nearest airport (up to 100km radius) to the provided location when using train or plane, still using [b]Overpass API[/b].[/li]
+    </release_notes>   
+</version>  
+
+    

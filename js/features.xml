@@ -1,0 +1,24 @@
+<feature id='1' status='closed'>
+    <description lang="EN">[li][s]Dropdown list for Nominatim query results in order to let the user choose the desired location instead of using the only first result.[/s][/li]</description>
+    <description lang="FR">[li][s]Ajouter une pré-liste de résultats pour la requête Nominatim pour permettre à l\'utilisateur de choisir la localisation souhaitée au lieu du premier résultat.[/s][/li]</description>
+</feature>
+
+<feature id='2' status='open'>
+    <description lang="EN">[li][i]Find better direction service for public transportation.[/i][/li]</description>
+    <description lang="FR">[li][i]Trouver un meilleur moteur de trajets pour les transports publics.[/i][/li]</description>
+</feature>
+
+<feature id='3' status='open'>
+    <description lang="EN">[li][i]Evaluate network payload performances to decide if hosting external ressources could be relevant.[/i][/li]</description>
+    <description lang="FR">[li][i]Evaluer les performances de chargement de l\'outil pour décider si héberger les ressources externes peut être pertinent.[/i][/li]</description>
+</feature>
+
+<feature id='4' status='closed'>
+    <description lang="EN">[li][s]Coloring different trips on the map.[/s][/li]</description>
+    <description lang="FR">[li][s]Colorer les différents trajets sur la carte.[/s][/li]</description>
+</feature>
+
+<feature id='5' status='open'>
+    <description lang="EN">[li][i]Look for filtered list of POIs when using public transportations to ensure that steps are stop stations.[/i][/li]</description>
+    <description lang="FR">[li][i]Effectuer une recherche filtrée des points d\'intérêt lors de l\'usage des transports en commun pour être sûr que les lieux soit des arrêts.[/i][/li]</description>
+</feature>

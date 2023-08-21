@@ -1,0 +1,95 @@
+<manual>
+    <text lang='EN'>
+        Based on provided geolocations, here\'s the operation mode to provide an [u]estimated[/u] CO2e emission for the specified trip :
+        [ul]
+        [/br]
+            [li]Each location string (than can be picked in an autocomplete dropdown list provided throught [b]Openrouteservice[/b] Autocomplete API) is sent to [b][url="https://nominatim.openstreetmap.org/" target="_blank"]Nominatim Openstreetmap[/url][/b] to query the OSM database for [lat,lon] GPS coordinates then stored in a list.[/li] 
+            [ul]        
+                [li]
+                    [i]If GPS coordinates are directly provided (whether DD : ex: 45.8994, 6.1269 or DMS format : ex: 45°53\'57.8"N 6°07\'36.8"E), the tools skips the location query on Nominatim.[/i]
+                [/li] 
+            [/ul]
+            [/br]   
+            [li]This [lat,lon] GPS coordinates list is sent over a different routing API based on chosen transportation mode :  [/li]   
+            [ul]    
+                [li]
+                    [b][url="https://openrouteservice.org/" target="_blank"]OpenRouteService[/url] directions API[/b] for any "road" mode, in order to plan a trip throught all these locations and obtain kilometers journey length and route as a GPS points array.
+                    [/br]
+                    [i]Openrouteservice directions API only supports transportation profiles driving-car and regular-bike, so public transportations may required to specify steps to match with the local public transportation plan. This could be also be a future enhancement.[/i]
+                [/li]  
+                [li]
+                    [b]A simple crowfly[/b] math calculation for plane, this needs to declare as many steps as possible
+                [/li]
+                [li]
+                    [b][url="https://brouter.de/" target="_blank"]BRouter.de[/url][/b] for trains journey, that sticks as much as possible to railway path and need to have departure and arrival on an existant train station
+                [/li]
+            [/ul]
+            [/br]
+           [li]
+                Total kilometers is sent to [b][url="https://impactco2.fr/transport" target="_blank"]Mon Impact Transport API[/url][/b] (provided by ADEME, FR gov. ecologic transition agency), with chosen transportation mode. It returns kgco2e emissions, then divided by carpoolers if specified.
+            [/li]
+            [ul]        
+                [li]
+                    [i]Default passengers number is 1 for any other transportation than car and electric car, as estimation returned from ADEME for buses assumes an average transportation occupancy.[/i]
+                [/li]
+            [/ul]
+            [/br]
+           [li]
+                GPS points array is shown as a line over a [b][url="https://leafletjs.com/" target="_blank"]Leaflet[/url][/b] Map, centered to fit global itinerary within the tile. This is usefull to see if the tool actually match with expected or realized journey.
+            [/li]
+        [/ul]
+        [div class="alert alert-dark" role="alert">
+            No data is stored on the server, all computation is done client-side by the  web-browser. All is HTML5/Javascript written and prettified with Bootstrap 5 CSS library. Some functions (GPS coord. validation) have been AI-written using [b][url="https://chat.openai.com/" target="_blank"]ChatGPT[/url][/b] prompts.
+        [/div]
+        All recensed bugs and futur features can be find on [url="./changelog.html" class="link-dark">changelog page[/url].
+    </text>
+    <text lang='FR'>
+        En fonction des géolocalisations fournies, voici le mode opératoire pour fournir une estimation de l\'émission de CO2e pour le trajet spécifié :
+        [ul]
+        [/br]
+            [li]
+                Chaque chaîne de localisation (qui peut être choisie dans la liste déroulante d\'autocomplétion fournie par l\'API [b]Openrouteservice[/b] Autocomplete) est envoyée à [b][url="https://nominatim.openstreetmap.org/" target="_blank"]Nominatim Openstreetmap[/url][/b] pour interroger la base de données OSM afin d\'obtenir les coordonnées GPS [lat,lon] alors stockées dans une liste.
+            [/li]
+            [ul]
+                [li]
+                    [i]Si les coordonnées GPS sont directement fournies (que ce soit au format DD : ex: 45,8994, 6,1269 ou DMS : ex: 45°53\'57.8"N 6°07\'36.8"E), l\'outil ne lance pas la requête vers Nominatim.[/i]
+                [/li]
+            [/ul]
+            [/br]
+            [li]
+                Cette liste de coordonnées GPS [lat,lon] est envoyée sur une API de routage différente en fonction du mode de transport choisi :
+            [/li]
+            [ul]
+                [li]
+                    [b][url="https://openrouteservice.org/" target="_blank"]OpenRouteService[/url] directions API[/b] pour tout mode de transports sur route, afin de planifier un voyage à travers toutes ces localisations et d\'obtenir la longueur du trajet en kilomètres et l\'itinéraire sous forme d\'un tableau de points GPS.
+                    [/br]
+                    [i]L\'API d\'Openrouteservice ne prend en charge que les profils de transport "voiture" et "vélo classique", les transports en commun peuvent donc nécessiter de spécifier des étapes pour correspondre au tracé de transport en commun. Cela pourrait également être une amélioration dans le futur.[/i]
+                [/li]
+                [li]
+                    [b]Un simple calcul mathématique à vol d\'oiseau[/b] pour les avions, nécessitant de fournir autant d\'étapes que possible.
+                [/li]
+                [li]
+                    [b][url="https://brouter.de/" target="_blank"]BRouter.de[/url][/b] pour les trajets en train, qui suit autant que possible les chemins de fer et doit avoir un départ et une arrivée dans une gare existante.
+                [/li]
+            [/ul]
+            [/br]
+            [li]
+                Le nombre total de kilomètres est envoyé à [b][url="https://impactco2.fr/transport" target="_blank"]Mon Impact Transport API[/url][/b] (fourni par l\'ADEME, l\'agence de transition écologique du gouvernement français), avec le mode de transport choisi. Cette dernière renvoie les émissions de CO2 (en kgco2e), puis les divise par le nombre de passagers si spécifié.
+            [/li]
+            [ul]
+                [li]
+                    [i]Le nombre de passagers par défaut est "1" pour tout transport autre que "voiture" et "voiture électrique", car l\'estimation retournée par ADEME pour les autres profils suppose une occupation moyenne des transports.[/i]
+                [/li]
+            [/ul]
+            [/br]
+            [li]
+                Le tableau de points GPS est affiché sous forme de ligne sur une carte [b][url="https://leafletjs.com/" target="_blank"]Leaflet[/url][/b], centrée pour s\'adapter à l\'itinéraire global dans la fenêtre. Cela est utile pour voir si le résultat de l\'outil correspond effectivement au voyage prévu ou réalisé.
+            [/li]
+        [/ul]
+        [div class="alert alert-dark" role="alert">
+            Aucune donnée n\'est stockée sur le serveur, tous les calculs sont effectués côté client par le navigateur Web. Tout est écrit en HTML5/Javascript et est embelli avec la bibliothèque CSS Bootstrap 5. Certaines fonctions (validation des coordonnées GPS) ont été écrites par intelligence artificielle en utilisant des prompts [b][url="https://chat.openai.com/" target="_blank"]ChatGPT[/url][/b].
+        [/div]
+        Tous les bugs recensés et les fonctionnalités futures peuvent être trouvés sur [url="./changelog.html" class="link-dark">la page de changelog[/url]
+        [/div]
+    </text>
+</manual>

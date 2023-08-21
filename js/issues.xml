@@ -1,0 +1,31 @@
+<issue id='1' status='closed'>
+    <description lang="EN">[li][s]#1 - CO2e calculation approximation with using round kilometers, better use meters.[/s][/li]</description>
+    <description lang="FR">[li][s]#1 - Le calcul CO2e est approximatif avec l\'utilisation d\'un arrondi au kilomètre près, il faudrait mieux utiliser un compte en mètres.[/s][/li]</description>
+</issue>
+
+<issue id='2' status='closed'>
+    <description lang="EN">[li][s]#2 - Map is not centered on global view when chaining trips.[/s][/li]</description>
+    <description lang="FR">[li][s]#2 - La carte n\'est pas centrée sur l\'itinéraire global lorsque plusieurs trajets s\'enchainent.[/s][/li]</description>
+</issue>
+
+<issue id='3' status='closed'>
+    <description lang="EN">[li][s]#3 - After trip deletion, GPS trace remains on the map.[/s][/li]</description>
+    <description lang="FR">[li][s]#3 - Après la suppression d\'un trajet, la trace GPS du trajet reste sur la carte.[/s][/li]</description>
+</issue>
+
+<issue id='4' status='closed'>
+    <description lang="EN">[li][s]#4 - Backward button still use old URL on changelog page, that causes error on watermark over Leaflet map.[/s][/li]</description>
+    <description lang="FR">[li][s]#4 - Le bouton "Retour" utilise toujours l\'ancienne URL sur la page de changelog, ce qui entraine une erreur sur le filigrane apposé sur la carte Leaflet.[/s][/li]</description>
+</issue>
+
+<issue id='5' status='closed'>
+    <description lang="EN">[li][s]#5 - "+" operator concats strings instead of summing numbers.[/s][/li]</description>
+    <description lang="FR">[li][s]#5 - L\'opérateur "+" concataine les chaines des caractères au lieu d\'additionner les nombres.[/s][/li]</description>
+</issue>
+
+<issue id='6' status='closed'>
+    <description lang="EN">[li][s]#6 - Markers are not shown when using train.[/s][/li]</description>
+    <description lang="FR">[li][s]#6 - Les marqueurs ne sont pas visibles lorsqu\'on utilise le train.[/s][/li]</description>
+</issue>
+
+
