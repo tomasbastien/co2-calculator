@@ -18,10 +18,10 @@
                     [i]Openrouteservice directions API only supports transportation profiles driving-car and regular-bike, so public transportations may required to specify steps to match with the local public transportation plan. This could be also be a future enhancement.[/i]
                 [/li]  
                 [li]
-                    [b]A simple crowfly[/b] math calculation for plane, this needs to declare as many steps as possible
+                    [b]A simple crowfly[/b] math calculation for plane, this needs to declare as many steps as possible. Tool selects the nearest airport from the provided location by iterative radius search (up to 100km) into Openstreetmap data using [b]Overpass API[/b].
                 [/li]
                 [li]
-                    [b][url="https://brouter.de/" target="_blank"]BRouter.de[/url][/b] for trains journey, that sticks as much as possible to railway path and need to have departure and arrival on an existant train station
+                    [b][url="https://brouter.de/" target="_blank"]BRouter.de[/url][/b] for trains journey, that sticks as much as possible to railway path. Tool selects the nearest station from the provided location by iterative radius search (up to 10km) into Openstreetmap data using [b]Overpass API[/b].
                 [/li]
             [/ul]
             [/br]
@@ -66,10 +66,10 @@
                     [i]L\'API d\'Openrouteservice ne prend en charge que les profils de transport "voiture" et "vélo classique", les transports en commun peuvent donc nécessiter de spécifier des étapes pour correspondre au tracé de transport en commun. Cela pourrait également être une amélioration dans le futur.[/i]
                 [/li]
                 [li]
-                    [b]Un simple calcul mathématique à vol d\'oiseau[/b] pour les avions, nécessitant de fournir autant d\'étapes que possible.
+                    [b]Un simple calcul mathématique à vol d\'oiseau[/b] pour les avions, nécessitant de fournir autant d\'étapes que possible. L\'outil sélectionne l\'aéroport le plus proche à partir d\'une recherche itérative (jusqu\'à un rayon de 100km) dans les données Openstreetmap en utilisant l\'[b]API Overpass[/b].
                 [/li]
                 [li]
-                    [b][url="https://brouter.de/" target="_blank"]BRouter.de[/url][/b] pour les trajets en train, qui suit autant que possible les chemins de fer et doit avoir un départ et une arrivée dans une gare existante.
+                    [b][url="https://brouter.de/" target="_blank"]BRouter.de[/url][/b] pour les trajets en train, qui suit autant que possible les chemins de fer. L\'outil sélectionne la gare la plus proche à partir d\'une recherche itérative (jusqu\'à un rayon de 10km) dans les données Openstreetmap en utilisant l\'[b]API Overpass[/b].
                 [/li]
             [/ul]
             [/br]
