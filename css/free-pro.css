@@ -1,7 +1,7 @@
 
 body {
 	background-color: #f2f2f2;
-	font-family: 'Montserrat',Helvetica,Arial,Lucida,sans-serif;
+	font-family: Gotham,Helvetica,Arial,Lucida,sans-serif;
 
 }
 input.empty {
@@ -46,6 +46,6 @@ input.empty {
 }
 
 button, input, optgroup, select, textarea {
-    font-family: 'Montserrat',Helvetica,Arial,Lucida,sans-serif;
+    font-family: Gotham,Helvetica,Arial,Lucida,sans-serif;
 }
 
