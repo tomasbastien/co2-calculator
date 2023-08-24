@@ -2,7 +2,7 @@ L.Control.Watermark = L.Control.extend({
 		onAdd(map) {
 			const img = L.DomUtil.create('img');
 
-			img.src = './img/logo-fp-fondblanc.svg';
+			img.src = './img/logo-fp-corp-fondblanc-strictborder.png';
 			img.style.width = '50px';
 
 			return img;
