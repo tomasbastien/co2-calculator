@@ -1,3 +1,5 @@
+@import "fonts/Gotham-webfontkit/stylesheet.css";
+
 
 body {
 	background-color: #f2f2f2;
@@ -5,7 +7,7 @@ body {
 
 }
 input.empty {
-  border: 2px solid #234B64;
+  border: 2px solid #000604;
 }
 .btn-primary {
     --bs-btn-color: #ffffff;
@@ -13,7 +15,7 @@ input.empty {
     --bs-btn-border-color: #cc0000;
     --bs-btn-hover-color: #cc0000	;
     --bs-btn-hover-bg: #ffffff;
-    --bs-btn-hover-border-color: #ffffff;
+    --bs-btn-hover-border-color: #cc0000;
     --bs-btn-focus-shadow-rgb: 49,132,253;
     --bs-btn-active-color: #fff;
     --bs-btn-active-bg: #0a58ca;
@@ -48,4 +50,9 @@ input.empty {
 button, input, optgroup, select, textarea {
     font-family: Gotham,Helvetica,Arial,Lucida,sans-serif;
 }
+
+.btn, h2, h5 {
+    font-weight: bolder;
+}
+
 
