@@ -18,6 +18,9 @@ L.control.watermark = function (opts) {
 };
 
 // L.control.watermark({position: 'bottomleft'}).addTo(map);
+
+var map_center=[45.899182,6.128679];
+var map_zoom=7;
 init_map(map);
 
 
