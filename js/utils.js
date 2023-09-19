@@ -29,14 +29,32 @@ let pluginOptions = {
        return plugin._getPixelDataOfNormalMap(domtoimageOptions)
    }
 }
-
-
-const map = L.map('map').setView([45.899182,6.128679],7);
-simpleMapScreenshoter = L.simpleMapScreenshoter(pluginOptions).addTo(map);
-map.addControl(new L.Control.Fullscreen());
+const map = L.map('map').setView([0,0],5);
 
 var alternate_colors=0;
-var colors = ["#0d6efd","#0d6efd"];
+
+
+var departureIcon = L.icon({
+	iconUrl: 'img/round-icon-green.svg',
+	//shadowUrl: 'leaf-shadow.png',
+
+	iconSize:     [75, 75], // size of the icon
+	//shadowSize:   [50, 64], // size of the shadow
+	//iconAnchor:   [22, 94], // point of the icon which will correspond to marker's location
+	//shadowAnchor: [4, 62],  // the same for the shadow
+	//popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+});
+
+var arrivalIcon = L.icon({
+	iconUrl: 'img/round-icon-red.svg',
+	//shadowUrl: 'leaf-shadow.png',
+
+	iconSize:     [75, 75], // size of the icon
+	//shadowSize:   [50, 64], // size of the shadow
+	//iconAnchor:   [22, 94], // point of the icon which will correspond to marker's location
+	//shadowAnchor: [4, 62],  // the same for the shadow
+	//popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+});
 
 const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
 	maxZoom: 19,
@@ -113,7 +131,14 @@ var transportations = [
 // FUNCTIONS
 
 
-
+function init_map(map){
+	map.setView(map_center,map_zoom);
+	if(L.control.watermark != null){
+		L.control.watermark({position: 'bottomleft'}).addTo(map);
+	}
+	simpleMapScreenshoter = L.simpleMapScreenshoter(pluginOptions).addTo(map);
+	map.addControl(new L.Control.Fullscreen());
+}
 function reset_map(map) {
 	map.eachLayer(function (layer) {
 			        map.removeLayer(layer);
@@ -786,8 +811,8 @@ function render_total(itineraries){
 		if(arrival_point.length == 3){//means that altitude is also included, remove it for marker
 			arrival_point.pop();
 		}
-		L.marker(departure_point.toReversed()).addTo(map);
-		L.marker(arrival_point.toReversed()).addTo(map);
+		L.marker(departure_point.toReversed(), {icon: departureIcon}).addTo(map);
+		L.marker(arrival_point.toReversed(), {icon: arrivalIcon}).addTo(map);
 		total["co2_emissions"]=parseFloat(total["co2_emissions"])+parseFloat(itineraries[itinerary]["co2_emissions"]);
 		total["co2_emissions_individual"]=parseFloat(total["co2_emissions_individual"])+(parseFloat(itineraries[itinerary]["co2_emissions"])/parseFloat(itineraries[itinerary]["passengers"]));
 		total["distance"]=parseFloat(total["distance"])+parseFloat(itineraries[itinerary]["distance"]);

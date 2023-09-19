@@ -216,4 +216,15 @@
     </release_notes>   
 </version>  
 
+<version number='2.6.1'>
+    <release_date lang="FR">19 septembre 2023</release_date>
+    <release_notes lang="FR">
+        [li][b]Amélioration de la personnalisation[/b] des instances (centre de carte, couleurs).[/li]
+    </release_notes>
+    <release_date lang="EN">Sep 19th, 2023</release_date>
+    <release_notes lang="EN">
+        [li][b]Enhancing customization[/b] for instancies (map center, colors)[/li]
+    </release_notes>   
+</version>  
+
     

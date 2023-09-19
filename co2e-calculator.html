@@ -28,7 +28,7 @@
 							<div class="card-body p-sm-5">
 								<button type="button" class="btn btn-light" style="padding : 12px" onclick="setLanguage('en')"><img src="https://flagcdn.com/w20/gb.png" height=13px width=20px alt="English"/></button>
 		        				<button type="button" class="btn btn-light" style="padding : 12px" onclick="setLanguage('fr')"><img src="https://flagcdn.com/w20/fr.png" alt="Français"/></button>
-								<h2 class="text-center mb-4"><span id="title"></span><span></h2>
+								<h2 class="text-center mb-4"><span id="title"></span></h2>
 								<div id="route-details">
 									<div class="mb-3">
 									<label for="cars"><span id="transportation_title"></span></label>
@@ -75,6 +75,10 @@
 									<button type="button" class="btn btn-light d-block w-100" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
 									  <span id="how">How does this tool work ?</span>
 									</button>
+									</br>
+									<button type="button" class="btn btn-success d-block w-100">
+									  <i class="fa fa-globe"></i><span id="greener"> Let's do this greener !</span>
+									</button>
 
 
 									<!-- Modal -->
@@ -107,6 +111,7 @@
 
 		</footer>
 	<!-- LOCAL SCRIPTS   -->
+
   <script src="js/utils.js"></script>
   <script src=js/en.js></script>
   <script src=js/fr.js></script>

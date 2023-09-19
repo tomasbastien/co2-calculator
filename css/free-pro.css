@@ -1,9 +1,10 @@
 @import "fonts/Gotham-webfontkit/stylesheet.css";
+@import "fonts/Metropolis-webfontkit/stylesheet.css";
 
 
 body {
-	background-color: #f2f2f2;
-	font-family: Gotham,Helvetica,Arial,Lucida,sans-serif;
+    background-color: #f2f2f2;
+    font-family: gothambold,Helvetica,Arial,Lucida,sans-serif;
 
 }
 input.empty {
@@ -13,7 +14,7 @@ input.empty {
     --bs-btn-color: #ffffff;
     --bs-btn-bg: #cc0000;
     --bs-btn-border-color: #cc0000;
-    --bs-btn-hover-color: #cc0000	;
+    --bs-btn-hover-color: #cc0000   ;
     --bs-btn-hover-bg: #ffffff;
     --bs-btn-hover-border-color: #cc0000;
     --bs-btn-focus-shadow-rgb: 49,132,253;
@@ -43,16 +44,14 @@ input.empty {
     --bs-btn-disabled-bg: #6c757d;
     --bs-btn-disabled-border-color: #6c757d;
     text-transform: uppercase;
-    
+
 
 }
 
 button, input, optgroup, select, textarea {
-    font-family: Gotham,Helvetica,Arial,Lucida,sans-serif;
+    font-family: gothambold,Helvetica,Arial,Lucida,sans-serif;
 }
 
 .btn, h2, h5 {
-    font-weight: bolder;
+    font-family: gothamblack,Helvetica,Arial,Lucida,sans-serif;
 }
-
-
