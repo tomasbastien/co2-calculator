@@ -41,7 +41,7 @@
         [div class="alert alert-dark" role="alert">
             No data is stored on the server, all computation is done client-side by the  web-browser. All is HTML5/Javascript written and prettified with Bootstrap 5 CSS library. Some functions (GPS coord. validation) have been AI-written using [b][url="https://chat.openai.com/" target="_blank"]ChatGPT[/url][/b] prompts.
         [/div]
-        All recensed bugs and futur features can be find on [url="./changelog.html" class="link-dark">changelog page[/url].
+        All recensed bugs and futur features can be find on [url="./changelog.html" class="link-dark">changelog page[/url]. Code is available on [url="https://github.com/tomasbastien/co2e-calculator" target="_blank" class="link-dark">GitHub[/url].
     </text>
     <text lang='FR'>
         En fonction des géolocalisations fournies, voici le mode opératoire pour fournir une estimation de l\'émission de CO2e pour le trajet spécifié :
@@ -89,7 +89,7 @@
         [div class="alert alert-dark" role="alert">
             Aucune donnée n\'est stockée sur le serveur, tous les calculs sont effectués côté client par le navigateur Web. Tout est écrit en HTML5/Javascript et est embelli avec la bibliothèque CSS Bootstrap 5. Certaines fonctions (validation des coordonnées GPS) ont été écrites par intelligence artificielle en utilisant des prompts [b][url="https://chat.openai.com/" target="_blank"]ChatGPT[/url][/b].
         [/div]
-        Tous les bugs recensés et les fonctionnalités futures peuvent être trouvés sur [url="./changelog.html" class="link-dark">la page de changelog[/url]
+        Tous les bugs recensés et les fonctionnalités futures peuvent être trouvés sur [url="./changelog.html" class="link-dark">la page de changelog[/url]. Le code est disponible sur [url="https://github.com/tomasbastien/co2e-calculator" target="_blank" class="link-dark">GitHub[/url].
         [/div]
     </text>
 </manual>
