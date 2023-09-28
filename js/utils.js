@@ -71,58 +71,67 @@ var transportations = [
 					"name": "Bike",
 					"id" : 7,
 					"profile" : "cycling-regular",
-					"emoji" : "🚲"
+					"emoji" : "🚲",
+					"ademe_co2e_per_km_in_g" : 0
 				},
 				{
 					"name" : "City Bus",
 					"id" : 9,
 					"profile" : "driving-car",
-					"emoji" : "🚌"
+					"emoji" : "🚌",
+					"ademe_co2e_per_km_in_g" : 112.7
 				},
 				{
 					"name": "Car",
 					"id" : 4,
 					"profile" : "driving-car",
-					"emoji" : "🚗"
+					"emoji" : "🚗",
+					"ademe_co2e_per_km_in_g" : 218
 				},
 				{
 					"name" : "Electric Car",
 					"id" : 5,
 					"profile" : "driving-car",
-					"emoji" : "🚗"
+					"emoji" : "🚗",
+					"ademe_co2e_per_km_in_g" : 103.4
 				},
 				{
 					"name" : "Autobus",
 					"id" : 6,
 					"profile" : "driving-car",
-					"emoji" : "🚐"
+					"emoji" : "🚐",
+					"ademe_co2e_per_km_in_g" : 35.2
 				},
 				{
 					"name" : "Regular train",
 					"id" : 15,
 					"profile" : "train",
 					"emoji" : "🚈",
-					"sncf_stop_suffix" : ":Train"
+					"sncf_stop_suffix" : ":Train",
+					"ademe_co2e_per_km_in_g" : 24.8
 				},
 				{
 					"name" : "High-speed train",
 					"id" : 2,
 					"profile" : "train",
 					"emoji" : "🚄",
-					"sncf_stop_suffix" : ":LongDistanceTrain"
+					"sncf_stop_suffix" : ":LongDistanceTrain",
+					"ademe_co2e_per_km_in_g" : 1.73
 				},
 				{
 					"name" : "SNCF",
 					"id" : 99,
 					"profile" : "train-sncf",
 					"emoji" : "🚈",
-					"sncf_stop_suffix" : ":Train"
+					"sncf_stop_suffix" : ":Train",
+					"ademe_co2e_per_km_in_g" : 0
 				},
 				{
 					"name" : "Plane",
 					"id" : 1,
 					"profile" : "plane",
-					"emoji" : "✈️"
+					"emoji" : "✈️",
+					"ademe_co2e_per_km_in_g" : 186
 				},
 
 
@@ -422,15 +431,22 @@ function get_crowfly_route(geojson_route){
 
 async function get_ademe_co2(route_distance, transportation_id){
 
-	const result = fetch('https://api.monimpacttransport.fr/beta/getEmissionsPerDistance?km='+route_distance/1000+'&transportations='+transportation_id, {
-					    method: 'GET'
-					})
-					.then(ademe_output => ademe_output.json())
-					.then(ademe_output => {
-						var co2_emissions = parseFloat(ademe_output[0].emissions.kgco2e);
-						//console.log("co2_emissions: "+co2_emissions);
-						return(co2_emissions);
-					});
+	// const result = fetch('https://api.monimpacttransport.fr/beta/getEmissionsPerDistance?km='+route_distance/1000+'&transportations='+transportation_id, {
+	// 				    method: 'GET'					
+	// 				 })	
+	// 				.then(ademe_output => ademe_output.json())
+	// 				.then(ademe_output => {
+	// 					console.log(ademe_output);
+	// 					var co2_emissions = parseFloat(ademe_output[0].emissions.kgco2e);
+	// 					//console.log("co2_emissions: "+co2_emissions);
+	// 					return(co2_emissions);
+	// 				});
+	for (var i=0 ; i < transportations.length ; i++)
+			{
+			    if (transportations[i]["id"] == transportation_id) {
+			        var result= transportations[i]["ademe_co2e_per_km_in_g"];
+			    }
+			}
 	if(result == undefined){
 			document.getElementById("loading").innerHTML = "";
 			document.getElementById("calculation-result").innerHTML = "<div class='alert alert-danger' role='alert'>An error occured during CO2 conversion, please retry</div>"
@@ -839,6 +855,13 @@ function render_total(itineraries){
 	total_div.innerHTML=content_total;
 	document.getElementById("calculation-result").appendChild(horizontal_line);
 	document.getElementById("calculation-result").appendChild(total_div);
+	alternatives_button=document.getElementById("greener-alternatives");	
+	if (alternatives_button != null) {
+				alternatives_button.style.display="";
+				// alternatives_button.onclick = function() {
+            // 	window.location.href = 'https://www.tictactrip.eu/search/annecy/valence';
+        		// };
+		}
 }
 
 function remove_route(itineraries,id){

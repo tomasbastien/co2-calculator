@@ -68,18 +68,20 @@
 										<button class="btn btn-secondary d-block w-100" onclick="clear_fields()"><span id="clear">Clear</span></button>
 									</div>
 								<div id="loading" class="mb-3"></div>
-								<div id="calculation-result" class="mb-3" style="display:none;"></div>
+								<div id="calculation-result" class="mb-3" style="display:none;">
+									
+								</div>
+								<div class="mb-3" id="greener-alternatives" style="display:none;">
+									<button type="button" class="btn btn-success d-block w-100" >
+									  <i class="fa fa-globe"></i> <span id="greener">Let's do this greener ! (soon)</span>
+								</button>
+								</div>
 								<div id="map" class="mb-3" style="display:block; height: 300px;"></div>
 								<div class="mb-3">
 									<!-- Button trigger modal -->
 									<button type="button" class="btn btn-light d-block w-100" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
 									  <span id="how">How does this tool work ?</span>
 									</button>
-									</br>
-									<button type="button" class="btn btn-success d-block w-100">
-									  <i class="fa fa-globe"></i> <span id="greener">Let's do this greener ! (soon)</span>
-									</button>
-
 
 									<!-- Modal -->
 									<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -113,6 +115,7 @@
 	<!-- LOCAL SCRIPTS   -->
 
   <script src="js/utils.js"></script>
+  <script src="js/default.js"></script>
   <script src=js/en.js></script>
   <script src=js/fr.js></script>
   <script src=js/lang.js></script>
