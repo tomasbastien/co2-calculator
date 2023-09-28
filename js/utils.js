@@ -35,7 +35,7 @@ var alternate_colors=0;
 
 
 var departureIcon = L.icon({
-	iconUrl: 'img/round-icon-green.svg',
+	iconUrl: './img/round-icon-green.svg',
 	//shadowUrl: 'leaf-shadow.png',
 
 	iconSize:     [75, 75], // size of the icon
@@ -46,7 +46,7 @@ var departureIcon = L.icon({
 });
 
 var arrivalIcon = L.icon({
-	iconUrl: 'img/round-icon-red.svg',
+	iconUrl: './img/round-icon-red.svg',
 	//shadowUrl: 'leaf-shadow.png',
 
 	iconSize:     [75, 75], // size of the icon
