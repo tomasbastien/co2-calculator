@@ -79,14 +79,14 @@ var transportations = [
 					"id" : 9,
 					"profile" : "driving-car",
 					"emoji" : "🚌",
-					"ademe_co2e_per_km_in_g" : 112.7
+					"ademe_co2e_per_km_in_g" : 103
 				},
 				{
 					"name": "Car",
 					"id" : 4,
 					"profile" : "driving-car",
 					"emoji" : "🚗",
-					"ademe_co2e_per_km_in_g" : 218
+					"ademe_co2e_per_km_in_g" : 193
 				},
 				{
 					"name" : "Electric Car",
@@ -131,7 +131,7 @@ var transportations = [
 					"id" : 1,
 					"profile" : "plane",
 					"emoji" : "✈️",
-					"ademe_co2e_per_km_in_g" : 186
+					"ademe_co2e_per_km_in_g" : 230
 				},
 
 
@@ -441,10 +441,11 @@ async function get_ademe_co2(route_distance, transportation_id){
 	// 					//console.log("co2_emissions: "+co2_emissions);
 	// 					return(co2_emissions);
 	// 				});
+	// console.log(route_distance)
 	for (var i=0 ; i < transportations.length ; i++)
 			{
 			    if (transportations[i]["id"] == transportation_id) {
-			        var result= transportations[i]["ademe_co2e_per_km_in_g"];
+			        var result= (transportations[i]["ademe_co2e_per_km_in_g"]/1000)*(route_distance/1000);
 			    }
 			}
 	if(result == undefined){
