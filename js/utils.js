@@ -431,23 +431,23 @@ function get_crowfly_route(geojson_route){
 
 async function get_ademe_co2(route_distance, transportation_id){
 
-	// const result = fetch('https://api.monimpacttransport.fr/beta/getEmissionsPerDistance?km='+route_distance/1000+'&transportations='+transportation_id, {
-	// 				    method: 'GET'					
-	// 				 })	
-	// 				.then(ademe_output => ademe_output.json())
-	// 				.then(ademe_output => {
-	// 					console.log(ademe_output);
-	// 					var co2_emissions = parseFloat(ademe_output[0].emissions.kgco2e);
-	// 					//console.log("co2_emissions: "+co2_emissions);
-	// 					return(co2_emissions);
-	// 				});
-	// console.log(route_distance)
-	for (var i=0 ; i < transportations.length ; i++)
-			{
-			    if (transportations[i]["id"] == transportation_id) {
-			        var result= (transportations[i]["ademe_co2e_per_km_in_g"]/1000)*(route_distance/1000);
-			    }
-			}
+	const result = fetch('https://api.monimpacttransport.fr/api/getEmissionsPerDistance?km='+route_distance/1000+'&transportations='+transportation_id, {
+					    method: 'GET'	
+					 })	
+					.then(ademe_output => ademe_output.json())
+					.then(ademe_output => {
+						//console.log(ademe_output);
+						var co2_emissions = parseFloat(ademe_output[0].emissions.kgco2e);
+						//console.log("co2_emissions: "+co2_emissions);
+						return(co2_emissions);
+					});
+	//TEMP WHEN ADEME WAS OFFLINE
+	// for (var i=0 ; i < transportations.length ; i++)
+	// 		{
+	// 		    if (transportations[i]["id"] == transportation_id) {
+	// 		        var result= (transportations[i]["ademe_co2e_per_km_in_g"]/1000)*(route_distance/1000);
+	// 		    }
+	// 		}
 	if(result == undefined){
 			document.getElementById("loading").innerHTML = "";
 			document.getElementById("calculation-result").innerHTML = "<div class='alert alert-danger' role='alert'>An error occured during CO2 conversion, please retry</div>"
