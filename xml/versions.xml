@@ -229,4 +229,15 @@
     </release_notes>   
 </version>
 
+<version number='2.6.2'>
+    <release_date lang="FR">4 novembre 2013</release_date>
+    <release_notes lang="FR">
+        [li][b]Ajout du bouton Copie[/b] pour le résultat total.[/li]
+    </release_notes>
+    <release_date lang="EN">Nov 4th, 2023</release_date>
+    <release_notes lang="EN">
+        [li][b]Adding Copy button[/b] for total result.[/li]
+    </release_notes>   
+</version>
+
     

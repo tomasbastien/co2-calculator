@@ -852,7 +852,7 @@ function render_total(itineraries){
 	var horizontal_line = document.createElement('hr');
 	var total_div = document.createElement('div');
 	total_div.className = "mb-3 d-flex align-items-center justify-content-center";
-	var content_total = "<h5 align='center'>TOTAL : "+total_kms+" kms"+", "+total["co2_emissions"].toFixed(2)+" kgCO2e 🌍 ("+total["co2_emissions_individual"].toFixed(2)+"kgCO2e/pers)</h5>"
+	var content_total = "<h5 align='center'id='total_text'>TOTAL : "+total_kms+" kms"+", "+total["co2_emissions"].toFixed(2)+" kgCO2e 🌍 ("+total["co2_emissions_individual"].toFixed(2)+"kgCO2e/pers) <button class='btn btn-secondary btn-sm' id='copyTotalButton' onclick='copyTotalText(this)' title='Copy to clipboard'><i class='fa fa-clone'></i></button></h5>"
 	total_div.innerHTML=content_total;
 	document.getElementById("calculation-result").appendChild(horizontal_line);
 	document.getElementById("calculation-result").appendChild(total_div);
@@ -1240,6 +1240,34 @@ function swapCoordinates(str) {
   return swapped.join(",");
 }
 
+function copyTotalText(button) {
+   var content = document.getElementById("total_text");
+   var contentToCopy = content.innerText;
+
+   var tempTextArea = document.createElement("textarea");
+   tempTextArea.value = contentToCopy;
+
+   document.body.appendChild(tempTextArea);
+
+   tempTextArea.select();
+   document.execCommand("copy");
+
+   document.body.removeChild(tempTextArea);
+
+   //alert("Text copied to clipboard.");
+   button.classList.remove("btn-secondary");
+   button.classList.add("btn-success");
+   button.innerHTML="<i class='fa fa-check'></i>"
+   button.title="Copied !"
+
+   setTimeout(function() {
+	    document.getElementById("copyTotalButton").classList.remove("btn-success");
+	    document.getElementById("copyTotalButton").classList.add("btn-secondary");
+	    document.getElementById("copyTotalButton").innerHTML="<i class='fa fa-clone'></i>"
+	    document.getElementById("copyTotalButton").title="Copy to clipboard"
+	}, 1500);
+}
+
 
 // MAIN
 
@@ -1321,3 +1349,4 @@ document.getElementById('transportation').oninput = function(){
      		this.classList.add('invalid') // if validation is false
      }
 }
+
