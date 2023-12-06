@@ -27,4 +27,4 @@ init_map(map);
 colors = ["#cc0000","#000000"];
 
 
-
+openrouteservice_token = "5b3ce3597851110001cf62483a8b9711fdbd49c0b11b4087ad9a32ff"; //Free plan

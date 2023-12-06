@@ -321,7 +321,7 @@ async function create_geojson_openrouteservice(locality_array) {
 
 	for (item of locality_array) {
 		if (!isValidGPSAny(item)){
-			await fetch('https://api.openrouteservice.org/geocode/search?api_key=5b3ce3597851110001cf62483a8b9711fdbd49c0b11b4087ad9a32ff&text='+item, {
+			await fetch('https://api.openrouteservice.org/geocode/search?api_key='+openrouteservice_token+'&text='+item, {
 		    method: 'GET'
 			})
 			.then(gps_json => gps_json.json())
@@ -463,7 +463,7 @@ async function get_openrouteservice_route(geojson_text, transportation_profile){
 		    method: 'POST',
 		    headers: {
 		        'Accept': 'application/json, application/geo+json, application/gpx+xml, img/png',
-		        'Authorization' : '5b3ce3597851110001cf62483a8b9711fdbd49c0b11b4087ad9a32ff',
+		        'Authorization' : openrouteservice_token,
 		        "Content-Type": "application/json"
 		        },
 		    body: geojson_text
@@ -607,7 +607,7 @@ async function get_nearby_stations_openrouteservices(lat,lon) {
 	    method: 'POST',
 	    headers: {
 	        'Accept': 'application/json, application/geo+json, application/gpx+xml, img/png',
-	        'Authorization' : '5b3ce3597851110001cf62483a8b9711fdbd49c0b11b4087ad9a32ff',
+	        'Authorization' : openrouteservice_token,
 	        "Content-Type": "application/json"
 	        },
 	    body: JSON.stringify(jsonObject)
@@ -903,7 +903,7 @@ function queryGeocodeAPIforDropdown(step,inputText) {
   const dropdownList = document.getElementById(step+'-dropdownList');
   dropdownList.innerHTML = ''; // Clear previous results
   // Make an API request
-  fetch(`https://api.openrouteservice.org/geocode/autocomplete?api_key=5b3ce3597851110001cf62483a8b9711fdbd49c0b11b4087ad9a32ff&text=${encodeURIComponent(inputText)}`)
+  fetch('https://api.openrouteservice.org/geocode/autocomplete?api_key='+openrouteservice_token+'&text=${encodeURIComponent(inputText)}')
   // fetch(`https://photon.komoot.io/api/?q==${encodeURIComponent(inputText)}`)
     .then(response => response.json())
     .then(data => {
