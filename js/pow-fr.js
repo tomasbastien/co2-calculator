@@ -2,7 +2,7 @@ L.Control.Watermark = L.Control.extend({
 	onAdd(map) {
 		const img = L.DomUtil.create('img');
 
-		img.src = './img/POW-FR.svg';
+		img.src = './img/logo-POW-Fr-bleu-2.png';
 		img.style.width = '50px';
 
 		return img;

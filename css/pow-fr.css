@@ -8,12 +8,12 @@ input.empty {
   border: 2px solid #234B64;
 }
 .btn-primary {
-    --bs-btn-color: #ffee33;
+    --bs-btn-color: #fea8db;
     --bs-btn-bg: #234B64;
     --bs-btn-border-color: #234B64;
     --bs-btn-hover-color: #234B64	;
-    --bs-btn-hover-bg: #ffee33;
-    --bs-btn-hover-border-color: #ffee33;
+    --bs-btn-hover-bg: #fea8db;
+    --bs-btn-hover-border-color: #fea8db;
     --bs-btn-focus-shadow-rgb: 49,132,253;
     --bs-btn-active-color: #fff;
     --bs-btn-active-bg: #0a58ca;
