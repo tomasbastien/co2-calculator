@@ -230,13 +230,24 @@
 </version>
 
 <version number='2.6.2'>
-    <release_date lang="FR">4 novembre 2013</release_date>
+    <release_date lang="FR">4 novembre 2023</release_date>
     <release_notes lang="FR">
         [li][b]Ajout du bouton Copie[/b] pour le résultat total.[/li]
     </release_notes>
     <release_date lang="EN">Nov 4th, 2023</release_date>
     <release_notes lang="EN">
         [li][b]Adding Copy button[/b] for total result.[/li]
+    </release_notes>   
+</version>
+
+<version number='2.6.3'>
+    <release_date lang="FR">15 mai 2024</release_date>
+    <release_notes lang="FR">
+        [li][b]Mise à jour de l'API Impact CO2[/b] de l'ADEME.[/li]
+    </release_notes>
+    <release_date lang="EN">May 15th, 2024</release_date>
+    <release_notes lang="EN">
+        [li][b]Updating Impact CO2 API[/b] from ADEME.[/li]
     </release_notes>   
 </version>
 
