@@ -431,27 +431,27 @@ function get_crowfly_route(geojson_route){
 
 async function get_ademe_co2(route_distance, transportation_id){
 
-	const result = fetch('https://impactco2.fr/api/v1/transport?km='+route_distance/1000+'&transports='+transportation_id, {
-					    method: 'GET',
-							headers: {
-							 'Accept': 'application/json',
-							 'Authorization' : "Bearer 16611846-3ae2-4ef6-8727-1fdb5ded8f61"
-							}
-					 })	
-					.then(ademe_output => ademe_output.json())
-					.then(ademe_output => {
-						console.log(ademe_output);
-						var co2_emissions = parseFloat(ademe_output.data[0].value);
-						//console.log("co2_emissions: "+co2_emissions);
-						return(co2_emissions);
-					});
-	//TEMP IF ADEME WAS OFFLINE
-	// for (var i=0 ; i < transportations.length ; i++)
-	// 		{
-	// 		    if (transportations[i]["id"] == transportation_id) {
-	// 		        var result= (transportations[i]["ademe_co2e_per_km_in_g"]/1000)*(route_distance/1000);
-	// 		    }
-	// 		}
+	// const result = fetch('https://impactco2.fr/api/v1/transport?km='+route_distance/1000+'&transports='+transportation_id, {
+	// 				    method: 'GET',
+	// 						headers: {
+	// 						 'Accept': 'application/json',
+	// 						 'Authorization' : "Bearer 16611846-3ae2-4ef6-8727-1fdb5ded8f61"
+	// 						}
+	// 				 })	
+	// 				.then(ademe_output => ademe_output.json())
+	// 				.then(ademe_output => {
+	// 					console.log(ademe_output);
+	// 					var co2_emissions = parseFloat(ademe_output.data[0].value);
+	// 					//console.log("co2_emissions: "+co2_emissions);
+	// 					return(co2_emissions);
+	// 				});
+	// TEMP IF ADEME WAS OFFLINE
+	for (var i=0 ; i < transportations.length ; i++)
+			{
+			    if (transportations[i]["id"] == transportation_id) {
+			        var result= (transportations[i]["ademe_co2e_per_km_in_g"]/1000)*(route_distance/1000);
+			    }
+			}
 	if(result == undefined){
 			document.getElementById("loading").innerHTML = "";
 			document.getElementById("calculation-result").innerHTML = "<div class='alert alert-danger' role='alert'>An error occured during CO2 conversion, please retry</div>"
