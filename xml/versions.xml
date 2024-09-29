@@ -243,12 +243,22 @@
 <version number='2.6.3'>
     <release_date lang="FR">15 mai 2024</release_date>
     <release_notes lang="FR">
-        [li][b]Mise à jour de l'API Impact CO2[/b] de l'ADEME.[/li]
+        [li][b]Mise à jour de l\'API Impact CO2[/b] de l\'ADEME.[/li]
     </release_notes>
     <release_date lang="EN">May 15th, 2024</release_date>
     <release_notes lang="EN">
         [li][b]Updating Impact CO2 API[/b] from ADEME.[/li]
-    </release_notes>   
+    </release_notes>  
+
+<version number='2.6.4'>
+    <release_date lang="FR">29 septembre 2024</release_date>
+    <release_notes lang="FR">
+        [li][b]Mise à jour de l\'API Impact CO2[/b] de l\'ADEME : ajout d\'un fichier json de référence sur le serveur web (régulièrement mis à jour) au lieu d\'une requête directe vers leur API[/li]
+    </release_notes>
+    <release_date lang="EN">Sept 29th 2024</release_date>
+    <release_notes lang="EN">
+        [li][b]Updating Impact CO2 API[/b] from ADEME : adding a reference json file on web server (periodically updated) instead of directly querying their API[/li]
+    </release_notes>  
 </version>
 
     

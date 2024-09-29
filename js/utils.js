@@ -66,76 +66,13 @@ var step_number = 0;
 
 
 var itineraries = [];
-var transportations = [
-				{
-					"name": "Bike",
-					"id" : 7,
-					"profile" : "cycling-regular",
-					"emoji" : "🚲",
-					"ademe_co2e_per_km_in_g" : 0
-				},
-				{
-					"name" : "City Bus",
-					"id" : 9,
-					"profile" : "driving-car",
-					"emoji" : "🚌",
-					"ademe_co2e_per_km_in_g" : 103
-				},
-				{
-					"name": "Car",
-					"id" : 4,
-					"profile" : "driving-car",
-					"emoji" : "🚗",
-					"ademe_co2e_per_km_in_g" : 193
-				},
-				{
-					"name" : "Electric Car",
-					"id" : 5,
-					"profile" : "driving-car",
-					"emoji" : "🚗",
-					"ademe_co2e_per_km_in_g" : 103.4
-				},
-				{
-					"name" : "Autobus",
-					"id" : 6,
-					"profile" : "driving-car",
-					"emoji" : "🚐",
-					"ademe_co2e_per_km_in_g" : 35.2
-				},
-				{
-					"name" : "Regular train",
-					"id" : 15,
-					"profile" : "train",
-					"emoji" : "🚈",
-					"sncf_stop_suffix" : ":Train",
-					"ademe_co2e_per_km_in_g" : 24.8
-				},
-				{
-					"name" : "High-speed train",
-					"id" : 2,
-					"profile" : "train",
-					"emoji" : "🚄",
-					"sncf_stop_suffix" : ":LongDistanceTrain",
-					"ademe_co2e_per_km_in_g" : 1.73
-				},
-				{
-					"name" : "SNCF",
-					"id" : 99,
-					"profile" : "train-sncf",
-					"emoji" : "🚈",
-					"sncf_stop_suffix" : ":Train",
-					"ademe_co2e_per_km_in_g" : 0
-				},
-				{
-					"name" : "Plane",
-					"id" : 1,
-					"profile" : "plane",
-					"emoji" : "✈️",
-					"ademe_co2e_per_km_in_g" : 230
-				},
 
+//GET LAST VALUES FOR JSON FILE ON THE WEBSERVER
+var transportations = get_ademe_last_data();
 
-			];
+// FOR LOCAL TESTING
+//var transportations = JSON.parse('{"last_updated" : "29/09/2024 13:19","transportations" : [{"name": "Bike","id" : 7,"profile" : "cycling-regular","emoji" : "🚲","ademe_co2e_per_km_in_g" : 0},{	"name" : "City Bus",	"id" : 9,	"profile" : "driving-car",	"emoji" : "🚌",	"ademe_co2e_per_km_in_g" : 103},{	"name": "Car",	"id" : 4,	"profile" : "driving-car",	"emoji" : "🚗",	"ademe_co2e_per_km_in_g" : 193},{	"name" : "Electric Car",	"id" : 5,	"profile" : "driving-car",	"emoji" : "🚗",	"ademe_co2e_per_km_in_g" : 103.4},{	"name" : "Autobus",	"id" : 6,	"profile" : "driving-car",	"emoji" : "🚐",	"ademe_co2e_per_km_in_g" : 35.2},{	"name" : "Regular train",	"id" : 15,	"profile" : "train",	"emoji" : "🚈",	"sncf_stop_suffix" : ":Train",	"ademe_co2e_per_km_in_g" : 24.8},{	"name" : "High-speed train",	"id" : 2,	"profile" : "train",	"emoji" : "🚄",	"sncf_stop_suffix" : ":LongDistanceTrain",	"ademe_co2e_per_km_in_g" : 1.73},{	"name" : "SNCF",	"id" : 99,	"profile" : "train-sncf",	"emoji" : "🚈",	"sncf_stop_suffix" : ":Train",	"ademe_co2e_per_km_in_g" : 0},{	"name" : "Plane",	"id" : 1,	"profile" : "plane",	"emoji" : "✈️",	"ademe_co2e_per_km_in_g" : 230}]}');
+
 
 // FUNCTIONS
 
@@ -429,6 +366,24 @@ function get_crowfly_route(geojson_route){
 
 //ADEME API CONVERSION FUNCTION
 
+async function get_ademe_last_data(){
+	const fullUrl = window.location.pathname;
+	console.log('Full URL:', fullUrl);
+	await fetch('https://'+fullUrl+'/../transportations.json')
+  .then(response => {
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+    return response.json();
+  })
+  .then(data => {
+    console.log(data);
+  })
+  .catch(error => {
+    console.error('Error fetching JSON:', error);
+  });
+}
+
 async function get_ademe_co2(route_distance, transportation_id){
 
 	// const result = fetch('https://impactco2.fr/api/v1/transport?km='+route_distance/1000+'&transports='+transportation_id, {
@@ -444,12 +399,13 @@ async function get_ademe_co2(route_distance, transportation_id){
 	// 					var co2_emissions = parseFloat(ademe_output.data[0].value);
 	// 					//console.log("co2_emissions: "+co2_emissions);
 	// 					return(co2_emissions);
-	// 				});
-	// TEMP IF ADEME WAS OFFLINE
-	for (var i=0 ; i < transportations.length ; i++)
+	// 				})
+	// 				;
+	//TEMP IF ADEME WAS OFFLINE
+	for (var i=0 ; i < transportations.transportations.length ; i++)
 			{
-			    if (transportations[i]["id"] == transportation_id) {
-			        var result= (transportations[i]["ademe_co2e_per_km_in_g"]/1000)*(route_distance/1000);
+			    if (transportations.transportations[i]["id"] == transportation_id) {
+			        var result= (transportations.transportations[i]["ademe_co2e_per_km_in_g"]/1000)*(route_distance/1000);
 			    }
 			}
 	if(result == undefined){
@@ -724,12 +680,12 @@ async function calculate_co2_route() {
 		var passengers = 1;
 		var transportation = document.getElementById("transportation").value;
 
-		for (var i=0 ; i < transportations.length ; i++)
+		for (var i=0 ; i < transportations.transportations.length ; i++)
 			{
-			    if (transportations[i]["name"] == transportation) {
-			        var transportation_id = transportations[i]["id"];
-			        var transportation_profile = transportations[i]["profile"];
-			        var transportation_emoji = transportations[i]["emoji"];
+			    if (transportations.transportations[i]["name"] == transportation) {
+			        var transportation_id = transportations.transportations[i]["id"];
+			        var transportation_profile = transportations.transportations[i]["profile"];
+			        var transportation_emoji = transportations.transportations[i]["emoji"];
 			    }
 			}
 			element=document.getElementById("passengers_div");
@@ -837,10 +793,11 @@ function render_total(itineraries){
 		total["co2_emissions"]=parseFloat(total["co2_emissions"])+parseFloat(itineraries[itinerary]["co2_emissions"]);
 		total["co2_emissions_individual"]=parseFloat(total["co2_emissions_individual"])+(parseFloat(itineraries[itinerary]["co2_emissions"])/parseFloat(itineraries[itinerary]["passengers"]));
 		total["distance"]=parseFloat(total["distance"])+parseFloat(itineraries[itinerary]["distance"]);
-		for (var i=0 ; i < transportations.length ; i++)
+		for (var i=0 ; i < transportations.transportations.length ; i++)
 		{
-		    if (transportations[i]["name"] == itineraries[itinerary]["transportation"]) {
-		        var transportation_emoji = transportations[i]["emoji"];
+		    if (transportations.transportations[i]["name"] == itineraries[itinerary]["transportation"]) {
+		        var transportation_emoji = transportations.transportations[i]["emoji"];
+
 		    }
 		}
 		distance_kms=(parseFloat(itineraries[itinerary]["distance"])/1000).toFixed(2);
