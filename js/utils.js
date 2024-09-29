@@ -67,12 +67,10 @@ var step_number = 0;
 
 var itineraries = [];
 
-//GET LAST VALUES FOR JSON FILE ON THE WEBSERVER
-var transportations = get_ademe_last_data();
+// BASE DATAS TO UPDATE NEXT
+var transportations = JSON.parse('{"last_updated" : "29/09/2024 13:19","transportations" : [{"name": "Bike","id" : 7,"profile" : "cycling-regular","emoji" : "🚲","ademe_co2e_per_km_in_g" : 0},{	"name" : "City Bus",	"id" : 9,	"profile" : "driving-car",	"emoji" : "🚌",	"ademe_co2e_per_km_in_g" : 103},{	"name": "Car",	"id" : 4,	"profile" : "driving-car",	"emoji" : "🚗",	"ademe_co2e_per_km_in_g" : 193},{	"name" : "Electric Car",	"id" : 5,	"profile" : "driving-car",	"emoji" : "🚗",	"ademe_co2e_per_km_in_g" : 103.4},{	"name" : "Autobus",	"id" : 6,	"profile" : "driving-car",	"emoji" : "🚐",	"ademe_co2e_per_km_in_g" : 35.2},{	"name" : "Regular train",	"id" : 15,	"profile" : "train",	"emoji" : "🚈",	"sncf_stop_suffix" : ":Train",	"ademe_co2e_per_km_in_g" : 24.8},{	"name" : "High-speed train",	"id" : 2,	"profile" : "train",	"emoji" : "🚄",	"sncf_stop_suffix" : ":LongDistanceTrain",	"ademe_co2e_per_km_in_g" : 1.73},{	"name" : "SNCF",	"id" : 99,	"profile" : "train-sncf",	"emoji" : "🚈",	"sncf_stop_suffix" : ":Train",	"ademe_co2e_per_km_in_g" : 0},{	"name" : "Plane",	"id" : 1,	"profile" : "plane",	"emoji" : "✈️",	"ademe_co2e_per_km_in_g" : 230}]}');
 
-// FOR LOCAL TESTING
-//var transportations = JSON.parse('{"last_updated" : "29/09/2024 13:19","transportations" : [{"name": "Bike","id" : 7,"profile" : "cycling-regular","emoji" : "🚲","ademe_co2e_per_km_in_g" : 0},{	"name" : "City Bus",	"id" : 9,	"profile" : "driving-car",	"emoji" : "🚌",	"ademe_co2e_per_km_in_g" : 103},{	"name": "Car",	"id" : 4,	"profile" : "driving-car",	"emoji" : "🚗",	"ademe_co2e_per_km_in_g" : 193},{	"name" : "Electric Car",	"id" : 5,	"profile" : "driving-car",	"emoji" : "🚗",	"ademe_co2e_per_km_in_g" : 103.4},{	"name" : "Autobus",	"id" : 6,	"profile" : "driving-car",	"emoji" : "🚐",	"ademe_co2e_per_km_in_g" : 35.2},{	"name" : "Regular train",	"id" : 15,	"profile" : "train",	"emoji" : "🚈",	"sncf_stop_suffix" : ":Train",	"ademe_co2e_per_km_in_g" : 24.8},{	"name" : "High-speed train",	"id" : 2,	"profile" : "train",	"emoji" : "🚄",	"sncf_stop_suffix" : ":LongDistanceTrain",	"ademe_co2e_per_km_in_g" : 1.73},{	"name" : "SNCF",	"id" : 99,	"profile" : "train-sncf",	"emoji" : "🚈",	"sncf_stop_suffix" : ":Train",	"ademe_co2e_per_km_in_g" : 0},{	"name" : "Plane",	"id" : 1,	"profile" : "plane",	"emoji" : "✈️",	"ademe_co2e_per_km_in_g" : 230}]}');
-
+get_ademe_last_data();
 
 // FUNCTIONS
 
@@ -368,7 +366,7 @@ function get_crowfly_route(geojson_route){
 
 async function get_ademe_last_data(){
 	const fullUrl = window.location.href;
-	console.log('Full URL:', fullUrl);
+	// console.log('Full URL:', fullUrl);
 	await fetch(fullUrl+'/../transportations.json')
   .then(response => {
     if (!response.ok) {
@@ -377,7 +375,7 @@ async function get_ademe_last_data(){
     return response.json();
   })
   .then(data => {
-    console.log(data);
+    transportations=data;
   })
   .catch(error => {
     console.error('Error fetching JSON:', error);
@@ -401,7 +399,8 @@ async function get_ademe_co2(route_distance, transportation_id){
 	// 					return(co2_emissions);
 	// 				})
 	// 				;
-	//TEMP IF ADEME WAS OFFLINE
+	//
+	//console.log(transportations)
 	for (var i=0 ; i < transportations.transportations.length ; i++)
 			{
 			    if (transportations.transportations[i]["id"] == transportation_id) {
