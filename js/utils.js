@@ -367,7 +367,7 @@ function get_crowfly_route(geojson_route){
 //ADEME API CONVERSION FUNCTION
 
 async function get_ademe_last_data(){
-	const fullUrl = window.location.pathname;
+	const fullUrl = window.location.href;
 	console.log('Full URL:', fullUrl);
 	await fetch('https://'+fullUrl+'/../transportations.json')
   .then(response => {

@@ -1,5 +1,5 @@
 var updates = {
-      'last_release_id' : '2.6.3'
+      'last_release_id' : '2.6.4'
 }
 
 changelog_langEn.known_issues = 'Known issues'

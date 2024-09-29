@@ -1,0 +1,71 @@
+{
+    "last_updated": "29/09/2024 13:19",
+    "transportations": [
+        {
+            "name": "Bike",
+            "id": 7,
+            "profile": "cycling-regular",
+            "emoji": "\ud83d\udeb2",
+            "ademe_co2e_per_km_in_g": 0
+        },
+        {
+            "name": "City Bus",
+            "id": 9,
+            "profile": "driving-car",
+            "emoji": "\ud83d\ude8c",
+            "ademe_co2e_per_km_in_g": 104.3
+        },
+        {
+            "name": "Car",
+            "id": 4,
+            "profile": "driving-car",
+            "emoji": "\ud83d\ude97",
+            "ademe_co2e_per_km_in_g": 192.0
+        },
+        {
+            "name": "Electric Car",
+            "id": 5,
+            "profile": "driving-car",
+            "emoji": "\ud83d\ude97",
+            "ademe_co2e_per_km_in_g": 19.8
+        },
+        {
+            "name": "Autobus",
+            "id": 6,
+            "profile": "driving-car",
+            "emoji": "\ud83d\ude90",
+            "ademe_co2e_per_km_in_g": 25.0
+        },
+        {
+            "name": "Regular train",
+            "id": 15,
+            "profile": "train",
+            "emoji": "\ud83d\ude88",
+            "sncf_stop_suffix": ":Train",
+            "ademe_co2e_per_km_in_g": 22.9
+        },
+        {
+            "name": "High-speed train",
+            "id": 2,
+            "profile": "train",
+            "emoji": "\ud83d\ude84",
+            "sncf_stop_suffix": ":LongDistanceTrain",
+            "ademe_co2e_per_km_in_g": 2.3
+        },
+        {
+            "name": "SNCF",
+            "id": 99,
+            "profile": "train-sncf",
+            "emoji": "\ud83d\ude88",
+            "sncf_stop_suffix": ":Train",
+            "ademe_co2e_per_km_in_g": 0
+        },
+        {
+            "name": "Plane",
+            "id": 1,
+            "profile": "plane",
+            "emoji": "\u2708\ufe0f",
+            "ademe_co2e_per_km_in_g": 258.2
+        }
+    ]
+}
