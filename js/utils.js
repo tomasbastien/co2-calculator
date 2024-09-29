@@ -369,7 +369,7 @@ function get_crowfly_route(geojson_route){
 async function get_ademe_last_data(){
 	const fullUrl = window.location.href;
 	console.log('Full URL:', fullUrl);
-	await fetch('https://'+fullUrl+'/../transportations.json')
+	await fetch(fullUrl+'/../transportations.json')
   .then(response => {
     if (!response.ok) {
       throw new Error('Network response was not ok');
