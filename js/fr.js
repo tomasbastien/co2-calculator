@@ -5,6 +5,7 @@ var changelog_langFr = {
 'issue-id-4' : '<li><del>#4 - Le bouton "Retour" utilise toujours l\'ancienne URL sur la page de changelog, ce qui entraine une erreur sur le filigrane apposé sur la carte Leaflet.</del></li>',
 'issue-id-5' : '<li><del>#5 - L\'opérateur "+" concataine les chaines des caractères au lieu d\'additionner les nombres.</del></li>',
 'issue-id-6' : '<li><del>#6 - Les marqueurs ne sont pas visibles lorsqu\'on utilise le train.</del></li>',
+'issue-id-7' : '<li>#7 - L\'autocomplétion ne fonctionne plus.</li>',
 'feature-id-1' : '<li><del>Ajouter une pré-liste de résultats pour la requête Nominatim pour permettre à l\'utilisateur de choisir la localisation souhaitée au lieu du premier résultat.</del></li>',
 'feature-id-2' : '<li><i>Trouver un meilleur moteur de trajets pour les transports publics.</i></li>',
 'feature-id-3' : '<li><i>Evaluer les performances de chargement de l\'outil pour décider si héberger les ressources externes peut être pertinent.</i></li>',

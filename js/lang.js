@@ -12,14 +12,14 @@ changelog_langFr.older_issues = 'Anciens bugs'
 changelog_langFr.older_features = 'Anciennes fonctionnalités envisagées'
 
 
-changelog_langEn.last_issues_review_date='   Aug 5th, 2023'
+changelog_langEn.last_issues_review_date='   Sep 29th, 2024'
 changelog_langEn.last_features_review_date='   Aug 5th, 2023'
-changelog_langEn.last_older_issues_review_date='   Aug 5th, 2023'
+changelog_langEn.last_older_issues_review_date='   Sep 29th, 2024'
 changelog_langEn.last_older_features_review_date='   Aug 5th, 2023'
 
-changelog_langFr.last_issues_review_date='   05 août 2023'
+changelog_langFr.last_issues_review_date='   29 septembre 2024'
 changelog_langFr.last_features_review_date='   05 août 2023'
-changelog_langFr.last_older_issues_review_date='   05 août 2023'
+changelog_langFr.last_older_issues_review_date='   29 septembre 2024'
 changelog_langFr.last_older_features_review_date='   05 août 2023'
 
 

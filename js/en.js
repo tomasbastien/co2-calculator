@@ -5,6 +5,7 @@ var changelog_langEn = {
 'issue-id-4' : '<li><del>#4 - Backward button still use old URL on changelog page, that causes error on watermark over Leaflet map.</del></li>',
 'issue-id-5' : '<li><del>#5 - "+" operator concats strings instead of summing numbers.</del></li>',
 'issue-id-6' : '<li><del>#6 - Markers are not shown when using train.</del></li>',
+'issue-id-7' : '<li>#7 - Autocomplete is not working</li>',
 'feature-id-1' : '<li><del>Dropdown list for Nominatim query results in order to let the user choose the desired location instead of using the only first result.</del></li>',
 'feature-id-2' : '<li><i>Find better direction service for public transportation.</i></li>',
 'feature-id-3' : '<li><i>Evaluate network payload performances to decide if hosting external ressources could be relevant.</i></li>',

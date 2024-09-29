@@ -400,7 +400,7 @@ async function get_ademe_co2(route_distance, transportation_id){
 	// 				})
 	// 				;
 	//
-	//console.log(transportations)
+	console.log(transportations)
 	for (var i=0 ; i < transportations.transportations.length ; i++)
 			{
 			    if (transportations.transportations[i]["id"] == transportation_id) {

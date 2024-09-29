@@ -28,4 +28,9 @@
     <description lang="FR">[li][s]#6 - Les marqueurs ne sont pas visibles lorsqu\'on utilise le train.[/s][/li]</description>
 </issue>
 
+<issue id='7' status='open'>
+    <description lang="EN">[li]#7 - Autocomplete is not working[/li]</description>
+    <description lang="FR">[li]#7 - L\'autocomplétion ne fonctionne plus.[/li]</description>
+</issue>
+
 
